@@ -19,12 +19,12 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- * Works out which stones a player is currently using (loose stones and stones socketed in holders, worn in accessory
- * slots - or held in a hand if no accessory mod is installed) and keeps their Palladium powers in sync.
+ * Works out which stones a player is currently using (stones socketed in worn holders; holders go in accessory
+ * slots - or count while held in a hand if no accessory mod is installed) and keeps their Palladium powers in sync.
  */
 public final class StoneWear {
-    /** Accessory slots (Trinkets/Curios) that stones and holders can go in. */
-    private static final String[] SLOTS = {"hand/ring", "offhand/ring", "hand/glove", "offhand/glove", "chest/necklace"};
+    /** Accessory slots (Trinkets/Curios) that holders can go in. Loose stones cannot be worn: they must be socketed. */
+    private static final String[] SLOTS = {"hand/glove", "offhand/glove", "chest/necklace"};
 
     private static final Map<UUID, Set<InfinityStone>> ACTIVE = new HashMap<>();
     private static final ResourceLocation SNAP = HeroesMod.stones("snap");
@@ -50,7 +50,7 @@ public final class StoneWear {
                 worn.addAll(util.getItemsInSlot(entity, slot));
             }
         } else {
-            // No accessory mod: stones and holders count while in either hand.
+            // No accessory mod: holders count while in either hand.
             worn.add(entity.getMainHandItem());
             worn.add(entity.getOffhandItem());
         }
@@ -60,9 +60,7 @@ public final class StoneWear {
     private static Set<InfinityStone> compute(LivingEntity entity) {
         Set<InfinityStone> set = EnumSet.noneOf(InfinityStone.class);
         for (ItemStack stack : wornStacks(entity)) {
-            if (stack.getItem() instanceof StoneItems.StoneItem stone) {
-                set.add(stone.stone);
-            } else if (stack.getItem() instanceof HolderItem) {
+            if (stack.getItem() instanceof HolderItem) {
                 set.addAll(HolderItem.stones(stack));
             }
         }

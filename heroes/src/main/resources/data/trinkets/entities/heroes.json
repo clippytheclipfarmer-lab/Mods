@@ -3,8 +3,6 @@
     "player"
   ],
   "slots": [
-    "hand/ring",
-    "offhand/ring",
     "hand/glove",
     "offhand/glove",
     "chest/necklace"

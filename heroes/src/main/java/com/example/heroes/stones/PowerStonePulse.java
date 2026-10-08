@@ -31,8 +31,8 @@ import java.util.UUID;
 public final class PowerStonePulse {
     /** Ticks between pulses. */
     private static final int INTERVAL = 40;
-    /** Damage to the carrier per pulse (it never kills: the carrier is left on at least half a heart). */
-    private static final float SELF_DAMAGE = 2.0F;
+    /** Damage to the carrier per pulse: three hearts. It never kills: it only hits when more than SELF_DAMAGE + 1 health is left. */
+    private static final float SELF_DAMAGE = 6.0F;
     /** Damage to each other creature the shockwave passes through. */
     private static final float WAVE_DAMAGE = 5.0F;
     private static final double MAX_RADIUS = 9.0;

@@ -153,8 +153,8 @@ A random event on the generated planets (not Earth, and not planets with `"symbi
 **Commands (op):** `/symbiote meteor` (drop one near you), `/symbiote blob`, `/symbiote bond [apex]`, `/symbiote release`.
 
 ## Infinity Stones (powers)
-Six stones plus three holders. Everything below works while the item is **worn in an accessory slot** (needs Trinkets; without an accessory mod the item counts while in either hand).
-Stones go in the ring slots; the Gauntlet and Bracers in the glove slots; the Necklace in the necklace slot.
+Six stones plus three holders. **Loose stones cannot be worn**: a stone only works once it is **socketed into a holder**, and the holder must be **worn in an accessory slot** (needs Trinkets; without an accessory mod it counts while in either hand).
+The Gauntlet and Bracers go in the glove slots; the Necklace in the necklace slot.
 
 | Stone | Power (action key) | Boosts other heroes |
 |---|---|---|
@@ -183,7 +183,7 @@ Every stone has a themed container that can be **placed in the world** like a bl
 | Time | Eye of Agamotto |
 | Soul | The Soul Urn (invented - the Soul Stone has no film container) |
 
-A filled container glows and shows its gem. **Right-click a filled one to take the stone out** (the container stays, empty); right-click an empty one while holding its stone to put it back. Breaking a container drops it with the stone still inside, so you can carry and re-place it. The creative menu has a filled and an empty version of each. Containers are only for keeping and displaying the stone: to use its power, wear the loose stone (or socket it into a holder).
+A filled container glows and shows its gem. **Right-click a filled one to take the stone out** (the container stays, empty); right-click an empty one while holding its stone to put it back. Breaking a container drops it with the stone still inside, so you can carry and re-place it. The creative menu has a filled and an empty version of each. Containers are only for keeping and displaying the stone: to use its power, socket the stone into a holder and wear the holder.
 
 ### The Power Stone is dangerous loose
-While a loose Power Stone is in your inventory (any slot) it hurts you (1 heart every 2 s, never to death) and sends out a **pulsing purple shockwave** every 2 seconds that expands 9 blocks and damages (2.5 hearts) and knocks back every creature it passes through. It stays safe when **worn in an accessory slot, socketed in a holder, or kept in the Orb**; creative and spectator players are immune. The numbers are constants at the top of `PowerStonePulse.java`.
+While a loose Power Stone is in your inventory (any slot) it hurts you (3 hearts every 2 s, but it never takes your last 3.5 hearts) and sends out a **pulsing purple shockwave** every 2 seconds that expands 9 blocks and damages (2.5 hearts) and knocks back every creature it passes through. It stays safe when **socketed in a holder (worn or not) or kept in the Orb**; creative and spectator players are immune. The numbers are constants at the top of `PowerStonePulse.java`.

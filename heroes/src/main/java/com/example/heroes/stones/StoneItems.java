@@ -70,9 +70,10 @@ public final class StoneItems {
         @Override
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal("One of the six Infinity Stones.").withStyle(net.minecraft.ChatFormatting.GRAY));
+            tooltip.add(Component.literal("Cannot be worn on its own: socket it into the Gauntlet, Necklace or Bracers.").withStyle(net.minecraft.ChatFormatting.DARK_GRAY));
             if (stone == InfinityStone.POWER) {
                 tooltip.add(Component.literal("Dangerous to carry: it hurts you and pulses shockwaves.").withStyle(net.minecraft.ChatFormatting.DARK_PURPLE));
-                tooltip.add(Component.literal("Wear it, socket it in a holder, or keep it in the Orb.").withStyle(net.minecraft.ChatFormatting.DARK_GRAY));
+                tooltip.add(Component.literal("Socket it in a holder or keep it in the Orb to tame it.").withStyle(net.minecraft.ChatFormatting.DARK_GRAY));
             }
         }
     }
