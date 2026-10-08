@@ -58,3 +58,6 @@ java {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
 }
+
+// Lets us script console commands into the dev server (e.g. `printf '...' | gradle runServer`).
+tasks.matching { it.name == 'runServer' }.configureEach { standardInput = System.in }

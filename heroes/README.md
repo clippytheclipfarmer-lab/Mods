@@ -59,3 +59,19 @@ For `gradle runClient/runServer`, drop the Palladium jar and the jars bundled in
 
 ## License
 GPL-3.0 (Palladium is GPL-3.0).
+
+## City regeneration
+Mark part of a map (for example a city) and everything destroyed inside it grows back, bottom-up, like a construction site.
+
+- **City Wand** (creative menu, Tools tab): left-click a block = corner 1, right-click a block = corner 2.
+- `/city create <name>` (uses the wand selection) or `/city create <name> <from> <to>`.
+- `/city list`, `/city info <name>`, `/city remove <name>`.
+- `/city finish <name>`: rebuild everything now (about 5 s). `/city forget <name>`: accept the current state as the new baseline.
+- `/city set <name> rebuild_seconds|idle_seconds|builders|sounds <value>`.
+
+How it works: every live block change inside a region (hero powers, explosions, players, other mods) saves the original block, including chests and other block data.
+Only real destruction or replacement is recorded; placing blocks into air, doors opening, crops growing, fluids and fire are ignored.
+After `idle_seconds` without new damage, blocks come back in order from the lowest layer up, paced so a big job takes about `rebuild_seconds`.
+Rebuilding pauses while a player in the region is fighting, skips spots blocked by entities, and waits for unloaded chunks.
+Builder villagers (invulnerable, no AI, a mason profession) appear near the rebuild front with hammering and construction sounds while a player is within 96 blocks, and disappear when finished.
+Damage records are saved with the world (capped at 6 million blocks per region); the nuke can destroy millions of blocks, so saves after a big blast can be large and slow.

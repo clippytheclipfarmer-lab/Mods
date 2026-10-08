@@ -1,5 +1,6 @@
 package com.example.heroes;
 
+import com.example.heroes.city.CityManager;
 import com.example.heroes.hulk.HulkHero;
 import com.example.heroes.viltrumite.ViltrumiteHero;
 import net.fabricmc.api.ModInitializer;
@@ -26,5 +27,6 @@ public class HeroesMod implements ModInitializer {
     public void onInitialize() {
         HulkHero.init();
         ViltrumiteHero.init();
+        CityManager.init();
     }
 }

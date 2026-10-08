@@ -18,5 +18,8 @@
     "palladium": ">=4.5.0",
     "geckolib": "*",
     "pehkui": "*"
-  }
+  },
+  "mixins": [
+    "heroes.mixins.json"
+  ]
 }
