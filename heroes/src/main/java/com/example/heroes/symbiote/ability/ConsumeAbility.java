@@ -1,5 +1,7 @@
 package com.example.heroes.symbiote.ability;
 
+import com.example.heroes.stones.InfinityStone;
+import com.example.heroes.stones.StoneBoost;
 import com.example.heroes.symbiote.SymbioteHost;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.server.level.ServerLevel;
@@ -43,7 +45,7 @@ public class ConsumeAbility extends Ability {
         boolean weak = target.getHealth() <= target.getMaxHealth() * 0.4F || target.getHealth() <= 12.0F;
         if (weak) {
             target.hurt(level.damageSources().mobAttack(entity), 1000.0F);
-            entity.heal(8.0F);
+            entity.heal(8.0F * (float) StoneBoost.mult(entity, InfinityStone.SOUL, 2.0));
             SymbioteHost.addHunger(entity, -40);
         } else {
             target.hurt(level.damageSources().mobAttack(entity), 8.0F);

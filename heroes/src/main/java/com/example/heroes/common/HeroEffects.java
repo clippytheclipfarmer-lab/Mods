@@ -1,5 +1,7 @@
 package com.example.heroes.common;
 
+import com.example.heroes.stones.InfinityStone;
+import com.example.heroes.stones.StoneBoost;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
@@ -19,6 +21,7 @@ public final class HeroEffects {
 
     /** Damages and launches every living entity within radius of the origin. */
     public static void blast(ServerLevel level, LivingEntity source, Vec3 origin, double radius, float damage, double knockback, double lift) {
+        damage *= (float) (StoneBoost.mult(source, InfinityStone.POWER, 1.5) * StoneBoost.general(source));
         AABB box = new AABB(origin, origin).inflate(radius);
         for (LivingEntity target : level.getEntitiesOfClass(LivingEntity.class, box, e -> e != source && e.isAlive())) {
             double dist = target.position().distanceTo(origin);
@@ -40,6 +43,10 @@ public final class HeroEffects {
 
     /** Breaks weak blocks (glass, leaves, dirt, ...) in a flat disc around the origin. */
     public static void breakWeakBlocks(ServerLevel level, LivingEntity source, BlockPos center, int radius, float maxHardness) {
+        if (StoneBoost.has(source, InfinityStone.REALITY)) { // Reality Stone: reach further and break harder blocks
+            radius += 2;
+            maxHardness *= 2;
+        }
         if (!level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
             return;
         }

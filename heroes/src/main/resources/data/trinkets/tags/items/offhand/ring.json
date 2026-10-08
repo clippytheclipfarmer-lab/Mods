@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "heroes:space_stone",
+    "heroes:mind_stone",
+    "heroes:reality_stone",
+    "heroes:power_stone",
+    "heroes:time_stone",
+    "heroes:soul_stone"
+  ]
+}

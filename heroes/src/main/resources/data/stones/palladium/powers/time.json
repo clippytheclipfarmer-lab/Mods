@@ -1,0 +1,50 @@
+{
+  "name": {
+    "translate": "power.stones.time"
+  },
+  "icon": "minecraft:clock",
+  "primary_color": [
+    60,
+    207,
+    90
+  ],
+  "secondary_color": [
+    255,
+    255,
+    255
+  ],
+  "abilities": {
+    "rewind": {
+      "type": "stones:rewind",
+      "list_index": 0,
+      "title": {
+        "translate": "ability.stones.rewind"
+      },
+      "icon": "minecraft:clock",
+      "conditions": {
+        "enabling": {
+          "type": "palladium:action",
+          "cooldown": 400
+        }
+      }
+    },
+    "haste": {
+      "type": "palladium:attribute_modifier",
+      "attribute": "generic.movement_speed",
+      "amount": 0.35,
+      "operation": 2,
+      "uuid": "1f570005-0000-4000-8000-000000000001",
+      "hidden": true,
+      "hidden_in_bar": true
+    },
+    "attack_speed": {
+      "type": "palladium:attribute_modifier",
+      "attribute": "generic.attack_speed",
+      "amount": 1.5,
+      "operation": 0,
+      "uuid": "1f570005-0000-4000-8000-000000000002",
+      "hidden": true,
+      "hidden_in_bar": true
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "name": {
+    "translate": "power.stones.reality"
+  },
+  "icon": "minecraft:amethyst_shard",
+  "primary_color": [
+    224,
+    48,
+    48
+  ],
+  "secondary_color": [
+    255,
+    255,
+    255
+  ],
+  "abilities": {
+    "reality_shift": {
+      "type": "stones:reality_shift",
+      "list_index": 0,
+      "title": {
+        "translate": "ability.stones.reality_shift"
+      },
+      "icon": "minecraft:amethyst_shard",
+      "conditions": {
+        "enabling": {
+          "type": "palladium:action",
+          "cooldown": 100
+        }
+      }
+    }
+  }
+}

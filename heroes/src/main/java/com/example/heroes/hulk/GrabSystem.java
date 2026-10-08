@@ -4,6 +4,8 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import com.example.heroes.common.HeroEffects;
+import com.example.heroes.stones.InfinityStone;
+import com.example.heroes.stones.StoneBoost;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -97,14 +99,15 @@ public final class GrabSystem {
 
     private static void grab(ServerLevel level, LivingEntity holder) {
         float tier = HulkRage.tier(holder).multiplier;
-        double reach = 6.0 * Math.max(1.0, holder.getBbHeight() / 1.8);
+        double mind = StoneBoost.mult(holder, InfinityStone.MIND, 2.0);
+        double reach = 6.0 * Math.max(1.0, holder.getBbHeight() / 1.8) * mind;
         Vec3 eye = holder.getEyePosition();
         Vec3 end = eye.add(holder.getViewVector(1F).scale(reach));
 
         EntityHitResult hit = ProjectileUtil.getEntityHitResult(level, holder, eye, end,
                 new AABB(eye, end).inflate(1.0),
                 e -> e != holder && e.isAlive() && !e.isSpectator() && e.isPickable() && !(e instanceof FallingBlockEntity)
-                        && e.getBbHeight() <= 3.5 * tier && !HELD.containsKey(e.getUUID()));
+                        && e.getBbHeight() <= 3.5 * tier * mind && !HELD.containsKey(e.getUUID()));
         Entity target = hit != null ? hit.getEntity() : null;
 
         if (target == null && level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
@@ -170,7 +173,7 @@ public final class GrabSystem {
             }
             Entity holder = level.getEntity(e.getKey());
             if (!(holder instanceof LivingEntity living) || !living.isAlive() || held.entity.isRemoved()
-                    || !HulkRage.isHulk(living) || ++held.ticks > MAX_HOLD_TICKS) {
+                    || !(HulkRage.isHulk(living) || StoneBoost.has(living, InfinityStone.MIND)) || ++held.ticks > MAX_HOLD_TICKS) {
                 toRelease.add(e.getKey());
                 continue;
             }

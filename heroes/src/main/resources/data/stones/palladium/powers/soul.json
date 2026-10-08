@@ -1,0 +1,39 @@
+{
+  "name": {
+    "translate": "power.stones.soul"
+  },
+  "icon": "minecraft:soul_lantern",
+  "primary_color": [
+    255,
+    138,
+    31
+  ],
+  "secondary_color": [
+    255,
+    255,
+    255
+  ],
+  "abilities": {
+    "soul_drain": {
+      "type": "stones:soul_drain",
+      "list_index": 0,
+      "title": {
+        "translate": "ability.stones.soul_drain"
+      },
+      "icon": "minecraft:soul_lantern",
+      "conditions": {
+        "enabling": {
+          "type": "palladium:action",
+          "cooldown": 60
+        }
+      }
+    },
+    "mending": {
+      "type": "palladium:healing",
+      "frequency": 60,
+      "amount": 1.0,
+      "hidden": true,
+      "hidden_in_bar": true
+    }
+  }
+}

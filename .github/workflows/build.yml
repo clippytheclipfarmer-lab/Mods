@@ -1,0 +1,22 @@
+name: Build mod
+on:
+  push:
+    paths: ['heroes/**', '.github/workflows/build.yml']
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: heroes
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+      - run: chmod +x gradlew && ./gradlew build --no-daemon
+      - uses: actions/upload-artifact@v4
+        with:
+          name: heroes-mod
+          path: heroes/build/libs/heroes-*.jar

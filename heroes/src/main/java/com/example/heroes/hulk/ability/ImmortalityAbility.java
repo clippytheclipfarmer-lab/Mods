@@ -1,6 +1,8 @@
 package com.example.heroes.hulk.ability;
 
 import com.example.heroes.hulk.HulkRage;
+import com.example.heroes.stones.InfinityStone;
+import com.example.heroes.stones.StoneBoost;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -36,7 +38,7 @@ public class ImmortalityAbility extends Ability {
     public static boolean tryRevive(LivingEntity entity, AbilityInstance entry) {
         long now = entity.level().getGameTime();
         Long last = LAST_REVIVE.get(entity.getUUID());
-        if (last != null && now - last < entry.getProperty(COOLDOWN_TICKS)) {
+        if (last != null && now - last < entry.getProperty(COOLDOWN_TICKS) * StoneBoost.mult(entity, InfinityStone.SOUL, 0.5)) {
             return false;
         }
         LAST_REVIVE.put(entity.getUUID(), now);

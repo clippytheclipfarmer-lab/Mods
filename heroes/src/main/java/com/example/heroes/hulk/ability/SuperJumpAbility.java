@@ -1,6 +1,8 @@
 package com.example.heroes.hulk.ability;
 
 import com.example.heroes.common.HeroEffects;
+import com.example.heroes.stones.InfinityStone;
+import com.example.heroes.stones.StoneBoost;
 import com.example.heroes.hulk.HulkRage;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
@@ -74,7 +76,7 @@ public class SuperJumpAbility extends Ability {
             return;
         }
         float rage = HulkRage.fraction(entity);
-        double power = (0.8 + 1.6 * charge / MAX_CHARGE) * (1.0 + 0.5 * rage);
+        double power = (0.8 + 1.6 * charge / MAX_CHARGE) * (1.0 + 0.5 * rage) * StoneBoost.mult(entity, InfinityStone.SPACE, 1.3);
         Vec3 look = entity.getLookAngle();
         Vec3 horizontal = new Vec3(look.x, 0, look.z).normalize().scale(0.6 * power);
         entity.setDeltaMovement(horizontal.x, power, horizontal.z);

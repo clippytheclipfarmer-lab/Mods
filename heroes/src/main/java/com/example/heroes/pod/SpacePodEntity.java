@@ -1,6 +1,8 @@
 package com.example.heroes.pod;
 
 import com.example.heroes.space.PlanetDef;
+import com.example.heroes.stones.InfinityStone;
+import com.example.heroes.stones.StoneBoost;
 import com.example.heroes.space.Planets;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -151,8 +153,9 @@ public class SpacePodEntity extends Entity {
         } else if (rider instanceof LivingEntity pilot) {
             Vec3 look = pilot.getLookAngle();
             velocity = velocity.scale(0.92).add(look.scale(pilot.zza * 0.12));
-            if (velocity.length() > MANUAL_MAX_SPEED) {
-                velocity = velocity.normalize().scale(MANUAL_MAX_SPEED);
+            double max = MANUAL_MAX_SPEED * StoneBoost.mult(pilot, InfinityStone.SPACE, 1.5);
+            if (velocity.length() > max) {
+                velocity = velocity.normalize().scale(max);
             }
             setYRot(pilot.getYRot());
             setXRot(pilot.getXRot());

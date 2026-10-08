@@ -21,6 +21,9 @@ import java.util.Map;
 /** The six Infinity Stone items. */
 public final class StoneItems {
     private static final Map<InfinityStone, Item> ITEMS = new EnumMap<>(InfinityStone.class);
+    public static Item GAUNTLET;
+    public static Item NECKLACE;
+    public static Item BRACERS;
 
     private StoneItems() {
     }
@@ -35,11 +38,19 @@ public final class StoneItems {
                     new StoneItem(stone, new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).fireResistant()));
             ITEMS.put(stone, item);
         }
-        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.INGREDIENTS).register(entries -> ITEMS.values().forEach(entries::accept));
+        GAUNTLET = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(HeroesMod.MOD_ID, "infinity_gauntlet"), new HolderItem(new Item.Properties()));
+        NECKLACE = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(HeroesMod.MOD_ID, "infinity_necklace"), new HolderItem(new Item.Properties()));
+        BRACERS = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(HeroesMod.MOD_ID, "infinity_bracers"), new HolderItem(new Item.Properties()));
+        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.INGREDIENTS).register(entries -> {
+            ITEMS.values().forEach(entries::accept);
+            entries.accept(GAUNTLET);
+            entries.accept(NECKLACE);
+            entries.accept(BRACERS);
+        });
     }
 
-    private static final class StoneItem extends Item {
-        private final InfinityStone stone;
+    public static final class StoneItem extends Item {
+        public final InfinityStone stone;
 
         StoneItem(InfinityStone stone, Properties properties) {
             super(properties);

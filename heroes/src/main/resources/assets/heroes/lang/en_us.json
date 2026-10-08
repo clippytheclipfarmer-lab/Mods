@@ -11,5 +11,8 @@
   "item.heroes.time_stone": "Time Stone",
   "item.heroes.soul_stone": "Soul Stone",
   "entity.heroes.symbiote_blob": "Symbiote",
-  "entity.heroes.symbiote_villager": "Symbiote Villager"
+  "entity.heroes.symbiote_villager": "Symbiote Villager",
+  "item.heroes.infinity_gauntlet": "Infinity Gauntlet",
+  "item.heroes.infinity_necklace": "Infinity Necklace",
+  "item.heroes.infinity_bracers": "Infinity Bracers"
 }

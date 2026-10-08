@@ -1,6 +1,8 @@
 package com.example.heroes.hulk.ability;
 
 import com.example.heroes.hulk.HulkRage;
+import com.example.heroes.stones.InfinityStone;
+import com.example.heroes.stones.StoneBoost;
 import com.example.heroes.hulk.HulkScale;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -41,7 +43,7 @@ public class RageScalingAbility extends Ability {
         HulkScale.set(entity, scale);
         // Immortal-style regeneration: heals faster the angrier he is.
         if (entity.tickCount % 20 == 0 && entity.getHealth() < entity.getMaxHealth()) {
-            entity.heal(0.5F + 3F * rage);
+            entity.heal((0.5F + 3F * rage) * (float) StoneBoost.mult(entity, InfinityStone.SOUL, 2.0));
         }
         apply(entity, Attributes.MAX_HEALTH, HEALTH, 10 + 30 * rage, AttributeModifier.Operation.ADDITION);
         apply(entity, Attributes.ATTACK_DAMAGE, DAMAGE, 3 + 9 * rage, AttributeModifier.Operation.ADDITION);

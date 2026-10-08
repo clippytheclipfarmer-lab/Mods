@@ -151,3 +151,22 @@ A random event on the generated planets (not Earth, and not planets with `"symbi
 - There is no easy way out: the symbiote leaves only if the host dies (it becomes a blob at the body) or with `/symbiote release`.
 
 **Commands (op):** `/symbiote meteor` (drop one near you), `/symbiote blob`, `/symbiote bond [apex]`, `/symbiote release`.
+
+## Infinity Stones (powers)
+Six stones plus three holders. Everything below works while the item is **worn in an accessory slot** (needs Trinkets; without an accessory mod the item counts while in either hand).
+Stones go in the ring slots; the Gauntlet and Bracers in the glove slots; the Necklace in the necklace slot.
+
+| Stone | Power (action key) | Boosts other heroes |
+|---|---|---|
+| Space | Blink (teleport to where you look), heroic flight, higher jump | Hulk super jump +30%, space pod +50% speed |
+| Mind | Telekinesis (grab and throw, same system as the Hulk's) | Grab reach x2 and can lift bigger things |
+| Reality | Reality Shift (turn the mob you look at into another mob) | Smashes/charges break harder blocks, wider radius |
+| Power | Power Blast (energy beam and explosion), more damage and armor | All shockwaves/blasts +50% damage |
+| Time | Rewind (back 5 seconds with that health), faster movement | Every ability cooldown ticks down twice as fast |
+| Soul | Soul Drain (steal life from a creature in front of you), slow regeneration | Hulk regeneration x2, revive cooldown halved, symbiote Consume heals x2 |
+
+Every stone you wear also adds a general +10% to blasts (and doubles at all six).
+
+**Holders** (Infinity Gauntlet, Infinity Necklace, Infinity Bracers; craftable with gold blocks, netherite and diamond blocks): worn, they give the powers of every stone socketed in them.
+Sneak + right-click with the holder in your main hand and a stone in your off hand to socket it; sneak + right-click with an empty off hand takes the last one out.
+With **all six** socketed in a worn holder you also get **The Snap**: half of all creatures (not players or bosses) within 128 blocks turn to ash, with a 20 minute cooldown.
