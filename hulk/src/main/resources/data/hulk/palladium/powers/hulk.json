@@ -140,6 +140,61 @@
           "ability": "stomp_quake"
         }
       }
+    },
+    "grab_throw": {
+      "type": "hulk:grab_throw",
+      "list_index": 4,
+      "title": {
+        "translate": "ability.hulk.grab_throw"
+      },
+      "icon": "minecraft:iron_block",
+      "conditions": {
+        "enabling": {
+          "type": "palladium:action",
+          "cooldown": 10
+        }
+      }
+    },
+    "charge": {
+      "type": "hulk:charge",
+      "list_index": 5,
+      "title": {
+        "translate": "ability.hulk.charge"
+      },
+      "icon": "minecraft:leather_boots",
+      "conditions": {
+        "enabling": {
+          "type": "palladium:held",
+          "cooldown": 100
+        }
+      }
+    },
+    "wall_climb": {
+      "type": "hulk:wall_climb",
+      "list_index": 6,
+      "title": {
+        "translate": "ability.hulk.wall_climb"
+      },
+      "icon": "minecraft:ladder",
+      "conditions": {
+        "enabling": {
+          "type": "palladium:held"
+        }
+      }
+    },
+    "anim_throw": {
+      "type": "geckolib:render_layer_animation",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "render_layer": "hulk:hulk",
+      "controller": "action_controller",
+      "animation_trigger": "throw",
+      "conditions": {
+        "enabling": {
+          "type": "palladium:ability_enabled",
+          "ability": "grab_throw"
+        }
+      }
     }
   }
 }

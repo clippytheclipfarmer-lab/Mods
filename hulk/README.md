@@ -18,6 +18,9 @@ Use Palladium's own tools (or your power-assigning system):
 - **Super Jump** (`hulk:super_jump`, hold key to charge, release to leap): lands with a small shockwave; Hulk takes no fall damage.
 - **Thunderclap** (`hulk:thunderclap`, action key, 5s cooldown): wide blast; slows, concusses (nausea + brief blindness) and knocks back enemies, shatters glass and snuffs out fires.
 - **Stomp Quake** (`hulk:stomp_quake`, action key, 6s cooldown): seismic stomp that launches enemies and flings ground blocks.
+- **Grab & Throw** (`hulk:grab_throw`, action key): press to grab the mob, player or block in front of you, press again to throw it. Thrown things explode on impact (damage scales with rage and tier). Held for at most 10 s.
+- **Shoulder Charge** (`hulk:charge`, hold key, up to 5 s): super sprint that bowls over mobs and smashes weak blocks.
+- **Wall Climb** (`hulk:wall_climb`, hold key): climb the wall you are pushing against.
 - **Immortality** (`hulk:immortality`, passive): instead of dying, Hulk revives at 40% health at full rage (5 min cooldown).
 - **Regeneration**: heals faster the higher his rage.
 
@@ -29,6 +32,9 @@ Use Palladium's own tools (or your power-assigning system):
 | 95-100% | Titan (kaiju scale, up to ~3x size) | x2.2 |
 
 Ability keys are Palladium's standard ability keybinds (Controls -> Palladium), assigned in the order of `list_index`.
+
+Grab & Throw, Shoulder Charge and Wall Climb are inspired by the GTA V Hulk script mod.
+Sprint and climb movement is applied on the client for players, like a vanilla ladder; the server follows their position.
 
 ## Placeholder art
 `assets/hulk/geo/hulk.geo.json`, `animations/hulk.animation.json` and `textures/models/hulk.png` are generated placeholders

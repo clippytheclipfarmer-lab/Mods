@@ -6,5 +6,8 @@
   "ability.hulk.rage_scaling": "Rage",
   "ability.hulk.ground_smash": "Ground Smash",
   "ability.hulk.stomp_quake": "Stomp Quake",
-  "ability.hulk.immortality": "Immortality"
+  "ability.hulk.immortality": "Immortality",
+  "ability.hulk.grab_throw": "Grab & Throw",
+  "ability.hulk.charge": "Shoulder Charge",
+  "ability.hulk.wall_climb": "Wall Climb"
 }

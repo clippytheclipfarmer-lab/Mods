@@ -4,13 +4,18 @@
   "texture": "hulk:textures/models/hulk.png",
   "animation_file": "hulk:animations/hulk.animation.json",
   "animation_controller": [
-    { "name": "idle_controller", "transition_tick_time": 10, "animation": "animation.hulk.idle" },
+    {
+      "name": "idle_controller",
+      "transition_tick_time": 10,
+      "animation": "animation.hulk.idle"
+    },
     {
       "name": "action_controller",
       "transition_tick_time": 2,
       "triggers": {
         "smash": "animation.hulk.smash",
-        "clap": "animation.hulk.clap"
+        "clap": "animation.hulk.clap",
+        "throw": "animation.hulk.throw"
       }
     }
   ],

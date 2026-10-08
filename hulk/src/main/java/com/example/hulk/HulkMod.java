@@ -1,6 +1,9 @@
 package com.example.hulk;
 
+import com.example.hulk.ability.ChargeAbility;
+import com.example.hulk.ability.GrabThrowAbility;
 import com.example.hulk.ability.GroundSmashAbility;
+import com.example.hulk.ability.WallClimbAbility;
 import com.example.hulk.ability.ImmortalityAbility;
 import com.example.hulk.ability.StompQuakeAbility;
 import com.example.hulk.ability.RageScalingAbility;
@@ -31,6 +34,9 @@ public class HulkMod implements ModInitializer {
         ABILITIES.register("super_jump", SuperJumpAbility::new);
         ABILITIES.register("thunderclap", ThunderclapAbility::new);
         ABILITIES.register("stomp_quake", StompQuakeAbility::new);
+        ABILITIES.register("grab_throw", GrabThrowAbility::new);
+        ABILITIES.register("charge", ChargeAbility::new);
+        ABILITIES.register("wall_climb", WallClimbAbility::new);
         IMMORTALITY = ABILITIES.register("immortality", ImmortalityAbility::new);
     }
 
@@ -42,6 +48,7 @@ public class HulkMod implements ModInitializer {
     public void onInitialize() {
         ABILITIES.register();
         HulkScale.init();
+        GrabSystem.init();
 
         ServerLivingEntityEvents.ALLOW_DAMAGE.register((entity, source, amount) -> {
             // Hulk shrugs off falls (needed for the super jump).

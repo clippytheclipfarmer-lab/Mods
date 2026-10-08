@@ -282,6 +282,112 @@
           }
         }
       }
+    },
+    "animation.hulk.throw": {
+      "loop": false,
+      "animation_length": 0.6,
+      "bones": {
+        "armorRightArm": {
+          "rotation": {
+            "0.0": {
+              "vector": [
+                -100,
+                0,
+                0
+              ]
+            },
+            "0.25": {
+              "vector": [
+                -140,
+                0,
+                0
+              ],
+              "easing": "easeOutQuad"
+            },
+            "0.4": {
+              "vector": [
+                20,
+                0,
+                0
+              ],
+              "easing": "easeInQuad"
+            },
+            "0.6": {
+              "vector": [
+                0,
+                0,
+                0
+              ]
+            }
+          }
+        },
+        "armorLeftArm": {
+          "rotation": {
+            "0.0": {
+              "vector": [
+                -100,
+                0,
+                0
+              ]
+            },
+            "0.25": {
+              "vector": [
+                -140,
+                0,
+                0
+              ],
+              "easing": "easeOutQuad"
+            },
+            "0.4": {
+              "vector": [
+                20,
+                0,
+                0
+              ],
+              "easing": "easeInQuad"
+            },
+            "0.6": {
+              "vector": [
+                0,
+                0,
+                0
+              ]
+            }
+          }
+        },
+        "armorBody": {
+          "rotation": {
+            "0.0": {
+              "vector": [
+                0,
+                0,
+                0
+              ]
+            },
+            "0.25": {
+              "vector": [
+                -12,
+                0,
+                0
+              ]
+            },
+            "0.4": {
+              "vector": [
+                18,
+                0,
+                0
+              ]
+            },
+            "0.6": {
+              "vector": [
+                0,
+                0,
+                0
+              ]
+            }
+          }
+        }
+      }
     }
   }
 }
