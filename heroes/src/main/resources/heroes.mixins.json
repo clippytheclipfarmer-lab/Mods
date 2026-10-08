@@ -6,7 +6,8 @@
   "mixins": [
     "LevelMixin",
     "BellBlockMixin",
-    "PlayerMixin"
+    "PlayerMixin",
+    "LivingEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1
