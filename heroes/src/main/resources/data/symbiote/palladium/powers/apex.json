@@ -23,6 +23,22 @@
       ],
       "auto_increase_per_tick": 1,
       "auto_increase_interval": 400
+    },
+    "armor": {
+      "max": 1000,
+      "color": [
+        120,
+        130,
+        165
+      ]
+    },
+    "core": {
+      "max": 100,
+      "color": [
+        225,
+        40,
+        60
+      ]
     }
   },
   "abilities": {

@@ -8,7 +8,7 @@ import net.threetag.palladium.power.ability.Ability;
 import net.threetag.palladium.power.ability.AbilityInstance;
 import net.threetag.palladium.util.icon.ItemIcon;
 
-/** Always-on fast healing: a slow trickle normally, twice as fast and four times as strong while the suit is on. */
+/** Always-on healing for the host (stronger in the suit), and slow mending of the symbiote's armor and life. */
 public class RegenAbility extends Ability {
     public RegenAbility() {
         this.withProperty(ICON, new ItemIcon(Items.GLISTERING_MELON_SLICE));
@@ -18,12 +18,23 @@ public class RegenAbility extends Ability {
 
     @Override
     public void tick(LivingEntity entity, AbilityInstance entry, IPowerHolder holder, boolean enabled) {
-        if (!enabled || entity.level().isClientSide || !entity.isAlive() || entity.getHealth() >= entity.getMaxHealth()) {
+        if (!enabled || entity.level().isClientSide || !entity.isAlive()) {
             return;
         }
         boolean suited = SymbioteHost.isSuited(entity);
-        if (entity.tickCount % (suited ? 20 : 40) == 0) {
+        if (entity.getHealth() < entity.getMaxHealth() && entity.tickCount % (suited ? 20 : 40) == 0) {
             entity.heal(suited ? 2.0F : 0.5F);
+        }
+        if (entity.tickCount % 20 == 0) {
+            // The symbiote mends too: its armor once the host has been left alone for 5 s, its own life slowly (0.1 heart per second).
+            var armor = SymbioteHost.bar(entity, SymbioteHost.ARMOR);
+            if (armor != null && !SymbioteHost.recentlyHit(entity, 100) && armor.get() < SymbioteHost.ARMOR_MAX) {
+                armor.add(suited ? 50 : 30);
+            }
+            var core = SymbioteHost.bar(entity, SymbioteHost.CORE);
+            if (core != null && core.get() > 0 && core.get() < SymbioteHost.CORE_MAX) {
+                core.add(1);
+            }
         }
     }
 

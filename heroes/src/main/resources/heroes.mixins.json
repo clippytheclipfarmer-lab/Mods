@@ -4,7 +4,8 @@
   "package": "com.example.heroes.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "LevelMixin"
+    "LevelMixin",
+    "BellBlockMixin"
   ],
   "injectors": {
     "defaultRequire": 1

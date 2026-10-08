@@ -64,6 +64,7 @@ public class ThunderclapAbility extends Ability {
             }
         }
 
+        com.example.heroes.symbiote.SymbioteHost.sonicHit(level, origin, radius, 6.0F); // a deafening clap hurts symbiotes
         level.sendParticles(ParticleTypes.SONIC_BOOM, origin.x, origin.y, origin.z, 1, 0, 0, 0, 0);
         level.sendParticles(ParticleTypes.EXPLOSION_EMITTER, origin.x, origin.y, origin.z, 1, 0, 0, 0, 0);
         level.playSound(null, origin.x, origin.y, origin.z, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.PLAYERS, 3.0F, 0.6F);

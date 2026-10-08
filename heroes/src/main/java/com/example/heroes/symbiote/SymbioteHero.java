@@ -43,17 +43,26 @@ public final class SymbioteHero {
         MeteorEvents.init();
         KlyntarSystem.init();
 
-        net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents.END_SERVER_TICK.register(SymbioteHost::releaseSimulatedKeys);
+        net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents.END_SERVER_TICK.register(SymbioteHost::tickServer);
 
-        // Hard hits make the suit spread on its own; fire and sonic damage hurt much more while it is on.
+        // Damage model of a host: the suit's armor soaks up ordinary damage first (it equals the host's health, then the
+        // host takes the rest). Only fire and sonic attacks reach the symbiote itself, which has 5 hearts.
         net.threetag.palladiumcore.event.LivingEntityEvents.HURT.register((entity, source, amount) -> {
             if (!entity.level().isClientSide && SymbioteHost.isHost(entity)) {
-                if (SymbioteHost.isSuited(entity)) {
-                    if (source.is(net.minecraft.tags.DamageTypeTags.IS_FIRE) || source.is(net.minecraft.world.damagesource.DamageTypes.SONIC_BOOM)) {
-                        amount.set(amount.get() * 2.0F);
+                float hit = amount.get();
+                boolean sonic = source.is(net.minecraft.world.damagesource.DamageTypes.SONIC_BOOM);
+                boolean fire = source.is(net.minecraft.tags.DamageTypeTags.IS_FIRE);
+                boolean suited = SymbioteHost.isSuited(entity);
+                SymbioteHost.markHit(entity);
+                if (sonic || fire) {
+                    SymbioteHost.damageCore(entity, hit, sonic);
+                    if (suited) {
+                        amount.set(0.0F); // the suit takes it; the host is shielded while the symbiote is wrapped around them
                     }
-                } else if (amount.get() >= 6.0F && entity instanceof ServerPlayer) {
-                    SymbioteHost.requestSuit(entity);
+                } else if (suited) {
+                    amount.set(SymbioteHost.absorb(entity, hit));
+                } else if (hit >= 6.0F && entity instanceof ServerPlayer) {
+                    SymbioteHost.requestSuit(entity); // a hard hit makes the suit spread by itself
                 }
             }
             return net.threetag.palladiumcore.event.EventResult.pass();

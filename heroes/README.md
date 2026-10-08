@@ -154,7 +154,14 @@ A random event on the generated planets (not Earth, and not planets with `"symbi
 **What needs the suit and what does not.**
 - *Suit only:* strength, armor, extra health, speed, leap, no fall damage, Tendril, Consume, Wall cling (the attribute abilities use an `enabling` condition on `suit`, the key abilities an `unlocking` one).
 - *Always on while bonded:* the hunger bar and starving takeover, a small passive boost (+2 attack damage, +4% speed), **danger sense** (`symbiote:sense`: actionbar warning and heartbeat when hostiles or other players are within 14 blocks), and **fast healing** (`symbiote:regen`: +0.5 heart per 2 s, or +1 heart per second in the suit).
-- *The suit itself:* the player's name tag is hidden while suited (client mixin `EntityRendererMixin`). Taking a hit of 3+ hearts, or the symbiote taking control when starving, spreads the suit automatically (`SymbioteHost.requestSuit` simulates the key press). While suited, fire and sonic-boom damage is doubled. Wearing it costs hunger (`symbiote:upkeep`: +1 per 2 s, so about 3 minutes of suit time fills the bar and the symbiote takes over).
+- *The suit itself:* the player's name tag is hidden while suited (client mixin `EntityRendererMixin`). Taking a hit of 3+ hearts, or the symbiote taking control when starving, spreads the suit automatically (`SymbioteHost.requestSuit` simulates the key press). Wearing it costs hunger (`symbiote:upkeep`: +1 per 2 s, so about 3 minutes of suit time fills the bar and the symbiote takes over).
+
+**Three layers of health.** A host has (1) their **own health**; (2) **symbiote armor**, a second pool equal to the host's maximum health (grey-blue bar); and (3) **the symbiote itself**, 5 hearts (red bar).
+- While suited, ordinary damage hits the armor first, and only what is left reaches the host.
+- **Only fire and sonic attacks hurt the symbiote itself.** Fire (burning, lava, fire blocks) and sonic damage (the warden's sonic boom) go straight to its 5 hearts, and a suited host takes nothing from them. Not suited, the host takes the hit as well. **Sonic attacks also include:** a **ringing bell** within 16 blocks (2 HP per ring, with the bell sound), the **Viltrumite sonic boom** (2 HP) and the **Hulk thunderclap** (6 HP) within their radius.
+- At 0 the symbiote **tears free and becomes a blob entity that cannot bond for 10 minutes** (`SymbioteBlobEntity.lockBonding`, saved with the entity). The host loses the power.
+- Mending: the armor refills 5% a second (3% unsuited) once the host has been left alone for 5 s; the symbiote itself recovers 0.1 heart a second. A new bond starts with both full (`SymbioteHost.tickServer` fills the bars once the power exists).
+- The two bars are Palladium energy bars `armor` (max 1000, per mille of the host's max health) and `core` (max 100, percent of 5 hearts) in `symbiote.json` and `apex.json`; the damage model is the `LivingEntityEvents.HURT` handler in `SymbioteHero`. Armor tracks the host's *current* maximum health (it grows with the suit's +10 health).
 
 **Commands (op):** `/symbiote meteor` (drop one near you), `/symbiote blob`, `/symbiote bond [apex]`, `/symbiote release`.
 

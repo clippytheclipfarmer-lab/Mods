@@ -90,12 +90,19 @@ public class SymbioteBlobEntity extends Monster implements SymbioteCreature {
     public void addAdditionalSaveData(CompoundTag tag) {
         super.addAdditionalSaveData(tag);
         tag.putInt("BlobSize", getBlobSize());
+        tag.putInt("BondLock", cooldown);
     }
 
     @Override
     public void readAdditionalSaveData(CompoundTag tag) {
         super.readAdditionalSaveData(tag);
         entityData.set(SIZE, Math.max(1, tag.getInt("BlobSize")));
+        cooldown = tag.getInt("BondLock");
+    }
+
+    /** Keeps the blob from bonding for this many ticks (used when a symbiote is driven off its host). */
+    public void lockBonding(int ticks) {
+        cooldown = Math.max(cooldown, ticks);
     }
 
     @Override

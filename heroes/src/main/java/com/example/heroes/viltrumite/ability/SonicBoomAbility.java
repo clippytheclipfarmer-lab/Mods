@@ -37,6 +37,7 @@ public class SonicBoomAbility extends Ability {
         level.sendParticles(ParticleTypes.CLOUD, entity.getX(), entity.getY() + 1, entity.getZ(), 3, 0.3, 0.3, 0.3, 0.02);
         if (entity.tickCount % 10 == 0) {
             HeroEffects.blast(level, entity, ahead, 3.0, 5.0F, 1.2, 0.3);
+            com.example.heroes.symbiote.SymbioteHost.sonicHit(level, ahead, 3.0, 2.0F);
             boom(level, entity);
         }
     }
