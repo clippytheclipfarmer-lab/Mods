@@ -9,5 +9,7 @@
   "item.heroes.reality_stone": "Reality Stone",
   "item.heroes.power_stone": "Power Stone",
   "item.heroes.time_stone": "Time Stone",
-  "item.heroes.soul_stone": "Soul Stone"
+  "item.heroes.soul_stone": "Soul Stone",
+  "entity.heroes.symbiote_blob": "Symbiote",
+  "entity.heroes.symbiote_villager": "Symbiote Villager"
 }

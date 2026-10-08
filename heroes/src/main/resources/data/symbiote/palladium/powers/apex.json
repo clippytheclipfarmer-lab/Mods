@@ -1,0 +1,208 @@
+{
+  "name": {
+    "translate": "power.symbiote.apex"
+  },
+  "icon": "minecraft:nether_star",
+  "primary_color": [
+    60,
+    10,
+    90
+  ],
+  "secondary_color": [
+    180,
+    60,
+    255
+  ],
+  "energy_bars": {
+    "hunger": {
+      "max": 100,
+      "color": [
+        200,
+        20,
+        30
+      ],
+      "auto_increase_per_tick": 1,
+      "auto_increase_interval": 400
+    }
+  },
+  "abilities": {
+    "render_layer": {
+      "type": "palladium:render_layer",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "render_layer": "symbiote:suit"
+    },
+    "hunger_logic": {
+      "type": "symbiote:hunger"
+    },
+    "strength": {
+      "type": "palladium:attribute_modifier",
+      "attribute": "generic.attack_damage",
+      "amount": 10,
+      "operation": 0,
+      "uuid": "5b1e0000-0000-4000-8000-b200000001",
+      "title": {
+        "translate": "ability.symbiote.strength"
+      },
+      "icon": "minecraft:netherite_sword",
+      "list_index": 0
+    },
+    "health": {
+      "type": "palladium:attribute_modifier",
+      "attribute": "generic.max_health",
+      "amount": 20,
+      "operation": 0,
+      "uuid": "5b1e0000-0000-4000-8000-b200000002",
+      "hidden": true,
+      "hidden_in_bar": true
+    },
+    "armor": {
+      "type": "palladium:attribute_modifier",
+      "attribute": "generic.armor",
+      "amount": 12,
+      "operation": 0,
+      "uuid": "5b1e0000-0000-4000-8000-b200000003",
+      "hidden": true,
+      "hidden_in_bar": true
+    },
+    "speed": {
+      "type": "palladium:attribute_modifier",
+      "attribute": "generic.movement_speed",
+      "amount": 0.2,
+      "operation": 2,
+      "uuid": "5b1e0000-0000-4000-8000-b200000004",
+      "hidden": true,
+      "hidden_in_bar": true
+    },
+    "leap": {
+      "type": "palladium:attribute_modifier",
+      "attribute": "palladium:jump_power",
+      "amount": 2.5,
+      "operation": 0,
+      "uuid": "5b1e0000-0000-4000-8000-b200000005",
+      "hidden": true,
+      "hidden_in_bar": true
+    },
+    "fall_resist": {
+      "type": "palladium:attribute_modifier",
+      "attribute": "palladium:fall_resistance",
+      "amount": 30,
+      "operation": 0,
+      "uuid": "5b1e0000-0000-4000-8000-b200000006",
+      "hidden": true,
+      "hidden_in_bar": true
+    },
+    "tendril": {
+      "type": "symbiote:tendril",
+      "list_index": 1,
+      "title": {
+        "translate": "ability.symbiote.tendril"
+      },
+      "icon": "minecraft:lead",
+      "conditions": {
+        "enabling": {
+          "type": "palladium:action",
+          "cooldown": 40
+        }
+      }
+    },
+    "consume": {
+      "type": "symbiote:consume",
+      "list_index": 2,
+      "title": {
+        "translate": "ability.symbiote.consume"
+      },
+      "icon": "minecraft:rotten_flesh",
+      "conditions": {
+        "enabling": {
+          "type": "palladium:action",
+          "cooldown": 60
+        }
+      }
+    },
+    "wall_cling": {
+      "type": "symbiote:wall_cling",
+      "list_index": 3,
+      "title": {
+        "translate": "ability.symbiote.wall_cling"
+      },
+      "icon": "minecraft:cobweb",
+      "conditions": {
+        "enabling": {
+          "type": "palladium:held"
+        }
+      }
+    },
+    "apex_form": {
+      "type": "palladium:dummy",
+      "list_index": 4,
+      "title": {
+        "translate": "ability.symbiote.apex_form"
+      },
+      "icon": "minecraft:nether_star",
+      "conditions": {
+        "enabling": {
+          "type": "palladium:toggle",
+          "cooldown": 100
+        }
+      }
+    },
+    "apex_size": {
+      "type": "palladium:size",
+      "scale": 1.35,
+      "hidden": true,
+      "hidden_in_bar": true,
+      "conditions": {
+        "enabling": {
+          "type": "palladium:ability_enabled",
+          "ability": "apex_form"
+        }
+      }
+    },
+    "apex_damage": {
+      "type": "palladium:attribute_modifier",
+      "attribute": "generic.attack_damage",
+      "amount": 10,
+      "operation": 0,
+      "uuid": "5b1e0000-0000-4000-8000-b200000007",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "conditions": {
+        "enabling": {
+          "type": "palladium:ability_enabled",
+          "ability": "apex_form"
+        }
+      }
+    },
+    "apex_health": {
+      "type": "palladium:attribute_modifier",
+      "attribute": "generic.max_health",
+      "amount": 30,
+      "operation": 0,
+      "uuid": "5b1e0000-0000-4000-8000-b200000008",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "conditions": {
+        "enabling": {
+          "type": "palladium:ability_enabled",
+          "ability": "apex_form"
+        }
+      }
+    },
+    "apex_knockback": {
+      "type": "palladium:attribute_modifier",
+      "attribute": "generic.knockback_resistance",
+      "amount": 0.8,
+      "operation": 0,
+      "uuid": "5b1e0000-0000-4000-8000-b200000009",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "conditions": {
+        "enabling": {
+          "type": "palladium:ability_enabled",
+          "ability": "apex_form"
+        }
+      }
+    }
+  }
+}

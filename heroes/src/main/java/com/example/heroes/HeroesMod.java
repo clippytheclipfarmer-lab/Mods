@@ -5,6 +5,7 @@ import com.example.heroes.hulk.HulkHero;
 import com.example.heroes.pod.PodRegistry;
 import com.example.heroes.space.SpaceSystem;
 import com.example.heroes.stones.StoneHunt;
+import com.example.heroes.symbiote.SymbioteHero;
 import com.example.heroes.viltrumite.ViltrumiteHero;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.resources.ResourceLocation;
@@ -19,9 +20,14 @@ public class HeroesMod implements ModInitializer {
     public static final String MOD_ID = "heroes";
     public static final String HULK = "hulk";
     public static final String VILTRUMITE = "viltrumite";
+    public static final String SYMBIOTE = "symbiote";
 
     public static ResourceLocation hulk(String path) {
         return new ResourceLocation(HULK, path);
+    }
+
+    public static ResourceLocation symbiote(String path) {
+        return new ResourceLocation(SYMBIOTE, path);
     }
 
     public static ResourceLocation viltrumite(String path) {
@@ -36,5 +42,6 @@ public class HeroesMod implements ModInitializer {
         SpaceSystem.init();
         PodRegistry.init();
         StoneHunt.init();
+        SymbioteHero.init();
     }
 }

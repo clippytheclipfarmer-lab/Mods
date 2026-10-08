@@ -1,0 +1,26 @@
+{
+  "name": "Klyntar",
+  "dimension": "heroes:klyntar",
+  "position": [
+    -700,
+    190,
+    640
+  ],
+  "radius": 34,
+  "blocks": {
+    "surface": "minecraft:blackstone",
+    "subsurface": "minecraft:deepslate",
+    "core": "minecraft:obsidian",
+    "accent": "minecraft:crying_obsidian",
+    "accent_scale": 9.0
+  },
+  "gravity": 1.2,
+  "oxygen": true,
+  "hazard": "none",
+  "landing": [
+    0,
+    0
+  ],
+  "symbiote_meteors": false,
+  "color": "#6b2bd1"
+}

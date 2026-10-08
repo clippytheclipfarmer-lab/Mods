@@ -46,6 +46,8 @@ public final class PlanetDef {
     public final int landingX;
     public final int landingZ;
     public final boolean canLaunch;
+    /** Whether symbiote meteors can fall here (never on Earth or the symbiote homeworld). */
+    public final boolean symbioteMeteors;
     /** Altitude at which flying up launches into space; -1 = a few blocks under the build limit. */
     public final int launchAltitude;
 
@@ -101,6 +103,7 @@ public final class PlanetDef {
             this.landingZ = 0;
         }
         this.canLaunch = GsonHelper.getAsBoolean(json, "can_launch", true);
+        this.symbioteMeteors = GsonHelper.getAsBoolean(json, "symbiote_meteors", true);
         this.launchAltitude = GsonHelper.getAsInt(json, "launch_altitude", -1);
     }
 

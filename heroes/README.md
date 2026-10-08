@@ -128,3 +128,26 @@ Hidden stones are put into an existing chest/barrel at the spot when there is on
 3. Commands (op): `/stonehunt status` (spoilers!), `/stonehunt reroll`, `/stonehunt place` (do the placement now), `/stonehunt give <stone> [player]`.
 
 Notes: positions are chosen from the world seed, so a fresh world gets a fresh roll. Unplaced stones (not enough locations) stay in `/stonehunt status` as `unplaced`.
+
+## Symbiote
+A random event on the generated planets (not Earth, and not planets with `"symbiote_meteors": false` such as **Klyntar**, the new symbiote homeworld).
+
+**Meteor event.** Every ~10 s each planet that has players has a 1-in-90 chance (about once per 15 minutes) of a burning meteor falling 45-90 blocks from a random player, with a chat warning giving the direction. It leaves a crater and a hollow shell of blackened rock with a **symbiote blob** inside. At most 3 blobs per world.
+
+**The blob** drifts slowly, pulls nearby mobs towards it and absorbs them (it grows as it eats), and hunts the nearest player or villager. On contact it lifts the victim with a black tendril and holds them for 3.5 seconds (hitting the blob breaks the grip), then rolls:
+- **20%** - the victim dies (the blob survives),
+- **60%** - an ordinary bond,
+- **20%** - a perfect host.
+
+**A bonded villager** becomes a hostile **Symbiote Villager** (the perfect-host roll gives a tougher **elite** that yanks you in with a tendril). When it dies the symbiote escapes as a blob again.
+
+**A bonded player** gets the Palladium power `symbiote:symbiote` (perfect host: `symbiote:apex`):
+- **Strength and living armor**: extra damage, health, armor, speed, a higher jump and no fall damage (black suit overlay).
+- **Tendril** (action): hit a creature and it is yanked to you; hit a block and you swing to it.
+- **Wall Cling** (hold): stick to walls, move forward to climb.
+- **Consume** (action): eat a weakened creature in front of you to heal 4 hearts and feed the symbiote; stronger ones are just bitten.
+- **Hunger** (red bar): fills over time (about every 17 min; Apex half as fast); kills and consuming feed it. When full, the symbiote **takes control for 10 s** and attacks whatever is closest.
+- **Apex form** (Apex only, toggle): +35% size, +10 damage, +15 hearts, heavy knockback resistance.
+- There is no easy way out: the symbiote leaves only if the host dies (it becomes a blob at the body) or with `/symbiote release`.
+
+**Commands (op):** `/symbiote meteor` (drop one near you), `/symbiote blob`, `/symbiote bond [apex]`, `/symbiote release`.

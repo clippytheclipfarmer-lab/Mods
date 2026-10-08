@@ -4,6 +4,7 @@ import com.example.heroes.pod.PodNet;
 import com.example.heroes.pod.PodRegistry;
 import com.example.heroes.pod.SpacePodEntity;
 import com.example.heroes.space.SpaceSystem;
+import com.example.heroes.symbiote.SymbioteEntities;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
@@ -32,6 +33,11 @@ public class HeroesClient implements ClientModInitializer {
         // Space pod
         EntityModelLayerRegistry.registerModelLayer(SpacePodModel.LAYER, SpacePodModel::createBodyLayer);
         EntityRendererRegistry.register(PodRegistry.SPACE_POD, SpacePodRenderer::new);
+
+        // Symbiote mobs
+        EntityModelLayerRegistry.registerModelLayer(SymbioteBlobModel.LAYER, SymbioteBlobModel::createBodyLayer);
+        EntityRendererRegistry.register(SymbioteEntities.SYMBIOTE_BLOB, SymbioteBlobRenderer::new);
+        EntityRendererRegistry.register(SymbioteEntities.SYMBIOTE_VILLAGER, SymbioteVillagerRenderer::new);
 
         // Star map
         starMapKey = KeyBindingHelper.registerKeyBinding(new KeyMapping("key.heroes.star_map", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_H, "key.categories.heroes"));

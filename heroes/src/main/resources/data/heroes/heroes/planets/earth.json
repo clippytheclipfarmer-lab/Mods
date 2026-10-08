@@ -17,5 +17,6 @@
   "gravity": 1.0,
   "oxygen": true,
   "hazard": "none",
-  "can_launch": true
+  "can_launch": true,
+  "symbiote_meteors": false
 }
