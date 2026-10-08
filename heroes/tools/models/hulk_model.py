@@ -44,8 +44,8 @@ def build():
     m.bone("armorBody", [0, 38, 0])
     m.bone("armorRightArm", [-17, 40, 0])
     m.bone("armorLeftArm", [17, 40, 0])
-    m.bone("armorRightLeg", [-9, 22, 0])
-    m.bone("armorLeftLeg", [9, 22, 0])
+    m.bone("armorRightLeg", [-7.6, 22, 0])
+    m.bone("armorLeftLeg", [7.6, 22, 0])
 
     def mot(base=GREEN, seed=1, amount=0.14, **kw):
         return mottled(Skin(base, seed=seed, **kw), seed, amount)
@@ -107,10 +107,10 @@ def build():
 
     # ------------------------------------------------------------------ legs: long pillars set well apart, big bare feet
     legs = [
-        ([-13.4, 12, -6.4], [10.6, 10.4, 12.8], mot(GREEN, 28, 0.14)),                                            # thigh
-        ([-14.4, 2.6, -5.8], [10.4, 10, 11.6], mot(DARK, 29, 0.16, veins=1)),                                 # calf
-        ([-15, 0, -10.4], [11.4, 3, 17.4], mot(DARK, 30, 0.14, edge=0.7)),                                    # big bare foot
-        ([-14.0, 13.6, -7.0], [11.8, 9.4, 14.0], Torn((88, 56, 130), depth=2, seed=31, noise=6)),             # shorts leg
+        ([-12.0, 12, -6.4], [10.6, 10.4, 12.8], mot(GREEN, 28, 0.14)),                                            # thigh
+        ([-13.0, 2.6, -5.8], [10.4, 10, 11.6], mot(DARK, 29, 0.16, veins=1)),                                 # calf
+        ([-13.6, 0, -10.4], [11.4, 3, 17.4], mot(DARK, 30, 0.14, edge=0.7)),                                    # big bare foot
+        ([-12.6, 13.6, -7.0], [11.8, 9.4, 14.0], Torn((88, 56, 130), depth=2, seed=31, noise=6)),             # shorts leg
     ]
     for origin, size, painter in legs:
         c = m.cube("armorRightLeg", origin, size, painter)
@@ -135,8 +135,8 @@ def build_eyes():
     m.bone("armorBody", [0, 38, 0])
     m.bone("armorRightArm", [-17 * WIDTH, 40, 0])
     m.bone("armorLeftArm", [17 * WIDTH, 40, 0])
-    m.bone("armorRightLeg", [-9 * WIDTH, 22, 0])
-    m.bone("armorLeftLeg", [9 * WIDTH, 22, 0])
+    m.bone("armorRightLeg", [-7.6 * WIDTH, 22, 0])
+    m.bone("armorLeftLeg", [7.6 * WIDTH, 22, 0])
     glow = Flat((120, 255, 90), noise=0, edge=1.0)
     m.cube("armorHead", [1.0, 43.2, -6.2], [2.4, 1.4, 0.8], glow)
     m.cube("armorHead", [-3.4, 43.2, -6.2], [2.4, 1.4, 0.8], glow)

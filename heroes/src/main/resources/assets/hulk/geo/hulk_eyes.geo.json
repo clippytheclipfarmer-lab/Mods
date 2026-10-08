@@ -84,7 +84,7 @@
         {
           "name": "armorRightLeg",
           "pivot": [
-            -7.2,
+            -6.08,
             22,
             0
           ]
@@ -92,7 +92,7 @@
         {
           "name": "armorLeftLeg",
           "pivot": [
-            7.2,
+            6.08,
             22,
             0
           ]
