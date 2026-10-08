@@ -20,9 +20,20 @@ public final class CityRegion {
     public int idleSeconds = 10;
     public int maxBuilders = 6;
     public boolean sounds = true;
+    /** The district this zone belongs to (for example "downtown" or "piers"); defaults to the zone's own id. */
+    public String district;
+    /** Repair speed in blocks per second; 0 = derive it from rebuildSeconds. */
+    public int blocksPerSecond = 0;
+    /** "bottom_up" (like a construction site) or "random" (scattered repairs). */
+    public String order = "bottom_up";
+    /** "powers": explosions and hero powers (everything except a player breaking blocks by hand); "all": every real destruction. */
+    public String tracking = "powers";
+    /** Repair effect: "block" (crumbs of the block), "marker" (a block marker), "cloud" or "none". */
+    public String particles = "block";
 
     public CityRegion(String name, ResourceKey<Level> dimension, BlockPos a, BlockPos b) {
         this.name = name;
+        this.district = name;
         this.dimension = dimension;
         this.min = new BlockPos(Math.min(a.getX(), b.getX()), Math.min(a.getY(), b.getY()), Math.min(a.getZ(), b.getZ()));
         this.max = new BlockPos(Math.max(a.getX(), b.getX()), Math.max(a.getY(), b.getY()), Math.max(a.getZ(), b.getZ()));
@@ -44,6 +55,11 @@ public final class CityRegion {
         tag.putInt("IdleSeconds", idleSeconds);
         tag.putInt("MaxBuilders", maxBuilders);
         tag.putBoolean("Sounds", sounds);
+        tag.putString("District", district);
+        tag.putInt("BlocksPerSecond", blocksPerSecond);
+        tag.putString("Order", order);
+        tag.putString("Tracking", tracking);
+        tag.putString("Particles", particles);
         return tag;
     }
 
@@ -57,6 +73,11 @@ public final class CityRegion {
         region.idleSeconds = tag.getInt("IdleSeconds");
         region.maxBuilders = tag.getInt("MaxBuilders");
         region.sounds = tag.getBoolean("Sounds");
+        region.district = tag.contains("District") ? tag.getString("District") : region.name;
+        region.blocksPerSecond = tag.getInt("BlocksPerSecond");
+        region.order = tag.contains("Order") ? tag.getString("Order") : "bottom_up";
+        region.tracking = tag.contains("Tracking") ? tag.getString("Tracking") : "all"; // zones saved before this option recorded everything
+        region.particles = tag.contains("Particles") ? tag.getString("Particles") : "block";
         return region;
     }
 }

@@ -21,6 +21,9 @@ public final class CityData extends SavedData {
 
     public final Map<String, CityRegion> regions = new LinkedHashMap<>();
     public final Map<String, CityRecords> records = new LinkedHashMap<>();
+    /** Points of interest and residential zones registered through the API or commands. */
+    public final Map<String, CityPoint> pois = new LinkedHashMap<>();
+    public final Map<String, CityPoint> residentials = new LinkedHashMap<>();
 
     private final List<BlockState> palette = new ArrayList<>();
     private final Object2IntOpenHashMap<BlockState> paletteIds = new Object2IntOpenHashMap<>();
@@ -82,7 +85,15 @@ public final class CityData extends SavedData {
             recordsTag.put(e.getKey(), rt);
         }
         tag.put("Records", recordsTag);
+        tag.put("Pois", savePoints(pois));
+        tag.put("Residentials", savePoints(residentials));
         return tag;
+    }
+
+    private static ListTag savePoints(Map<String, CityPoint> points) {
+        ListTag list = new ListTag();
+        points.values().forEach(p -> list.add(p.save()));
+        return list;
     }
 
     public static CityData load(CompoundTag tag) {
@@ -95,6 +106,14 @@ public final class CityData extends SavedData {
             BlockState state = NbtUtils.readBlockState(BuiltInRegistries.BLOCK.asLookup(), (CompoundTag) t);
             data.paletteIds.put(state, data.palette.size());
             data.palette.add(state);
+        }
+        for (Tag t : tag.getList("Pois", Tag.TAG_COMPOUND)) {
+            CityPoint point = CityPoint.load((CompoundTag) t);
+            data.pois.put(point.id(), point);
+        }
+        for (Tag t : tag.getList("Residentials", Tag.TAG_COMPOUND)) {
+            CityPoint point = CityPoint.load((CompoundTag) t);
+            data.residentials.put(point.id(), point);
         }
         CompoundTag recordsTag = tag.getCompound("Records");
         for (String name : recordsTag.getAllKeys()) {

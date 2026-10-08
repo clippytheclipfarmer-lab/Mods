@@ -76,6 +76,22 @@ Rebuilding pauses while a player in the region is fighting, skips spots blocked 
 Builder villagers (invulnerable, no AI, a mason profession) appear near the rebuild front with hammering and construction sounds while a player is within 96 blocks, and disappear when finished.
 Damage records are saved with the world (capped at 6 million blocks per region); the nuke can destroy millions of blocks, so saves after a big blast can be large and slow.
 
+### City zones, districts and the scripting API
+
+Each city region is also a **zone** that belongs to a **district** (for example `downtown` or `piers`). Several zones can share a district. The following static methods on `com.example.heroes.city.CityManager` are meant for scripts and other mods (for KubeJS: `Java.loadClass("com.example.heroes.city.CityManager")`); they are safe to call from any thread, run on the server thread, and are queued if called before the world has loaded (idempotent, so a startup script can call them on every start):
+
+| Call | What it does |
+|---|---|
+| `registerCityZone(String id, BlockPos min, BlockPos max)` | Registers (or updates) a zone in the overworld; its district is its own id. |
+| `registerCityZone(String id, String districtId, BlockPos min, BlockPos max)` | Same, with a district. An overload also takes the dimension key. Registering an existing id keeps its settings and recorded damage. |
+| `String getDistrict(Player player)` | The district of the zone the player stands in, or `null` outside every zone. `getZone(Player)` returns the zone id. |
+| `registerPOI(String id, int x, int y, int z, String name)` | Stores a point of interest (saved with the world). `getPOIs()` lists them. |
+| `registerResidential(String id, int x, int y, int z, String tier)` | Stores a residential zone with a tier. `getResidentials()` lists them. |
+
+Zone settings (`/city set <name> ...`, also in `/city info`): `district <id>`, `blocks_per_second <n>` (0 = pace the job over `rebuild_seconds`), `order bottom_up|random` (scattered repairs pick random blocks from the damaged set in batches, spread across ticks), `particles block|marker|cloud|none` (the block marker or cloud effect on every repair), `tracking powers|all`. **`powers`** (the default for new zones) records explosions and hero powers, and ignores a player breaking blocks by hand; `all` records everything (zones saved before this option keep `all`).
+Other commands: `/city where` (your zone and district), `/city poi add <id> <pos> <name>`, `/city poi remove|list`, `/city residential add <id> <pos> <tier>`, `/city residential remove|list`.
+Memory: destroyed blocks are stored as packed `long` positions plus a block palette index (not one object per block) and saved as arrays, so even millions of blocks stay compact. Repairs are sampled per tick from a pre-sorted or shuffled queue, so no tick repairs more than the configured rate and nothing scans the whole region.
+
 ## Space
 Fly straight up past the build limit and you leave the planet (normal dimension-change loading screen) and arrive in the **space dimension**, above the planet you left.
 There the planets are real block spheres you can see and fly around, plus an orbit station. Fly into a planet and you land on its surface (another loading screen);
