@@ -46,6 +46,12 @@ public final class OriginEffects {
         if (sheet == null) {
             return;
         }
+        Race raceForHeight = sheet.raceDef();
+        if (sheet.height <= 0 && raceForHeight != null && raceForHeight.heightMax > 0) {
+            sheet.rollHeight(player.getRandom()); // characters created before heights existed get one now
+            OriginData.get(player.server).setDirty();
+        }
+        OriginScale.setHeight(player, sheet.height);
         int str = sheet.mod(Ability5e.STR), dex = sheet.mod(Ability5e.DEX), con = sheet.mod(Ability5e.CON);
         add(player, Attributes.MAX_HEALTH, "con", con * 2.0 + (sheet.level() - 1), AttributeModifier.Operation.ADDITION);
         add(player, Attributes.ATTACK_DAMAGE, "str", str * 0.5, AttributeModifier.Operation.ADDITION);
@@ -67,6 +73,9 @@ public final class OriginEffects {
     }
 
     public static void clear(ServerPlayer player) {
+        if (OriginApi.get(player) == null) {
+            OriginScale.setHeight(player, 0);
+        }
         for (Attribute attribute : BuiltInRegistries.ATTRIBUTE) {
             AttributeInstance instance = player.getAttribute(attribute);
             if (instance == null) {

@@ -253,6 +253,8 @@ The random character generator lives in another project; this mod provides the *
 | **Human** | 85 | The normal Minecraft character: no bonuses. |
 | **Asgardian** | 15 | +1 STR, +1 CON, +4 max health, a little knockback resistance, hunger drains 25% slower, heals 1 HP every 10 s. Subtypes: **Asgardian** (75, just a bit tougher than a human, no magic, no powers), **Warrior** (18, +1 STR +1 DEX), **Royal** (7, +1 INT +1 WIS +2 CHA, heals faster, flag `magical_potential` for future magic). |
 
+**Height.** A race can set `height_blocks` (`min`/`max`). Each Asgardian rolls a height between **2.1 and 2.6 blocks** (the average of two uniform rolls, so the typical one is about 2.35) when the character is created; a player is 1.8, so that is a Pehkui scale of 1.17 to 1.44 (`OriginScale`, which stacks with the Hulk's scale). The height is saved with the character and shown on the sheet. Humans stay at 1.8.
+
 **Ability scores** are rolled **4d6, drop the lowest** for each of the six, then the race and subtype bonuses are added on top (capped at 20). The modifier is `floor((score - 10) / 2)`.
 
 **Levels** are 1-20 with the 5e proficiency bonus (+2 at 1-4, +3 at 5-8, ... +6 at 17-20), from the mod's own XP. The thresholds are the 5e table divided by 5 (level 2 at 60 XP, level 20 at 71,000). XP comes from kills (hostile creatures give twice their max health; animals a quarter of that; villagers and the like an eighth), bosses (Ender Dragon 5000, Knull 10000, Wither 3000, Warden 2000), a new biome (+25) and a new dimension (+200). Intelligence adds 5% XP per point of modifier.

@@ -45,6 +45,9 @@ public final class Race {
     public final String name;
     public final String description;
     public final int weight;
+    /** Height range in blocks (a player is 1.8). 0 = normal size. */
+    public final double heightMin;
+    public final double heightMax;
     public final int[] bonuses = new int[6];
     public final List<AttributeBonus> attributes = new ArrayList<>();
     public final Map<String, Double> traits = new HashMap<>();
@@ -55,6 +58,14 @@ public final class Race {
         name = json.has("name") ? json.get("name").getAsString() : id.getPath();
         description = json.has("description") ? json.get("description").getAsString() : "";
         weight = json.has("weight") ? json.get("weight").getAsInt() : 1;
+        if (json.has("height_blocks")) {
+            JsonObject h = json.getAsJsonObject("height_blocks");
+            heightMin = h.get("min").getAsDouble();
+            heightMax = h.get("max").getAsDouble();
+        } else {
+            heightMin = 0;
+            heightMax = 0;
+        }
         readBonuses(json, bonuses);
         readTraits(json, traits);
         if (json.has("attributes")) {

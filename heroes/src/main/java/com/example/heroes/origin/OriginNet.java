@@ -35,6 +35,7 @@ public final class OriginNet {
         tag.putString("Subtype", subtype.name);
         tag.putString("Description", race.description);
         int level = sheet.level();
+        tag.putFloat("Height", sheet.height);
         tag.putInt("Level", level);
         tag.putInt("Xp", sheet.xp);
         tag.putInt("XpThis", Levels.xpFor(level));

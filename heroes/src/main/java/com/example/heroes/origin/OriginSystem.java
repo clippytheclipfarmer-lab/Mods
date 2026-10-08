@@ -22,6 +22,7 @@ public final class OriginSystem {
 
     public static void init() {
         Races.init();
+        OriginScale.init();
         OriginNet.init();
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> OriginCommands.register(dispatcher));
 

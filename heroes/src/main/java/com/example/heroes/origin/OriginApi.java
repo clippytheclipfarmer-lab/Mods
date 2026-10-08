@@ -29,6 +29,7 @@ public final class OriginApi {
         sheet.race = race.id;
         sheet.subtype = Races.randomSubtype(race, player.getRandom()).id;
         sheet.rollScores(player.getRandom());
+        sheet.rollHeight(player.getRandom());
         OriginData.get(player.server).put(player.getUUID(), sheet);
         refresh(player);
         player.sendSystemMessage(Component.literal("You are " + sheet.subtypeDef().name + ", level 1."));

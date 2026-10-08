@@ -2,6 +2,7 @@
   "name": "Asgardian",
   "description": "A little tougher than a human in every way: stronger, sturdier, slower to tire, quicker to heal and long-lived. Most are just that, with no magic and no powers. Royals are born with magical potential.",
   "weight": 15,
+  "height_blocks": { "min": 2.1, "max": 2.6 },
   "ability_bonuses": { "str": 1, "con": 1 },
   "attributes": [
     { "attribute": "minecraft:generic.max_health", "amount": 4.0, "operation": "addition" },

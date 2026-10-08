@@ -17,6 +17,8 @@ public final class Sheet {
     /** The rolled scores (4d6, drop the lowest), before race bonuses. */
     public final int[] rolled = new int[6];
     public int xp;
+    /** This character's height in blocks (a player is 1.8); 0 = normal size. */
+    public float height;
     public final Set<String> biomes = new HashSet<>();
     public final Set<String> dimensions = new HashSet<>();
 
@@ -61,6 +63,17 @@ public final class Sheet {
         return r.traits.getOrDefault(name, 0.0) + r.subtype(subtype).traits.getOrDefault(name, 0.0);
     }
 
+    /** Rolls a height within the race's range: the average of two uniform rolls, so most are near the middle of the range. */
+    public void rollHeight(RandomSource random) {
+        Race r = raceDef();
+        if (r == null || r.heightMax <= 0) {
+            height = 0;
+            return;
+        }
+        double t = (random.nextDouble() + random.nextDouble()) / 2.0;
+        height = (float) (r.heightMin + (r.heightMax - r.heightMin) * t);
+    }
+
     public void rollScores(RandomSource random) {
         for (int i = 0; i < 6; i++) {
             rolled[i] = Dice.fourD6DropLowest(random);
@@ -73,6 +86,7 @@ public final class Sheet {
         tag.putString("Subtype", subtype);
         tag.putIntArray("Rolled", rolled);
         tag.putInt("Xp", xp);
+        tag.putFloat("Height", height);
         ListTag b = new ListTag();
         biomes.forEach(s -> b.add(StringTag.valueOf(s)));
         tag.put("Biomes", b);
@@ -89,6 +103,7 @@ public final class Sheet {
         int[] r = tag.getIntArray("Rolled");
         System.arraycopy(r, 0, s.rolled, 0, Math.min(6, r.length));
         s.xp = tag.getInt("Xp");
+        s.height = tag.getFloat("Height");
         for (Tag t : tag.getList("Biomes", Tag.TAG_STRING)) {
             s.biomes.add(t.getAsString());
         }
