@@ -196,6 +196,16 @@
           "ability": "grab_throw"
         }
       }
+    },
+    "gamma_nuke": {
+      "type": "hulk:gamma_nuke",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "hold_ticks": 200,
+      "radius": 100,
+      "damage": 400,
+      "block_damage": true,
+      "cooldown": 24000
     }
   }
 }

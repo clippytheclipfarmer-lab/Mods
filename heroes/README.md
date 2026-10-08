@@ -30,6 +30,7 @@ Use Palladium's own tools (or your power-assigning system):
 - **Grab & Throw** (`hulk:grab_throw`, action key): press to grab the mob, player or block in front of you, press again to throw it. Thrown things explode on impact (damage scales with rage and tier). Held for at most 10 s.
 - **Shoulder Charge** (`hulk:charge`, hold key, up to 8 s): super sprint that keeps accelerating the longer you run (full speed after 4 s), that bowls over mobs and smashes weak blocks.
 - **Wall Climb** (`hulk:wall_climb`, hold key): climb the wall you are pushing against.
+- **Gamma Nuke** (`hulk:gamma_nuke`, passive, no button): if rage stays at 100% for 10 s straight, Hulk detonates. Everything alive within 100 blocks takes massive damage (he is spared), and terrain in a 100-block sphere is erased as an expanding wave over ~10 s (nearest first, so the server does not freeze). Bedrock and unloaded chunks are skipped; it needs the `mobGriefing` gamerule on for terrain damage. Afterwards rage resets to 0, he is weakened and slowed, and it cannot happen again for 20 min. All numbers are properties of the ability in `hulk.json` (`hold_ticks`, `radius`, `damage`, `block_damage`, `cooldown`); set `block_damage` to false to only damage entities. The cooldown is not saved across server restarts.
 - **Immortality** (`hulk:immortality`, passive): instead of dying, Hulk revives at 40% health at full rage (5 min cooldown).
 - **Regeneration**: heals faster the higher his rage.
 

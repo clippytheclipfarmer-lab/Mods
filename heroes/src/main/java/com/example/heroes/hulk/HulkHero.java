@@ -2,6 +2,7 @@ package com.example.heroes.hulk;
 
 import com.example.heroes.HeroesMod;
 import com.example.heroes.hulk.ability.ChargeAbility;
+import com.example.heroes.hulk.ability.GammaNukeAbility;
 import com.example.heroes.hulk.ability.GrabThrowAbility;
 import com.example.heroes.hulk.ability.GroundSmashAbility;
 import com.example.heroes.hulk.ability.ImmortalityAbility;
@@ -35,6 +36,7 @@ public final class HulkHero {
         ABILITIES.register("grab_throw", GrabThrowAbility::new);
         ABILITIES.register("charge", ChargeAbility::new);
         ABILITIES.register("wall_climb", WallClimbAbility::new);
+        ABILITIES.register("gamma_nuke", GammaNukeAbility::new);
         IMMORTALITY = ABILITIES.register("immortality", ImmortalityAbility::new);
     }
 
@@ -45,6 +47,7 @@ public final class HulkHero {
         ABILITIES.register();
         HulkScale.init();
         GrabSystem.init();
+        NukeSystem.init();
 
         ServerLivingEntityEvents.ALLOW_DAMAGE.register((entity, source, amount) -> {
             // Hulk shrugs off falls (needed for the super jump).

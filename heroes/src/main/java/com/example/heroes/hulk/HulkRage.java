@@ -35,6 +35,18 @@ public final class HulkRage {
         }
     }
 
+    public static boolean isFull(LivingEntity entity) {
+        EnergyBar bar = bar(entity);
+        return bar != null && bar.get() >= bar.getMax();
+    }
+
+    public static void set(LivingEntity entity, int value) {
+        EnergyBar bar = bar(entity);
+        if (bar != null) {
+            bar.set(value);
+        }
+    }
+
     /** Rage as a 0..1 fraction. */
     public static float fraction(LivingEntity entity) {
         EnergyBar bar = bar(entity);
