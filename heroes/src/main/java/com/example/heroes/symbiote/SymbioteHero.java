@@ -32,6 +32,7 @@ public final class SymbioteHero {
         ABILITIES.register("sense", SenseAbility::new);
         ABILITIES.register("regen", RegenAbility::new);
         ABILITIES.register("upkeep", SuitUpkeepAbility::new);
+        ABILITIES.register("feed", com.example.heroes.symbiote.ability.FeedAbility::new);
     }
 
     private SymbioteHero() {
@@ -69,9 +70,9 @@ public final class SymbioteHero {
         });
 
         ServerLivingEntityEvents.AFTER_DEATH.register((entity, source) -> {
-            // A host's kills feed the symbiote.
             if (source.getEntity() instanceof ServerPlayer killer && SymbioteHost.isHost(killer) && entity != killer) {
-                SymbioteHost.addHunger(killer, -12);
+                // A host's kills feed the symbiote; while it is in control it eats its fill from big prey.
+                SymbioteHost.feed(killer, SymbioteHost.isControlled(killer) ? Math.max(15, Math.min(60, Math.round(entity.getMaxHealth() * 2))) : 12);
             }
             // When the host dies the symbiote leaves as a blob again.
             if (entity instanceof ServerPlayer host && SymbioteHost.isHost(host) && host.level() instanceof ServerLevel level) {

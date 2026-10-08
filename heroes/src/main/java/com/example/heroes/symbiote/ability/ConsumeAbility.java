@@ -46,7 +46,7 @@ public class ConsumeAbility extends Ability {
         if (weak) {
             target.hurt(level.damageSources().mobAttack(entity), 1000.0F);
             entity.heal(8.0F * (float) StoneBoost.mult(entity, InfinityStone.SOUL, 2.0));
-            SymbioteHost.addHunger(entity, -40);
+            SymbioteHost.feed(entity, 40);
         } else {
             target.hurt(level.damageSources().mobAttack(entity), 8.0F);
         }

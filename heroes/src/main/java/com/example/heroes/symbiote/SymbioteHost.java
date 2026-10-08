@@ -29,6 +29,7 @@ public final class SymbioteHost {
     public static final ResourceLocation BASE = HeroesMod.symbiote("symbiote");
     public static final ResourceLocation APEX = HeroesMod.symbiote("apex");
     public static final String HUNGER = "hunger";
+    public static final int FULL = 100;
 
     public static final String SUIT = "suit";
     /** Symbiote armor (energy bar, per mille of the host's maximum health) and the symbiote's own life (percent of 5 hearts). */
@@ -103,6 +104,7 @@ public final class SymbioteHost {
     }
 
     public static void release(LivingEntity entity) {
+        entity.removeTag(CONTROL_TAG);
         SuperpowerUtil.removeSuperpower(entity, BASE);
         SuperpowerUtil.removeSuperpower(entity, APEX);
     }
@@ -125,24 +127,29 @@ public final class SymbioteHost {
         return null;
     }
 
-    /** 0 = fed, 100 = starving. Does nothing for entities without a symbiote. */
-    public static void addHunger(LivingEntity entity, int delta) {
+    /** The symbiote's own hunger bar: {@link #FULL} = sated, 0 = starving. -1 for entities without a symbiote. */
+    public static int satiation(LivingEntity entity) {
         EnergyBar bar = hungerBar(entity);
-        if (bar != null) {
-            bar.add(delta);
-        }
+        return bar == null ? -1 : bar.get();
     }
 
-    public static void setHunger(LivingEntity entity, int value) {
+    public static void feed(LivingEntity entity, int amount) {
         EnergyBar bar = hungerBar(entity);
         if (bar != null) {
-            bar.set(value);
+            bar.set(Math.max(0, Math.min(FULL, bar.get() + amount)));
         }
     }
 
     public static boolean isStarving(LivingEntity entity) {
         EnergyBar bar = hungerBar(entity);
-        return bar != null && bar.get() >= bar.getMax();
+        return bar != null && bar.get() <= 0;
+    }
+
+    /** While this tag is on the host, the symbiote is in control of the body until it has eaten its fill. */
+    public static final String CONTROL_TAG = "heroes_symbiote_control";
+
+    public static boolean isControlled(LivingEntity entity) {
+        return entity.getTags().contains(CONTROL_TAG);
     }
 
     // ------------------------------------------------------------------ the symbiote's own health
@@ -158,7 +165,9 @@ public final class SymbioteHost {
             }
             EnergyBar armor = bar(player, ARMOR);
             EnergyBar core = bar(player, CORE);
-            if (armor != null && core != null) {
+            EnergyBar hunger = bar(player, HUNGER);
+            if (armor != null && core != null && hunger != null) {
+                hunger.set(FULL);
                 armor.set(ARMOR_MAX);
                 core.set(CORE_MAX);
                 PENDING_INIT.remove(id);
