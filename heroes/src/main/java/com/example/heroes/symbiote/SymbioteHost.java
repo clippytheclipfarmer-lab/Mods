@@ -145,6 +145,24 @@ public final class SymbioteHost {
         return bar != null && bar.get() <= 0;
     }
 
+    /**
+     * Called when a host eats: while the symbiote is not full, it eats first - the whole item goes to its food bar
+     * (meat counts 4x its food value, anything else 2x), and the host gets neither food nor any bad effect (the symbiote
+     * cannot get food poisoning). Returns false when the symbiote is full, so the host eats normally.
+     */
+    public static boolean eatFirst(LivingEntity entity, net.minecraft.world.item.ItemStack stack) {
+        int food = satiation(entity);
+        var props = stack.getItem().getFoodProperties();
+        if (food < 0 || food >= FULL || props == null) {
+            return false;
+        }
+        feed(entity, props.getNutrition() * (props.isMeat() ? 4 : 2));
+        if (entity instanceof ServerPlayer player) {
+            player.displayClientMessage(Component.literal("\u00a77The symbiote takes it first."), true);
+        }
+        return true;
+    }
+
     /** While this tag is on the host, the symbiote is in control of the body until it has eaten its fill. */
     public static final String CONTROL_TAG = "heroes_symbiote_control";
 

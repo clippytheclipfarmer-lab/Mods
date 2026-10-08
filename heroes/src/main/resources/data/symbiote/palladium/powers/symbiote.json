@@ -317,20 +317,6 @@
       "type": "symbiote:upkeep",
       "hidden": true,
       "hidden_in_bar": true
-    },
-    "feed": {
-      "type": "symbiote:feed",
-      "list_index": 5,
-      "title": {
-        "translate": "ability.symbiote.feed"
-      },
-      "icon": "minecraft:cooked_beef",
-      "conditions": {
-        "enabling": {
-          "type": "palladium:action",
-          "cooldown": 20
-        }
-      }
     }
   }
 }

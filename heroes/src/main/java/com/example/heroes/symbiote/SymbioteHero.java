@@ -32,7 +32,6 @@ public final class SymbioteHero {
         ABILITIES.register("sense", SenseAbility::new);
         ABILITIES.register("regen", RegenAbility::new);
         ABILITIES.register("upkeep", SuitUpkeepAbility::new);
-        ABILITIES.register("feed", com.example.heroes.symbiote.ability.FeedAbility::new);
     }
 
     private SymbioteHero() {
