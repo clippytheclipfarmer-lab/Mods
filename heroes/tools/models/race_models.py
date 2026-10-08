@@ -290,16 +290,29 @@ def main():
                           "right_leg": "armorRightLeg", "left_leg": "armorLeftLeg"},
                 "render_full_model_in_first_person": False})
             primary, secondary = POWER_COLORS[race]
+            abilities = {
+                "hide_body": {"type": "palladium:remove_body_part", "hidden": True, "hidden_in_bar": True,
+                              "affects_first_person": False, "body_parts": HIDE_ALL},
+                "render_layer": {"type": "palladium:render_layer", "hidden": True, "hidden_in_bar": True, "render_layer": "races:" + key}}
+            if race == "skrull":
+                # Shapeshifters turn their own look off while they wear another shape (the marker power races:morphed).
+                not_morphed = {"enabling": {"type": "palladium:not", "conditions": [{"type": "palladium:has_power", "power": "races:morphed"}]}}
+                abilities["hide_body"]["conditions"] = not_morphed
+                abilities["render_layer"]["conditions"] = not_morphed
+                abilities["shapeshift"] = {"type": "races:shapeshift", "list_index": 0, "title": {"translate": "ability.races.shapeshift"},
+                                           "icon": "minecraft:ender_eye", "conditions": {"enabling": {"type": "palladium:action", "cooldown": 40}}}
             write_json(os.path.join(ROOT, "data", "races", "palladium", "powers", key + ".json"), {
                 "name": {"translate": "power.races." + key},
                 "icon": "minecraft:player_head",
                 "primary_color": primary,
                 "secondary_color": secondary,
-                "abilities": {
-                    "hide_body": {"type": "palladium:remove_body_part", "hidden": True, "hidden_in_bar": True,
-                                  "affects_first_person": False, "body_parts": HIDE_ALL},
-                    "render_layer": {"type": "palladium:render_layer", "hidden": True, "hidden_in_bar": True, "render_layer": "races:" + key}}})
+                "abilities": abilities})
             lang["power.races." + key] = "%s (%s)" % (race.capitalize() if race != "jotun" else "Jotun", gender)
+    lang["power.races.morphed"] = "Shapeshifted"
+    lang["ability.races.shapeshift"] = "Shapeshift"
+    write_json(os.path.join(ROOT, "data", "races", "palladium", "powers", "morphed.json"), {
+        "name": {"translate": "power.races.morphed"}, "icon": "minecraft:ender_eye", "primary_color": [118, 164, 62], "secondary_color": [58, 52, 66],
+        "abilities": {"flag": {"type": "palladium:dummy", "hidden": True, "hidden_in_bar": True}}})
     os.makedirs(os.path.join(ROOT, "assets", "races", "lang"), exist_ok=True)
     write_json(os.path.join(ROOT, "assets", "races", "lang", "en_us.json"), lang)
     print("wrote 6 race models, render layers and powers")

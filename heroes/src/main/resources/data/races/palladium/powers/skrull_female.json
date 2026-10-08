@@ -32,13 +32,49 @@
         "right_leg_overlay",
         "left_leg",
         "left_leg_overlay"
-      ]
+      ],
+      "conditions": {
+        "enabling": {
+          "type": "palladium:not",
+          "conditions": [
+            {
+              "type": "palladium:has_power",
+              "power": "races:morphed"
+            }
+          ]
+        }
+      }
     },
     "render_layer": {
       "type": "palladium:render_layer",
       "hidden": true,
       "hidden_in_bar": true,
-      "render_layer": "races:skrull_female"
+      "render_layer": "races:skrull_female",
+      "conditions": {
+        "enabling": {
+          "type": "palladium:not",
+          "conditions": [
+            {
+              "type": "palladium:has_power",
+              "power": "races:morphed"
+            }
+          ]
+        }
+      }
+    },
+    "shapeshift": {
+      "type": "races:shapeshift",
+      "list_index": 0,
+      "title": {
+        "translate": "ability.races.shapeshift"
+      },
+      "icon": "minecraft:ender_eye",
+      "conditions": {
+        "enabling": {
+          "type": "palladium:action",
+          "cooldown": 40
+        }
+      }
     }
   }
 }

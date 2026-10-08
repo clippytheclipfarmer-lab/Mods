@@ -62,7 +62,7 @@ public final class OriginApi {
     public static void clear(ServerPlayer player) {
         OriginData.get(player.server).remove(player.getUUID());
         OriginEffects.clear(player);
-        OriginEffects.syncModel(player, null);
+        OriginEffects.syncModel(player, null, null, false);
         OriginNet.sync(player);
     }
 
@@ -97,6 +97,7 @@ public final class OriginApi {
     public static void refresh(ServerPlayer player) {
         OriginEffects.apply(player);
         OriginNet.sync(player);
+        com.example.heroes.origin.morph.MorphNet.broadcast(player);
     }
 
     public static ResourceLocation id(String path) {

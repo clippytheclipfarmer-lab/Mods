@@ -19,6 +19,7 @@ public final class OriginClient {
     }
 
     public static void init() {
+        MorphClient.init();
         ClientPlayNetworking.registerGlobalReceiver(OriginNet.SHEET, (client, handler, buf, sender) -> {
             CompoundTag tag = buf.readNbt();
             client.execute(() -> sheet = tag == null ? new CompoundTag() : tag);

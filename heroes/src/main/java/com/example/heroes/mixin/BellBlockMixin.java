@@ -15,8 +15,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 /** A ringing bell is a sonic attack: it hurts every symbiote within 16 blocks. */
 @Mixin(BellBlock.class)
 public abstract class BellBlockMixin {
-    @Inject(method = "attemptToRing(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction;)Z", at = @At("RETURN"))
-    private void heroes$bellHurtsSymbiotes(Level level, BlockPos pos, Direction direction, CallbackInfoReturnable<Boolean> cir) {
+    @Inject(method = "attemptToRing(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction;)Z", at = @At("RETURN"))
+    private void heroes$bellHurtsSymbiotes(net.minecraft.world.entity.Entity ringer, Level level, BlockPos pos, Direction direction, CallbackInfoReturnable<Boolean> cir) {
         if (cir.getReturnValueZ() && level instanceof ServerLevel serverLevel) {
             SymbioteHost.sonicHit(serverLevel, Vec3.atCenterOf(pos), 16.0, 2.0F);
         }

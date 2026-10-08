@@ -1,0 +1,23 @@
+{
+  "name": {
+    "translate": "power.races.morphed"
+  },
+  "icon": "minecraft:ender_eye",
+  "primary_color": [
+    118,
+    164,
+    62
+  ],
+  "secondary_color": [
+    58,
+    52,
+    66
+  ],
+  "abilities": {
+    "flag": {
+      "type": "palladium:dummy",
+      "hidden": true,
+      "hidden_in_bar": true
+    }
+  }
+}

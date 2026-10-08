@@ -19,6 +19,10 @@ public final class Sheet {
     /** The rolled scores (4d6, drop the lowest), before race bonuses. */
     public final int[] rolled = new int[6];
     public int xp;
+    /** Shapeshifting: "" (none), "model" (a race model power), "skin" (another player's skin) or "mob" (an entity type). */
+    public String morphKind = "";
+    public String morphTarget = "";
+    public float morphHeight;
     /** This character's height in blocks (a player is 1.8); 0 = normal size. */
     public float height;
     public final Set<String> biomes = new HashSet<>();
@@ -90,6 +94,9 @@ public final class Sheet {
         tag.putString("Gender", gender);
         tag.putIntArray("Rolled", rolled);
         tag.putInt("Xp", xp);
+        tag.putString("MorphKind", morphKind);
+        tag.putString("MorphTarget", morphTarget);
+        tag.putFloat("MorphHeight", morphHeight);
         tag.putFloat("Height", height);
         ListTag b = new ListTag();
         biomes.forEach(s -> b.add(StringTag.valueOf(s)));
@@ -108,6 +115,9 @@ public final class Sheet {
         int[] r = tag.getIntArray("Rolled");
         System.arraycopy(r, 0, s.rolled, 0, Math.min(6, r.length));
         s.xp = tag.getInt("Xp");
+        s.morphKind = tag.getString("MorphKind");
+        s.morphTarget = tag.getString("MorphTarget");
+        s.morphHeight = tag.getFloat("MorphHeight");
         s.height = tag.getFloat("Height");
         for (Tag t : tag.getList("Biomes", Tag.TAG_STRING)) {
             s.biomes.add(t.getAsString());

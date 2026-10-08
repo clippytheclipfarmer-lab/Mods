@@ -23,11 +23,18 @@ public final class OriginSystem {
     public static void init() {
         Races.init();
         OriginScale.init();
+        com.example.heroes.origin.morph.Morph.init();
         OriginNet.init();
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> OriginCommands.register(dispatcher));
 
-        ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> OriginApi.refresh(handler.getPlayer()));
-        ServerPlayerEvents.AFTER_RESPAWN.register((oldPlayer, newPlayer, alive) -> OriginApi.refresh(newPlayer));
+        ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
+            OriginApi.refresh(handler.getPlayer());
+            com.example.heroes.origin.morph.MorphNet.sendAllTo(handler.getPlayer());
+        });
+        ServerPlayerEvents.AFTER_RESPAWN.register((oldPlayer, newPlayer, alive) -> {
+            com.example.heroes.origin.morph.Morph.clearQuietly(newPlayer); // a shapeshift does not survive death
+            OriginApi.refresh(newPlayer);
+        });
         ServerTickEvents.END_SERVER_TICK.register(server -> {
             for (ServerPlayer player : server.getPlayerList().getPlayers()) {
                 OriginEffects.tick(player);

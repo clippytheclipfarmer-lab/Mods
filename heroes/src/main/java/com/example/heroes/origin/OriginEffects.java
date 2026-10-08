@@ -54,8 +54,11 @@ public final class OriginEffects {
             sheet.rollHeight(player.getRandom()); // characters created before heights existed get one now
             OriginData.get(player.server).setDirty();
         }
-        OriginScale.setHeight(player, sheet.height);
-        syncModel(player, sheet.raceDef() == null ? null : sheet.raceDef().models.get(sheet.gender));
+        boolean morphed = !sheet.morphKind.isEmpty();
+        OriginScale.setHeight(player, morphed && sheet.morphHeight > 0 ? sheet.morphHeight : sheet.height);
+        ResourceLocation own = sheet.raceDef() == null ? null : sheet.raceDef().models.get(sheet.gender);
+        ResourceLocation extra = morphed && sheet.morphKind.equals("model") ? new ResourceLocation(sheet.morphTarget) : null;
+        syncModel(player, own, extra, morphed);
         int str = sheet.mod(Ability5e.STR), dex = sheet.mod(Ability5e.DEX), con = sheet.mod(Ability5e.CON);
         add(player, Attributes.MAX_HEALTH, "con", con * 2.0 + (sheet.level() - 1), AttributeModifier.Operation.ADDITION);
         add(player, Attributes.ATTACK_DAMAGE, "str", str * 0.5, AttributeModifier.Operation.ADDITION);
@@ -93,17 +96,28 @@ public final class OriginEffects {
         }
     }
 
-    /** Wears the model power for this race and gender, and takes off every other race model. null = the normal player model. */
-    public static void syncModel(ServerPlayer player, ResourceLocation wanted) {
+    /**
+     * Wears the model power for this race and gender (plus, while shapeshifted into another race's model, that model's power)
+     * and takes off every other race model. The marker power {@code races:morphed} is on while shapeshifted, so a shapeshifter's
+     * own model turns itself off.
+     */
+    public static void syncModel(ServerPlayer player, ResourceLocation own, ResourceLocation extra, boolean morphed) {
         for (Race race : Races.all()) {
             for (ResourceLocation id : race.models.values()) {
+                boolean wanted = id.equals(own) || id.equals(extra);
                 boolean has = PowerUtil.hasPower(player, id);
-                if (id.equals(wanted) && !has) {
+                if (wanted && !has) {
                     SuperpowerUtil.addSuperpower(player, id);
-                } else if (!id.equals(wanted) && has) {
+                } else if (!wanted && has) {
                     SuperpowerUtil.removeSuperpower(player, id);
                 }
             }
+        }
+        boolean marked = PowerUtil.hasPower(player, com.example.heroes.origin.morph.Morph.MARKER);
+        if (morphed && !marked) {
+            SuperpowerUtil.addSuperpower(player, com.example.heroes.origin.morph.Morph.MARKER);
+        } else if (!morphed && marked) {
+            SuperpowerUtil.removeSuperpower(player, com.example.heroes.origin.morph.Morph.MARKER);
         }
     }
 
