@@ -14,5 +14,11 @@
   "entity.heroes.symbiote_villager": "Symbiote Villager",
   "item.heroes.infinity_gauntlet": "Infinity Gauntlet",
   "item.heroes.infinity_necklace": "Infinity Necklace",
-  "item.heroes.infinity_bracers": "Infinity Bracers"
+  "item.heroes.infinity_bracers": "Infinity Bracers",
+  "block.heroes.power_orb": "The Orb",
+  "block.heroes.space_tesseract": "The Tesseract",
+  "block.heroes.mind_scepter": "The Scepter",
+  "block.heroes.reality_aether": "The Aether",
+  "block.heroes.time_eye": "Eye of Agamotto",
+  "block.heroes.soul_urn": "The Soul Urn"
 }

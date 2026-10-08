@@ -1,0 +1,11 @@
+{
+  "parent": "heroes:block/soul_urn_empty",
+  "overrides": [
+    {
+      "predicate": {
+        "heroes:filled": 1
+      },
+      "model": "heroes:block/soul_urn_filled"
+    }
+  ]
+}

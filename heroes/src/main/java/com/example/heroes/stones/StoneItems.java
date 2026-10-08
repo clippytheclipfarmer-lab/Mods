@@ -33,6 +33,7 @@ public final class StoneItems {
     }
 
     public static void init() {
+        StoneContainers.init();
         for (InfinityStone stone : InfinityStone.values()) {
             Item item = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(HeroesMod.MOD_ID, stone.id()),
                     new StoneItem(stone, new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).fireResistant()));
@@ -46,6 +47,10 @@ public final class StoneItems {
             entries.accept(GAUNTLET);
             entries.accept(NECKLACE);
             entries.accept(BRACERS);
+            for (InfinityStone stone : InfinityStone.values()) {
+                entries.accept(StoneContainers.stack(stone, true));
+                entries.accept(StoneContainers.stack(stone, false));
+            }
         });
     }
 

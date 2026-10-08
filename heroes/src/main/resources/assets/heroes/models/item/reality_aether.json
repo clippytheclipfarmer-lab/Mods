@@ -1,0 +1,11 @@
+{
+  "parent": "heroes:block/reality_aether_empty",
+  "overrides": [
+    {
+      "predicate": {
+        "heroes:filled": 1
+      },
+      "model": "heroes:block/reality_aether_filled"
+    }
+  ]
+}

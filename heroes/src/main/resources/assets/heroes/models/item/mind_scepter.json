@@ -1,0 +1,11 @@
+{
+  "parent": "heroes:block/mind_scepter_empty",
+  "overrides": [
+    {
+      "predicate": {
+        "heroes:filled": 1
+      },
+      "model": "heroes:block/mind_scepter_filled"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "parent": "heroes:block/space_tesseract_empty",
+  "overrides": [
+    {
+      "predicate": {
+        "heroes:filled": 1
+      },
+      "model": "heroes:block/space_tesseract_filled"
+    }
+  ]
+}

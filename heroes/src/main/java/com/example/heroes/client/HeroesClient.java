@@ -4,6 +4,8 @@ import com.example.heroes.pod.PodNet;
 import com.example.heroes.pod.PodRegistry;
 import com.example.heroes.pod.SpacePodEntity;
 import com.example.heroes.space.SpaceSystem;
+import com.example.heroes.stones.InfinityStone;
+import com.example.heroes.stones.StoneContainers;
 import com.example.heroes.symbiote.SymbioteEntities;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.fabricmc.api.ClientModInitializer;
@@ -33,6 +35,13 @@ public class HeroesClient implements ClientModInitializer {
         // Space pod
         EntityModelLayerRegistry.registerModelLayer(SpacePodModel.LAYER, SpacePodModel::createBodyLayer);
         EntityRendererRegistry.register(PodRegistry.SPACE_POD, SpacePodRenderer::new);
+
+        // Stone containers show their gem only when filled
+        for (InfinityStone stone : InfinityStone.values()) {
+            net.minecraft.client.renderer.item.ItemProperties.register(StoneContainers.item(stone), new net.minecraft.resources.ResourceLocation("heroes", "filled"),
+                    (stack, level, entity, seed) -> stack.getTag() != null && stack.getTag().getBoolean("Filled") ? 1.0F : 0.0F);
+            net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap.INSTANCE.putBlock(StoneContainers.block(stone), net.minecraft.client.renderer.RenderType.cutout());
+        }
 
         // Symbiote mobs
         EntityModelLayerRegistry.registerModelLayer(SymbioteBlobModel.LAYER, SymbioteBlobModel::createBodyLayer);

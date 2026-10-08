@@ -1,0 +1,11 @@
+{
+  "parent": "heroes:block/time_eye_empty",
+  "overrides": [
+    {
+      "predicate": {
+        "heroes:filled": 1
+      },
+      "model": "heroes:block/time_eye_filled"
+    }
+  ]
+}

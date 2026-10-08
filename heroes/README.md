@@ -119,9 +119,9 @@ Each landing dimension is ordinary datapack worldgen: see `dimension`, `worldgen
 - More bodies: add a planet JSON with `"kind": "star"` or `"kind": "black_hole"` (and optional `"color"`, `"ring": {"inner_radius", "outer_radius", "thickness", "block"}`).
 
 ## Infinity Stone hunt
-Six stones: Space, Mind, Reality, Power, Time, Soul (`heroes:<name>_stone`; powers and boosts are not implemented yet).
+Six stones: Space, Mind, Reality, Power, Time, Soul (`heroes:<name>_stone`). In the hunt each stone sits sealed inside its own **placeable container** (see below), not loose.
 When the first player joins a world, the stones are shuffled: **two** go into secret spots in the map, the other **four** each get a **shrine** on one of the generated planets (built the first time a player is on that planet, 36 blocks from the landing spot).
-Hidden stones are put into an existing chest/barrel at the spot when there is one (so it looks like normal loot), otherwise a chest is placed.
+Hidden stones are put, inside their filled container, into an existing chest/barrel at the spot when there is one (so it looks like normal loot), otherwise a chest is placed. Shrines put the container block on the pedestal.
 
 1. Find the secret spots with the scanner: `python3 tools/find_hidden_spots.py <world folder> --count 10` (no extra packages; run it on a copy of the map). It lists deep, isolated containers and unopened loot chests.
 2. Put its output in `config/heroes/stone_hunt_locations.json` (created empty on first run). At least two locations are needed; the rest are spare.
@@ -170,3 +170,17 @@ Every stone you wear also adds a general +10% to blasts (and doubles at all six)
 **Holders** (Infinity Gauntlet, Infinity Necklace, Infinity Bracers; craftable with gold blocks, netherite and diamond blocks): worn, they give the powers of every stone socketed in them.
 Sneak + right-click with the holder in your main hand and a stone in your off hand to socket it; sneak + right-click with an empty off hand takes the last one out.
 With **all six** socketed in a worn holder you also get **The Snap**: half of all creatures (not players or bosses) within 128 blocks turn to ash, with a 20 minute cooldown.
+
+## Stone containers
+Every stone has a themed container that can be **placed in the world** like a block:
+
+| Stone | Container |
+|---|---|
+| Power | The Orb |
+| Space | The Tesseract |
+| Mind | The Scepter |
+| Reality | The Aether |
+| Time | Eye of Agamotto |
+| Soul | The Soul Urn (invented - the Soul Stone has no film container) |
+
+A filled container glows and shows its gem. **Right-click a filled one to take the stone out** (the container stays, empty); right-click an empty one while holding its stone to put it back. Breaking a container drops it with the stone still inside, so you can carry and re-place it. The creative menu has a filled and an empty version of each. Containers are only for keeping and displaying the stone: to use its power, wear the loose stone (or socket it into a holder).

@@ -161,7 +161,7 @@ public final class StoneHunt {
         ServerLevel level = server.overworld();
         BlockPos pos = placement.pos;
         level.getChunk(pos.getX() >> 4, pos.getZ() >> 4); // loads (or generates) the chunk
-        ItemStack item = new ItemStack(StoneItems.get(stone));
+        ItemStack item = StoneContainers.stack(stone, true);
 
         // Prefer an existing container at or next to the spot: the stone goes into a chest the map already hides.
         Container container = findContainer(level, pos);
@@ -259,16 +259,15 @@ public final class StoneHunt {
                 level.setBlock(base.offset(cx, 5, cz), Blocks.SEA_LANTERN.defaultBlockState(), 2);
             }
         }
-        // Pedestal with the chest on top.
+        // Pedestal with the stone's container on top.
         level.setBlock(base.offset(0, 1, 0), Blocks.POLISHED_BLACKSTONE.defaultBlockState(), 2);
-        BlockPos chest = base.offset(0, 2, 0);
-        level.setBlock(chest, Blocks.CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.SOUTH), 3);
-        if (level.getBlockEntity(chest) instanceof Container container && insert(container, new ItemStack(StoneItems.get(stone)), level.random)) {
-            placement.placed = true;
-            placement.pos = chest;
-            data.setDirty();
-            HeroesMod.LOGGER.info("Stone hunt: {} shrine built at {} on {}", stone.displayName(), chest.toShortString(), placement.where);
-        }
+        BlockPos spot = base.offset(0, 2, 0);
+        level.setBlock(spot, StoneContainers.block(stone).defaultBlockState()
+                .setValue(StoneContainerBlock.FILLED, true).setValue(StoneContainerBlock.FACING, Direction.SOUTH), 3);
+        placement.placed = true;
+        placement.pos = spot;
+        data.setDirty();
+        HeroesMod.LOGGER.info("Stone hunt: {} shrine built at {} on {}", stone.displayName(), spot.toShortString(), placement.where);
     }
 
     /** Test helper: builds every unbuilt shrine immediately in the right world. */

@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=south,filled=false": {
+      "model": "heroes:block/mind_scepter_empty"
+    },
+    "facing=south,filled=true": {
+      "model": "heroes:block/mind_scepter_filled"
+    },
+    "facing=west,filled=false": {
+      "model": "heroes:block/mind_scepter_empty",
+      "y": 90
+    },
+    "facing=west,filled=true": {
+      "model": "heroes:block/mind_scepter_filled",
+      "y": 90
+    },
+    "facing=north,filled=false": {
+      "model": "heroes:block/mind_scepter_empty",
+      "y": 180
+    },
+    "facing=north,filled=true": {
+      "model": "heroes:block/mind_scepter_filled",
+      "y": 180
+    },
+    "facing=east,filled=false": {
+      "model": "heroes:block/mind_scepter_empty",
+      "y": 270
+    },
+    "facing=east,filled=true": {
+      "model": "heroes:block/mind_scepter_filled",
+      "y": 270
+    }
+  }
+}
