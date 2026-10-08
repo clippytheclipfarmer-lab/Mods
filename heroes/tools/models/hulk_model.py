@@ -92,7 +92,7 @@ def build():
     m.cube("armorBody", [7.4, 38.8, -5.5], [6.6, 2.8, 11], mot(DARK, 32, 0.2))
     m.cube("armorBody", [-17.5, 37.2, -5.5], [6, 4.2, 11], mot(GREEN, 21, 0.2))                               # traps step down to the shoulders
     m.cube("armorBody", [11.5, 37.2, -5.5], [6, 4.2, 11], mot(GREEN, 22, 0.2))
-    m.cube("armorBody", [-13, 20.5, -6.4], [26, 4.2, 12.8], Torn((84, 54, 124), depth=1, seed=23, noise=6))   # shorts waist
+    m.cube("armorBody", [-12.4, 20.5, -6.2], [24.8, 4.2, 12.4], Torn((84, 54, 124), depth=1, seed=23, noise=6))   # shorts waist
 
     # ------------------------------------------------------------------ arms: huge, hanging low (right arm at -x; left mirrored)
     arm = [
@@ -107,10 +107,10 @@ def build():
 
     # ------------------------------------------------------------------ legs: long pillars set well apart, big bare feet
     legs = [
-        ([-15, 12, -6.6], [12, 10.4, 13.2], mot(GREEN, 28, 0.14)),                                            # thigh
+        ([-13.4, 12, -6.4], [10.6, 10.4, 12.8], mot(GREEN, 28, 0.14)),                                            # thigh
         ([-14.4, 2.6, -5.8], [10.4, 10, 11.6], mot(DARK, 29, 0.16, veins=1)),                                 # calf
         ([-15, 0, -10.4], [11.4, 3, 17.4], mot(DARK, 30, 0.14, edge=0.7)),                                    # big bare foot
-        ([-15.8, 13.6, -7.4], [13.6, 9.4, 14.8], Torn((88, 56, 130), depth=2, seed=31, noise=6)),             # shorts leg
+        ([-14.0, 13.6, -7.0], [11.8, 9.4, 14.0], Torn((88, 56, 130), depth=2, seed=31, noise=6)),             # shorts leg
     ]
     for origin, size, painter in legs:
         c = m.cube("armorRightLeg", origin, size, painter)
@@ -128,10 +128,27 @@ def build():
     return m
 
 
+def build_eyes():
+    """Just the two eyes, drawn by a second render layer with the `glow` render type so they shine in the dark."""
+    m = ModelBuilder("geometry.hulk_eyes", 16, 16)
+    m.bone("armorHead", [0, 40, 0])
+    m.bone("armorBody", [0, 38, 0])
+    m.bone("armorRightArm", [-17 * WIDTH, 40, 0])
+    m.bone("armorLeftArm", [17 * WIDTH, 40, 0])
+    m.bone("armorRightLeg", [-9 * WIDTH, 22, 0])
+    m.bone("armorLeftLeg", [9 * WIDTH, 22, 0])
+    glow = Flat((120, 255, 90), noise=0, edge=1.0)
+    m.cube("armorHead", [1.0, 43.2, -6.2], [2.4, 1.4, 0.8], glow)
+    m.cube("armorHead", [-3.4, 43.2, -6.2], [2.4, 1.4, 0.8], glow)
+    return m
+
+
 if __name__ == "__main__":
     root = os.path.join(os.path.dirname(__file__), "..", "..", "src", "main", "resources", "assets", "hulk")
     os.makedirs(os.path.join(root, "geo"), exist_ok=True)
     os.makedirs(os.path.join(root, "textures", "models"), exist_ok=True)
     model = build()
     model.write(os.path.join(root, "geo", "hulk.geo.json"), os.path.join(root, "textures", "models", "hulk.png"))
+    eyes = build_eyes()
+    eyes.write(os.path.join(root, "geo", "hulk_eyes.geo.json"), os.path.join(root, "textures", "models", "hulk_eyes.png"))
     print("wrote the Hulk model and texture")

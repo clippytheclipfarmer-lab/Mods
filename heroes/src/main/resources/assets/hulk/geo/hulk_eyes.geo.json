@@ -1,0 +1,103 @@
+{
+  "format_version": "1.12.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.hulk_eyes",
+        "texture_width": 16,
+        "texture_height": 16,
+        "visible_bounds_width": 4,
+        "visible_bounds_height": 5,
+        "visible_bounds_offset": [
+          0,
+          1.75,
+          0
+        ]
+      },
+      "bones": [
+        {
+          "name": "armorHead",
+          "pivot": [
+            0,
+            40,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                1.0,
+                43.2,
+                -6.2
+              ],
+              "size": [
+                2.4,
+                1.4,
+                0.8
+              ],
+              "uv": [
+                0,
+                0
+              ]
+            },
+            {
+              "origin": [
+                -3.4,
+                43.2,
+                -6.2
+              ],
+              "size": [
+                2.4,
+                1.4,
+                0.8
+              ],
+              "uv": [
+                8,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "name": "armorBody",
+          "pivot": [
+            0,
+            38,
+            0
+          ]
+        },
+        {
+          "name": "armorRightArm",
+          "pivot": [
+            -13.600000000000001,
+            40,
+            0
+          ]
+        },
+        {
+          "name": "armorLeftArm",
+          "pivot": [
+            13.600000000000001,
+            40,
+            0
+          ]
+        },
+        {
+          "name": "armorRightLeg",
+          "pivot": [
+            -7.2,
+            22,
+            0
+          ]
+        },
+        {
+          "name": "armorLeftLeg",
+          "pivot": [
+            7.2,
+            22,
+            0
+          ]
+        }
+      ]
+    }
+  ]
+}
