@@ -218,3 +218,13 @@ A dark organic hive world with a permanent night sky (End-style), 1.2x gravity, 
 - **Knull, God of the Abyss:** a giant boss (900 HP, boss bar, can't take more than 60 per hit). Phase 1: tendril yanks and crawler summons. Phase 2 (below 60%): brutes, and a ground-shaking stomp. Phase 3 (below 30%): darkness for everyone nearby, and he speeds up. Drops 2 nether stars, 8 netherite scrap and 4 echo shards; he does not respawn once beaten.
 - **Bonding Altar:** at -70 / -50 from the landing site. Right-click it with an empty hand for a willing bond: **5% death, 65% ordinary bond, 30% perfect host**. 10 minute cooldown per player.
 - The hive and altar are built the first time someone lands on Klyntar. Admin commands on Klyntar: `/symbiote klyntar build`, `/symbiote klyntar knull`.
+
+## Model tools (`tools/`)
+Models are authored in code so they can be looked at and improved without launching the game:
+
+- `tools/modelpreview.py model.geo.json texture.png out.png` renders a front / 3/4 / side / back preview sheet of any GeckoLib cube model (needs `numpy` and `Pillow`). Calibrated against the vanilla Steve skin.
+- `tools/models/mc_model.py` is a small builder: describe cubes and how to paint them and it packs the texture, paints it and writes the `.geo.json` and `.png`.
+- `tools/models/hulk_model.py` generates the Hulk model and texture (re-run it after editing, then re-run the preview). Latest preview: `previews/hulk.png`.
+
+The generated files are ordinary GeckoLib assets, so you can still open them in Blockbench and edit or replace them; keep the bone names (`armorHead`, `armorBody`, `armorRightArm`, `armorLeftArm`, `armorRightLeg`, `armorLeftLeg`).
+While the Hulk power is active the player's own body is hidden (`palladium:remove_body_part`), so only the Hulk model shows.
