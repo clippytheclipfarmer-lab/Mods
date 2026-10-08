@@ -184,3 +184,6 @@ Every stone has a themed container that can be **placed in the world** like a bl
 | Soul | The Soul Urn (invented - the Soul Stone has no film container) |
 
 A filled container glows and shows its gem. **Right-click a filled one to take the stone out** (the container stays, empty); right-click an empty one while holding its stone to put it back. Breaking a container drops it with the stone still inside, so you can carry and re-place it. The creative menu has a filled and an empty version of each. Containers are only for keeping and displaying the stone: to use its power, wear the loose stone (or socket it into a holder).
+
+### The Power Stone is dangerous loose
+While a loose Power Stone is in your inventory (any slot) it hurts you (1 heart every 2 s, never to death) and sends out a **pulsing purple shockwave** every 2 seconds that expands 9 blocks and damages (2.5 hearts) and knocks back every creature it passes through. It stays safe when **worn in an accessory slot, socketed in a holder, or kept in the Orb**; creative and spectator players are immune. The numbers are constants at the top of `PowerStonePulse.java`.
