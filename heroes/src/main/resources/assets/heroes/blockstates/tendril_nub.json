@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "armed=true": {
+      "model": "heroes:block/tendril_nub"
+    },
+    "armed=false": {
+      "model": "heroes:block/tendril_nub"
+    }
+  }
+}

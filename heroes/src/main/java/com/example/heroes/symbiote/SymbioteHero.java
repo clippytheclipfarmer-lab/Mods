@@ -1,6 +1,7 @@
 package com.example.heroes.symbiote;
 
 import com.example.heroes.HeroesMod;
+import com.example.heroes.symbiote.klyntar.KlyntarSystem;
 import com.example.heroes.symbiote.ability.ConsumeAbility;
 import com.example.heroes.symbiote.ability.HungerAbility;
 import com.example.heroes.symbiote.ability.TendrilAbility;
@@ -34,6 +35,7 @@ public final class SymbioteHero {
         ABILITIES.register();
         SymbioteEntities.init();
         MeteorEvents.init();
+        KlyntarSystem.init();
 
         ServerLivingEntityEvents.AFTER_DEATH.register((entity, source) -> {
             // A host's kills feed the symbiote.
@@ -79,6 +81,19 @@ public final class SymbioteHero {
                     SymbioteHost.bond(ctx.getSource().getPlayerOrException(), true);
                     return 1;
                 })))
+                .then(Commands.literal("klyntar")
+                        .then(Commands.literal("build").executes(ctx -> {
+                            var level = ctx.getSource().getLevel();
+                            boolean ok = KlyntarSystem.onKlyntar(level) && KlyntarSystem.buildNow(level);
+                            ctx.getSource().sendSuccess(() -> Component.literal(ok ? "Built the hive and altar." : "Run this on Klyntar before they are built."), false);
+                            return ok ? 1 : 0;
+                        }))
+                        .then(Commands.literal("knull").executes(ctx -> {
+                            var level = ctx.getSource().getLevel();
+                            boolean ok = KlyntarSystem.onKlyntar(level) && KlyntarSystem.awakenNow(level);
+                            ctx.getSource().sendSuccess(() -> Component.literal(ok ? "Knull awakens." : "Build the hive first (on Klyntar)."), false);
+                            return ok ? 1 : 0;
+                        })))
                 .then(Commands.literal("release").executes(ctx -> {
                     SymbioteHost.release(ctx.getSource().getPlayerOrException());
                     return 1;

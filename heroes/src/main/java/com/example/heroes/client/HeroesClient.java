@@ -7,6 +7,7 @@ import com.example.heroes.space.SpaceSystem;
 import com.example.heroes.stones.InfinityStone;
 import com.example.heroes.stones.StoneContainers;
 import com.example.heroes.symbiote.SymbioteEntities;
+import com.example.heroes.symbiote.klyntar.KlyntarEntities;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
@@ -47,6 +48,12 @@ public class HeroesClient implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(SymbioteBlobModel.LAYER, SymbioteBlobModel::createBodyLayer);
         EntityRendererRegistry.register(SymbioteEntities.SYMBIOTE_BLOB, SymbioteBlobRenderer::new);
         EntityRendererRegistry.register(SymbioteEntities.SYMBIOTE_VILLAGER, SymbioteVillagerRenderer::new);
+
+        EntityRendererRegistry.register(KlyntarEntities.SYMBIOTE_CRAWLER, SymbioteMobRenderers.Crawler::new);
+        EntityRendererRegistry.register(KlyntarEntities.SYMBIOTE_BRUTE, SymbioteMobRenderers.Giant::new);
+        EntityRendererRegistry.register(KlyntarEntities.KNULL, SymbioteMobRenderers.Giant::new);
+        net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap.INSTANCE.putBlock(KlyntarEntities.TAR, net.minecraft.client.renderer.RenderType.translucent());
+        net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap.INSTANCE.putBlock(KlyntarEntities.NUB, net.minecraft.client.renderer.RenderType.cutout());
 
         // Star map
         starMapKey = KeyBindingHelper.registerKeyBinding(new KeyMapping("key.heroes.star_map", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_H, "key.categories.heroes"));

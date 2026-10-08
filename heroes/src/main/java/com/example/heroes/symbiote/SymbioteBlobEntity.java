@@ -39,7 +39,7 @@ import java.util.List;
  * and hunts players and villagers. On contact it lifts the victim with a tendril and tries to bond (20% death,
  * 60% ordinary bond, 20% perfect host).
  */
-public class SymbioteBlobEntity extends Monster {
+public class SymbioteBlobEntity extends Monster implements SymbioteCreature {
     private static final EntityDataAccessor<Integer> SIZE = SynchedEntityData.defineId(SymbioteBlobEntity.class, EntityDataSerializers.INT);
     private static final DustParticleOptions BLACK = new DustParticleOptions(new Vector3f(0.02F, 0.02F, 0.03F), 1.6F);
     private static final int BOND_TICKS = 70;
@@ -153,7 +153,7 @@ public class SymbioteBlobEntity extends Monster {
     private void lureAndAbsorb(ServerLevel level) {
         AABB area = getBoundingBox().inflate(LURE_RANGE, 8, LURE_RANGE);
         List<Mob> mobs = level.getEntitiesOfClass(Mob.class, area, m -> m != this && m.isAlive() && !(m instanceof SymbioteBlobEntity)
-                && !(m instanceof SymbioteVillagerEntity) && !(m instanceof Villager) && m.getBbHeight() < 3.2F);
+                && !(m instanceof SymbioteCreature) && !(m instanceof Villager) && m.getBbHeight() < 3.2F);
         double absorbRange = 2.2 + getBbWidth();
         for (Mob mob : mobs) {
             if (mob.distanceToSqr(this) <= absorbRange * absorbRange) {

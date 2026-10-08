@@ -203,3 +203,18 @@ A stone loose in your inventory is a drawback (safe once socketed in a holder or
 | Soul | 1 heart and hunger every 3 s |
 
 Only the Power Stone can kill you; the others stop hurting you before your last 3.5 hearts. The timings are in `LooseStones.java` and `PowerStonePulse.java`.
+
+## Klyntar (the symbiote homeworld)
+A dark organic hive world with a permanent night sky (End-style), 1.2x gravity, breathable air, and no meteors.
+
+- **Terrain:** black rock (blackstone/deepslate) with patches of basalt and magma, glowing veins of crying obsidian, black spires topped with crying obsidian, and shallow pools of **Symbiote Tar**.
+- **Hazards:**
+  - **Spores** (purple spores in the air): constant weakness and bouts of nausea.
+  - **Symbiote Tar:** you sink, crawl slowly and are slowly eaten (1 HP/s). It sometimes rears up as a blob.
+  - **Tendril Nubs:** small black sprouts on the ground. Step on one and it drags you towards the hive for six seconds (it re-arms after ten).
+  - Bonded **hosts**, symbiote creatures and creative players are immune to all of these.
+- **Creatures:** blobs, **Symbiote Crawlers** (fast wall-climbing spiders) and **Symbiote Brutes** (big, tough, 70 HP) keep spawning around you (caps: 6 / 8 / 2 within 64 blocks).
+- **The hive:** a tar-floored dome 120 blocks east and 70 south of the landing site, with the core (crying obsidian and end rods) on an island in the tar. Getting within 20 blocks wakes **Knull**.
+- **Knull, God of the Abyss:** a giant boss (900 HP, boss bar, can't take more than 60 per hit). Phase 1: tendril yanks and crawler summons. Phase 2 (below 60%): brutes, and a ground-shaking stomp. Phase 3 (below 30%): darkness for everyone nearby, and he speeds up. Drops 2 nether stars, 8 netherite scrap and 4 echo shards; he does not respawn once beaten.
+- **Bonding Altar:** at -70 / -50 from the landing site. Right-click it with an empty hand for a willing bond: **5% death, 65% ordinary bond, 30% perfect host**. 10 minute cooldown per player.
+- The hive and altar are built the first time someone lands on Klyntar. Admin commands on Klyntar: `/symbiote klyntar build`, `/symbiote klyntar knull`.

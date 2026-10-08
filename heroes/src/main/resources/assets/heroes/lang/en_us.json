@@ -21,5 +21,11 @@
   "block.heroes.reality_aether": "The Aether",
   "block.heroes.time_eye": "Eye of Agamotto",
   "block.heroes.soul_urn": "The Soul Urn",
-  "item.heroes.stone_ring": "Stone Ring"
+  "item.heroes.stone_ring": "Stone Ring",
+  "block.heroes.symbiote_tar": "Symbiote Tar",
+  "block.heroes.tendril_nub": "Tendril Nub",
+  "block.heroes.bonding_altar": "Bonding Altar",
+  "entity.heroes.symbiote_crawler": "Symbiote Crawler",
+  "entity.heroes.symbiote_brute": "Symbiote Brute",
+  "entity.heroes.knull": "Knull"
 }

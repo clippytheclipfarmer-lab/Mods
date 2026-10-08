@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "heroes:block/bonding_altar"
+    }
+  }
+}

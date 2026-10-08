@@ -1,17 +1,31 @@
 {
-  "carvers": {},
-  "downfall": 0.5,
+  "has_precipitation": false,
+  "temperature": 0.3,
+  "downfall": 0.0,
   "effects": {
-    "fog_color": 2756672,
+    "sky_color": 1312287,
+    "fog_color": 2821946,
+    "water_color": 3873370,
+    "water_fog_color": 1181728,
     "mood_sound": {
+      "sound": "minecraft:ambient.crimson_forest.mood",
+      "tick_delay": 6000,
       "block_search_extent": 8,
-      "offset": 2.0,
-      "sound": "minecraft:ambient.cave",
-      "tick_delay": 6000
+      "offset": 2.0
     },
-    "sky_color": 1706538,
-    "water_color": 4159204,
-    "water_fog_color": 329011
+    "particle": {
+      "options": {
+        "type": "minecraft:crimson_spore"
+      },
+      "probability": 0.02
+    }
+  },
+  "carvers": {
+    "air": [
+      "minecraft:cave",
+      "minecraft:cave_extra_underground",
+      "minecraft:canyon"
+    ]
   },
   "features": [
     [],
@@ -20,25 +34,27 @@
     [],
     [],
     [],
-    [],
-    [],
+    [
+      "heroes:hive_veins",
+      "heroes:tar_disk"
+    ],
     [],
     [],
     [
-      "minecraft:void_start_platform"
-    ]
+      "heroes:tendril_nubs",
+      "heroes:black_spires"
+    ],
+    []
   ],
-  "has_precipitation": false,
-  "spawn_costs": {},
   "spawners": {
+    "monster": [],
+    "creature": [],
     "ambient": [],
     "axolotls": [],
-    "creature": [],
-    "misc": [],
-    "monster": [],
     "underground_water_creature": [],
+    "water_creature": [],
     "water_ambient": [],
-    "water_creature": []
+    "misc": []
   },
-  "temperature": 0.5
+  "spawn_costs": {}
 }

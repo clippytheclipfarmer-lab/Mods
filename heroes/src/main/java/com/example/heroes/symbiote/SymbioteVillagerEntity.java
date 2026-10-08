@@ -26,7 +26,7 @@ import net.minecraft.world.phys.Vec3;
 import org.joml.Vector3f;
 
 /** A villager taken by a symbiote: black, hostile, and (if it was a perfect host) elite, able to yank targets in with a tendril. */
-public class SymbioteVillagerEntity extends Monster {
+public class SymbioteVillagerEntity extends Monster implements SymbioteCreature {
     private static final EntityDataAccessor<Boolean> ELITE = SynchedEntityData.defineId(SymbioteVillagerEntity.class, EntityDataSerializers.BOOLEAN);
     private static final DustParticleOptions BLACK = new DustParticleOptions(new Vector3f(0.02F, 0.02F, 0.03F), 1.4F);
 
