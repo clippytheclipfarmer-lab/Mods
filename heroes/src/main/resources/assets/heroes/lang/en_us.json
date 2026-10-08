@@ -27,5 +27,6 @@
   "block.heroes.bonding_altar": "Bonding Altar",
   "entity.heroes.symbiote_crawler": "Symbiote Crawler",
   "entity.heroes.symbiote_brute": "Symbiote Brute",
-  "entity.heroes.knull": "Knull"
+  "entity.heroes.knull": "Knull",
+  "key.heroes.character_sheet": "Open Character Sheet"
 }

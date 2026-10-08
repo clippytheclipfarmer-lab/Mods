@@ -42,6 +42,7 @@ public class HeroesMod implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        com.example.heroes.origin.OriginSystem.init();
         HulkHero.init();
         ViltrumiteHero.init();
         CityManager.init();

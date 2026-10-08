@@ -241,3 +241,30 @@ Models are authored in code so they can be looked at and improved without launch
 
 The generated files are ordinary GeckoLib assets, so you can still open them in Blockbench and edit or replace them; keep the bone names (`armorHead`, `armorBody`, `armorRightArm`, `armorLeftArm`, `armorRightLeg`, `armorLeftLeg`).
 While the Hulk power is active the player's own body is hidden (`palladium:remove_body_part`), so only the Hulk model shows.
+
+## Origin system: races and the character sheet
+
+The random character generator lives in another project; this mod provides the **race part** and the **stat sheet**, with a small API that the generator calls (`com.example.heroes.origin.OriginApi`).
+
+**Races** are data files, `data/<namespace>/heroes/races/<id>.json` (reload with `/reload`; add your own the same way). Each has a name, description, a roll `weight`, `ability_bonuses` (`str/dex/con/int/wis/cha`), attribute bonuses, `traits`, and `subtypes` (each with its own `weight`, bonuses, traits and `flags`). Included:
+
+| Race | Rolled by weight | What it is |
+|---|---|---|
+| **Human** | 85 | The normal Minecraft character: no bonuses. |
+| **Asgardian** | 15 | +1 STR, +1 CON, +4 max health, a little knockback resistance, hunger drains 25% slower, heals 1 HP every 10 s. Subtypes: **Asgardian** (75, just a bit tougher than a human, no magic, no powers), **Warrior** (18, +1 STR +1 DEX), **Royal** (7, +1 INT +1 WIS +2 CHA, heals faster, flag `magical_potential` for future magic). |
+
+**Ability scores** are rolled **4d6, drop the lowest** for each of the six, then the race and subtype bonuses are added on top (capped at 20). The modifier is `floor((score - 10) / 2)`.
+
+**Levels** are 1-20 with the 5e proficiency bonus (+2 at 1-4, +3 at 5-8, ... +6 at 17-20), from the mod's own XP. The thresholds are the 5e table divided by 5 (level 2 at 60 XP, level 20 at 71,000). XP comes from kills (hostile creatures give twice their max health; animals a quarter of that; villagers and the like an eighth), bosses (Ender Dragon 5000, Knull 10000, Wither 3000, Warden 2000), a new biome (+25) and a new dimension (+200). Intelligence adds 5% XP per point of modifier.
+
+**What the scores do** (`OriginEffects`, applied as attribute modifiers, refreshed on join, respawn, level-up and every 10 s):
+- **STR**: +0.5 melee damage and +0.1 attack knockback per point of modifier.
+- **DEX**: +2% movement speed per point, and a 3% per point chance (up to 25%) to dodge an attack outright.
+- **CON**: +2 max health per point, plus +1 per level above the first.
+- **INT**: more XP (+5% per point) and ability cooldowns tick down 3% per point faster.
+- **WIS**: harmful effects last 10% shorter per point (up to 50%); with +2 or more you sense hostile creatures close by without line of sight.
+- **CHA**: villager trades are about 8% cheaper per point (dearer for a negative modifier); unprovoked hostile mobs that are chasing you lose interest more often.
+
+**The sheet** opens with **K** (rebindable under Controls > Heroes): name, race, level and XP bar, the six scores with their modifiers (hover a score to see the roll and the race bonus), proficiency, HP, armor class (10 + armor) and the character's traits.
+
+**API and commands.** `OriginApi.assign(player, race)` / `assignRandom(player)` create a character (random subtype, fresh 4d6 scores, level 1); `get(player)`, `hasFlag(player, "magical_potential")`, `addXp(player, amount, scaleWithInt)`, `rerollScores(player)`, `clear(player)`. Characters are saved in the world (`OriginData`) and synced to the client for the sheet. Op commands: `/origin assign <race> [player]`, `/origin random [player]`, `/origin reroll`, `/origin xp <amount>`, `/origin info [player]`, `/origin clear`.

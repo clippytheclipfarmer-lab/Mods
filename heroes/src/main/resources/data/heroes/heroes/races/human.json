@@ -1,0 +1,11 @@
+{
+  "name": "Human",
+  "description": "The normal Minecraft character: no bonuses, no tricks, endlessly adaptable.",
+  "weight": 85,
+  "ability_bonuses": {},
+  "attributes": [],
+  "traits": {},
+  "subtypes": [
+    { "id": "common", "name": "Human", "weight": 100, "ability_bonuses": {}, "flags": [] }
+  ]
+}

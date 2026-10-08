@@ -1,5 +1,7 @@
 package com.example.heroes.mixin;
 
+import com.example.heroes.origin.OriginApi;
+import com.example.heroes.origin.Sheet;
 import com.example.heroes.symbiote.SymbioteHost;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.server.level.ServerPlayer;
@@ -11,6 +13,7 @@ import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /** A host's symbiote eats first: while its food bar is not full, food goes to it instead of the host. */
@@ -33,5 +36,19 @@ public abstract class PlayerMixin {
             food.shrink(1);
         }
         cir.setReturnValue(food);
+    }
+
+    /** Race trait: some races (the Asgardians) tire more slowly, so hunger drains by a fraction less. */
+    @ModifyVariable(method = "causeFoodExhaustion", at = @At("HEAD"), argsOnly = true)
+    private float heroes$slowerHunger(float exhaustion) {
+        Player self = (Player) (Object) this;
+        if (self instanceof ServerPlayer) {
+            Sheet sheet = OriginApi.get(self);
+            double multiplier = sheet == null ? 0 : sheet.trait("hunger_multiplier");
+            if (multiplier > 0) {
+                return (float) (exhaustion * multiplier);
+            }
+        }
+        return exhaustion;
     }
 }

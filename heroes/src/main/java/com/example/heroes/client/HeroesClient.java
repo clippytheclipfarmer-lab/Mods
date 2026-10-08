@@ -55,6 +55,8 @@ public class HeroesClient implements ClientModInitializer {
         net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap.INSTANCE.putBlock(KlyntarEntities.TAR, net.minecraft.client.renderer.RenderType.translucent());
         net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap.INSTANCE.putBlock(KlyntarEntities.NUB, net.minecraft.client.renderer.RenderType.cutout());
 
+        OriginClient.init();
+
         // Star map
         starMapKey = KeyBindingHelper.registerKeyBinding(new KeyMapping("key.heroes.star_map", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_H, "key.categories.heroes"));
         ClientPlayNetworking.registerGlobalReceiver(PodNet.BODIES, (client, handler, buf, sender) -> {
