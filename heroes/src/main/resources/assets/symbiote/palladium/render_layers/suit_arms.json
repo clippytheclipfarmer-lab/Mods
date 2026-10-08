@@ -1,6 +1,6 @@
 {
   "type": "geckolib:default",
-  "model": "symbiote:geo/suit.geo.json",
+  "model": "symbiote:geo/suit_arms.geo.json",
   "texture": "symbiote:textures/models/suit.png",
   "bones": {
     "head": "armorHead",

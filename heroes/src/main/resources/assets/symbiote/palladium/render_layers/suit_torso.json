@@ -1,0 +1,14 @@
+{
+  "type": "geckolib:default",
+  "model": "symbiote:geo/suit_torso.geo.json",
+  "texture": "symbiote:textures/models/suit.png",
+  "bones": {
+    "head": "armorHead",
+    "body": "armorBody",
+    "right_arm": "armorRightArm",
+    "left_arm": "armorLeftArm",
+    "right_leg": "armorRightLeg",
+    "left_leg": "armorLeftLeg"
+  },
+  "render_full_model_in_first_person": false
+}
