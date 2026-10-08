@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "heroes",
+  "version": "${version}",
+  "name": "Heroes",
+  "description": "Superheroes for Palladium: Hulk, Viltrumites and more.",
+  "license": "GPL-3.0-only",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.example.heroes.HeroesMod"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.14.0",
+    "minecraft": "~1.20.1",
+    "fabric-api": "*",
+    "palladium": ">=4.5.0",
+    "geckolib": "*",
+    "pehkui": "*"
+  }
+}

@@ -1,0 +1,163 @@
+{
+  "name": {
+    "translate": "power.viltrumite.viltrumite"
+  },
+  "icon": "minecraft:elytra",
+  "primary_color": [
+    200,
+    40,
+    40
+  ],
+  "secondary_color": [
+    230,
+    200,
+    60
+  ],
+  "abilities": {
+    "render_layer": {
+      "type": "palladium:render_layer",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "render_layer": "viltrumite:suit"
+    },
+    "flight": {
+      "type": "palladium:attribute_modifier",
+      "attribute": "palladium:flight_speed",
+      "amount": 1.0,
+      "title": {
+        "translate": "ability.viltrumite.flight"
+      },
+      "icon": "minecraft:elytra",
+      "list_index": 0,
+      "uuid": "7d1c0000-0000-4000-8000-000000000001"
+    },
+    "flight_sprint": {
+      "type": "palladium:attribute_modifier",
+      "attribute": "palladium:flight_sprint_speed",
+      "amount": 3.0,
+      "operation": 0,
+      "uuid": "7d1c0000-0000-4000-8000-000000000002",
+      "hidden": true,
+      "hidden_in_bar": true
+    },
+    "flight_flexibility": {
+      "type": "palladium:attribute_modifier",
+      "attribute": "palladium:flight_flexibility",
+      "amount": 5,
+      "operation": 0,
+      "uuid": "7d1c0000-0000-4000-8000-000000000003",
+      "hidden": true,
+      "hidden_in_bar": true
+    },
+    "heroic_flight": {
+      "type": "palladium:attribute_modifier",
+      "attribute": "palladium:heroic_flight_type",
+      "amount": 1,
+      "operation": 0,
+      "uuid": "7d1c0000-0000-4000-8000-000000000004",
+      "hidden": true,
+      "hidden_in_bar": true
+    },
+    "sonic_boom": {
+      "type": "viltrumite:sonic_boom",
+      "conditions": {
+        "enabling": {
+          "type": "palladium:is_fast_flying"
+        }
+      }
+    },
+    "strength": {
+      "type": "palladium:attribute_modifier",
+      "attribute": "generic.attack_damage",
+      "amount": 12,
+      "operation": 0,
+      "uuid": "7d1c0000-0000-4000-8000-000000000005",
+      "title": {
+        "translate": "ability.viltrumite.strength"
+      },
+      "icon": "minecraft:netherite_sword",
+      "list_index": 1
+    },
+    "punch_damage": {
+      "type": "palladium:attribute_modifier",
+      "attribute": "palladium:punch_damage",
+      "amount": 10,
+      "operation": 0,
+      "uuid": "7d1c0000-0000-4000-8000-000000000006",
+      "hidden": true,
+      "hidden_in_bar": true
+    },
+    "knockback": {
+      "type": "palladium:attribute_modifier",
+      "attribute": "generic.attack_knockback",
+      "amount": 3,
+      "operation": 0,
+      "uuid": "7d1c0000-0000-4000-8000-000000000007",
+      "hidden": true,
+      "hidden_in_bar": true
+    },
+    "mining": {
+      "type": "palladium:attribute_modifier",
+      "attribute": "palladium:destroy_speed",
+      "amount": 8,
+      "operation": 0,
+      "uuid": "7d1c0000-0000-4000-8000-000000000008",
+      "hidden": true,
+      "hidden_in_bar": true
+    },
+    "health": {
+      "type": "palladium:attribute_modifier",
+      "attribute": "generic.max_health",
+      "amount": 20,
+      "operation": 0,
+      "uuid": "7d1c0000-0000-4000-8000-000000000009",
+      "title": {
+        "translate": "ability.viltrumite.durability"
+      },
+      "icon": "minecraft:netherite_chestplate",
+      "list_index": 2
+    },
+    "armor": {
+      "type": "palladium:attribute_modifier",
+      "attribute": "generic.armor",
+      "amount": 12,
+      "operation": 0,
+      "uuid": "7d1c0000-0000-4000-8000-000000000010",
+      "hidden": true,
+      "hidden_in_bar": true
+    },
+    "toughness": {
+      "type": "palladium:attribute_modifier",
+      "attribute": "generic.armor_toughness",
+      "amount": 8,
+      "operation": 0,
+      "uuid": "7d1c0000-0000-4000-8000-000000000011",
+      "hidden": true,
+      "hidden_in_bar": true
+    },
+    "knockback_resistance": {
+      "type": "palladium:attribute_modifier",
+      "attribute": "generic.knockback_resistance",
+      "amount": 0.9,
+      "operation": 0,
+      "uuid": "7d1c0000-0000-4000-8000-000000000012",
+      "hidden": true,
+      "hidden_in_bar": true
+    },
+    "regeneration": {
+      "type": "palladium:healing",
+      "frequency": 40,
+      "amount": 1.0,
+      "hidden": true,
+      "hidden_in_bar": true
+    },
+    "space_survival": {
+      "type": "viltrumite:space_survival",
+      "title": {
+        "translate": "ability.viltrumite.space_survival"
+      },
+      "icon": "minecraft:heart_of_the_sea",
+      "list_index": 3
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "geckolib:default",
+  "model": "viltrumite:geo/suit.geo.json",
+  "texture": "viltrumite:textures/models/suit.png",
+  "bones": {
+    "head": "armorHead",
+    "body": "armorBody",
+    "right_arm": "armorRightArm",
+    "left_arm": "armorLeftArm",
+    "right_leg": "armorRightLeg",
+    "left_leg": "armorLeftLeg"
+  },
+  "render_full_model_in_first_person": false
+}
