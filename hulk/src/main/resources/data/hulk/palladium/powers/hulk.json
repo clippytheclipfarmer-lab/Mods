@@ -1,0 +1,76 @@
+{
+  "name": { "translate": "power.hulk.hulk" },
+  "icon": "minecraft:slime_ball",
+  "primary_color": [ 60, 160, 50 ],
+  "secondary_color": [ 30, 90, 30 ],
+  "energy_bars": {
+    "rage": {
+      "max": 100,
+      "color": [ 80, 200, 60 ],
+      "auto_increase_per_tick": -1,
+      "auto_increase_interval": 40
+    }
+  },
+  "abilities": {
+    "rage_scaling": {
+      "type": "hulk:rage_scaling",
+      "hidden": true,
+      "hidden_in_bar": true
+    },
+    "render_layer": {
+      "type": "palladium:render_layer",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "render_layer": "hulk:hulk"
+    },
+    "smash": {
+      "type": "hulk:ground_smash",
+      "list_index": 0,
+      "title": { "translate": "ability.hulk.smash" },
+      "icon": "minecraft:anvil",
+      "conditions": {
+        "enabling": { "type": "palladium:action", "cooldown": 60 }
+      }
+    },
+    "super_jump": {
+      "type": "hulk:super_jump",
+      "list_index": 1,
+      "title": { "translate": "ability.hulk.super_jump" },
+      "icon": "minecraft:rabbit_foot",
+      "conditions": {
+        "enabling": { "type": "palladium:held", "cooldown": 0 }
+      }
+    },
+    "thunderclap": {
+      "type": "hulk:thunderclap",
+      "list_index": 2,
+      "title": { "translate": "ability.hulk.thunderclap" },
+      "icon": "minecraft:goat_horn",
+      "conditions": {
+        "enabling": { "type": "palladium:action", "cooldown": 100 }
+      }
+    },
+    "anim_smash": {
+      "type": "geckolib:render_layer_animation",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "render_layer": "hulk:hulk",
+      "controller": "action_controller",
+      "animation_trigger": "smash",
+      "conditions": {
+        "enabling": { "type": "palladium:ability_enabled", "ability": "smash" }
+      }
+    },
+    "anim_clap": {
+      "type": "geckolib:render_layer_animation",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "render_layer": "hulk:hulk",
+      "controller": "action_controller",
+      "animation_trigger": "clap",
+      "conditions": {
+        "enabling": { "type": "palladium:ability_enabled", "ability": "thunderclap" }
+      }
+    }
+  }
+}

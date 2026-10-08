@@ -1,0 +1,287 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "animation.hulk.idle": {
+      "loop": true,
+      "animation_length": 2.0,
+      "bones": {
+        "armorBody": {
+          "scale": {
+            "0": {
+              "vector": [
+                1,
+                1,
+                1
+              ]
+            },
+            "1.0": {
+              "vector": [
+                1.03,
+                1.02,
+                1.03
+              ]
+            },
+            "2.0": {
+              "vector": [
+                1,
+                1,
+                1
+              ]
+            }
+          }
+        },
+        "armorRightArm": {
+          "rotation": {
+            "0": {
+              "vector": [
+                0,
+                0,
+                4
+              ]
+            },
+            "1.0": {
+              "vector": [
+                0,
+                0,
+                8
+              ]
+            },
+            "2.0": {
+              "vector": [
+                0,
+                0,
+                4
+              ]
+            }
+          }
+        },
+        "armorLeftArm": {
+          "rotation": {
+            "0": {
+              "vector": [
+                0,
+                0,
+                -4
+              ]
+            },
+            "1.0": {
+              "vector": [
+                0,
+                0,
+                -8
+              ]
+            },
+            "2.0": {
+              "vector": [
+                0,
+                0,
+                -4
+              ]
+            }
+          }
+        }
+      }
+    },
+    "animation.hulk.smash": {
+      "loop": false,
+      "animation_length": 0.8,
+      "bones": {
+        "armorRightArm": {
+          "rotation": {
+            "0": {
+              "vector": [
+                0,
+                0,
+                0
+              ]
+            },
+            "0.3": {
+              "vector": [
+                -180,
+                0,
+                0
+              ],
+              "easing": "easeOutQuad"
+            },
+            "0.45": {
+              "vector": [
+                -20,
+                0,
+                0
+              ],
+              "easing": "easeInQuad"
+            },
+            "0.8": {
+              "vector": [
+                0,
+                0,
+                0
+              ]
+            }
+          }
+        },
+        "armorLeftArm": {
+          "rotation": {
+            "0": {
+              "vector": [
+                0,
+                0,
+                0
+              ]
+            },
+            "0.3": {
+              "vector": [
+                -180,
+                0,
+                0
+              ],
+              "easing": "easeOutQuad"
+            },
+            "0.45": {
+              "vector": [
+                -20,
+                0,
+                0
+              ],
+              "easing": "easeInQuad"
+            },
+            "0.8": {
+              "vector": [
+                0,
+                0,
+                0
+              ]
+            }
+          }
+        },
+        "armorBody": {
+          "rotation": {
+            "0": {
+              "vector": [
+                0,
+                0,
+                0
+              ]
+            },
+            "0.3": {
+              "vector": [
+                -10,
+                0,
+                0
+              ]
+            },
+            "0.45": {
+              "vector": [
+                25,
+                0,
+                0
+              ]
+            },
+            "0.8": {
+              "vector": [
+                0,
+                0,
+                0
+              ]
+            }
+          }
+        }
+      }
+    },
+    "animation.hulk.clap": {
+      "loop": false,
+      "animation_length": 0.7,
+      "bones": {
+        "armorRightArm": {
+          "rotation": {
+            "0": {
+              "vector": [
+                0,
+                0,
+                0
+              ]
+            },
+            "0.25": {
+              "vector": [
+                -90,
+                -40,
+                0
+              ]
+            },
+            "0.4": {
+              "vector": [
+                -90,
+                -5,
+                0
+              ]
+            },
+            "0.7": {
+              "vector": [
+                0,
+                0,
+                0
+              ]
+            }
+          }
+        },
+        "armorLeftArm": {
+          "rotation": {
+            "0": {
+              "vector": [
+                0,
+                0,
+                0
+              ]
+            },
+            "0.25": {
+              "vector": [
+                -90,
+                40,
+                0
+              ]
+            },
+            "0.4": {
+              "vector": [
+                -90,
+                5,
+                0
+              ]
+            },
+            "0.7": {
+              "vector": [
+                0,
+                0,
+                0
+              ]
+            }
+          }
+        },
+        "armorBody": {
+          "scale": {
+            "0": {
+              "vector": [
+                1,
+                1,
+                1
+              ]
+            },
+            "0.4": {
+              "vector": [
+                1.1,
+                1.05,
+                1.1
+              ]
+            },
+            "0.7": {
+              "vector": [
+                1,
+                1,
+                1
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
