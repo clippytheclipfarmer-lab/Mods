@@ -58,6 +58,14 @@ public final class StoneContainers {
         return ITEMS.get(stone);
     }
 
+    /** The stone inside a filled container item, or null if the stack is not a filled container. */
+    public static InfinityStone heldStone(ItemStack stack) {
+        if (stack.getItem() instanceof ContainerItem item && ContainerItem.filled(stack)) {
+            return item.stone;
+        }
+        return null;
+    }
+
     public static ItemStack stack(InfinityStone stone, boolean filled) {
         ItemStack stack = new ItemStack(ITEMS.get(stone));
         if (filled) {

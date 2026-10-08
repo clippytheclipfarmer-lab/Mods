@@ -23,8 +23,8 @@ import java.util.UUID;
  * slots - or count while held in a hand if no accessory mod is installed) and keeps their Palladium powers in sync.
  */
 public final class StoneWear {
-    /** Accessory slots (Trinkets/Curios) that holders can go in. Loose stones cannot be worn: they must be socketed. */
-    private static final String[] SLOTS = {"hand/glove", "offhand/glove", "chest/necklace"};
+    /** Accessory slots (Trinkets/Curios) that holders (and the one-stone Stone Ring) can go in. Loose stones cannot be worn: they must be socketed. */
+    private static final String[] SLOTS = {"hand/ring", "offhand/ring", "hand/glove", "offhand/glove", "chest/necklace"};
 
     private static final Map<UUID, Set<InfinityStone>> ACTIVE = new HashMap<>();
     private static final ResourceLocation SNAP = HeroesMod.stones("snap");
@@ -59,6 +59,13 @@ public final class StoneWear {
 
     private static Set<InfinityStone> compute(LivingEntity entity) {
         Set<InfinityStone> set = EnumSet.noneOf(InfinityStone.class);
+        // A filled stone container held in either hand lends its stone's powers.
+        for (ItemStack stack : new ItemStack[]{entity.getMainHandItem(), entity.getOffhandItem()}) {
+            InfinityStone held = StoneContainers.heldStone(stack);
+            if (held != null) {
+                set.add(held);
+            }
+        }
         for (ItemStack stack : wornStacks(entity)) {
             if (stack.getItem() instanceof HolderItem) {
                 set.addAll(HolderItem.stones(stack));

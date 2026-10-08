@@ -34,6 +34,7 @@ public final class StoneHero {
             PowerStonePulse.tickWaves(server);
             for (ServerPlayer player : server.getPlayerList().getPlayers()) {
                 PowerStonePulse.tick(player);
+                LooseStones.tick(player);
                 if (StoneBoost.has(player, InfinityStone.TIME)) {
                     StoneAbilities.recordHistory(player);
                     // Time flows faster for the wearer: every ability cooldown ticks down twice as fast.
@@ -51,7 +52,11 @@ public final class StoneHero {
             StoneWear.forget(handler.getPlayer().getUUID());
             StoneAbilities.forgetHistory(handler.getPlayer().getUUID());
             PowerStonePulse.forget(handler.getPlayer().getUUID());
+            LooseStones.forget(handler.getPlayer().getUUID());
         });
-        net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents.SERVER_STOPPED.register(server -> PowerStonePulse.clear());
+        net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents.SERVER_STOPPED.register(server -> {
+            PowerStonePulse.clear();
+            LooseStones.clear();
+        });
     }
 }

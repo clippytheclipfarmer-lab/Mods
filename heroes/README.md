@@ -153,8 +153,10 @@ A random event on the generated planets (not Earth, and not planets with `"symbi
 **Commands (op):** `/symbiote meteor` (drop one near you), `/symbiote blob`, `/symbiote bond [apex]`, `/symbiote release`.
 
 ## Infinity Stones (powers)
-Six stones plus three holders. **Loose stones cannot be worn**: a stone only works once it is **socketed into a holder**, and the holder must be **worn in an accessory slot** (needs Trinkets; without an accessory mod it counts while in either hand).
-The Gauntlet and Bracers go in the glove slots; the Necklace in the necklace slot.
+Six stones plus four holders. **Loose stones cannot be worn**: a stone only works once it is **socketed into a holder**, and the holder must be **worn in an accessory slot** (needs Trinkets; without an accessory mod it counts while in either hand).
+The **Stone Ring** (cheap: 4 gold ingots + an amethyst shard) holds **one** stone and goes in a ring slot; the Gauntlet and Bracers (six sockets) go in the glove slots; the Necklace (six sockets) in the necklace slot.
+
+**Containers in hand:** a filled stone container (Orb, Tesseract, Scepter, Aether, Eye, Soul Urn) gives its stone's powers while you hold it in either hand, and keeps the stone safe.
 
 | Stone | Power (action key) | Boosts other heroes |
 |---|---|---|
@@ -167,7 +169,7 @@ The Gauntlet and Bracers go in the glove slots; the Necklace in the necklace slo
 
 Every stone you wear also adds a general +10% to blasts (and doubles at all six).
 
-**Holders** (Infinity Gauntlet, Infinity Necklace, Infinity Bracers; craftable with gold blocks, netherite and diamond blocks): worn, they give the powers of every stone socketed in them.
+**Holders** (Stone Ring with one socket; Infinity Gauntlet, Necklace and Bracers with six, craftable with gold blocks, netherite and diamond blocks): worn, they give the powers of every stone socketed in them.
 Sneak + right-click with the holder in your main hand and a stone in your off hand to socket it; sneak + right-click with an empty off hand takes the last one out.
 With **all six** socketed in a worn holder you also get **The Snap**: half of all creatures (not players or bosses) within 128 blocks turn to ash, with a 20 minute cooldown.
 
@@ -186,4 +188,18 @@ Every stone has a themed container that can be **placed in the world** like a bl
 A filled container glows and shows its gem. **Right-click a filled one to take the stone out** (the container stays, empty); right-click an empty one while holding its stone to put it back. Breaking a container drops it with the stone still inside, so you can carry and re-place it. The creative menu has a filled and an empty version of each. Containers are only for keeping and displaying the stone: to use its power, socket the stone into a holder and wear the holder.
 
 ### The Power Stone is dangerous loose
-While a loose Power Stone is in your inventory (any slot) it hurts you (3 hearts every 2 s, but it never takes your last 3.5 hearts) and sends out a **pulsing purple shockwave** every 2 seconds that expands 9 blocks and damages (2.5 hearts) and knocks back every creature it passes through. It stays safe when **socketed in a holder (worn or not) or kept in the Orb**; creative and spectator players are immune. The numbers are constants at the top of `PowerStonePulse.java`.
+While a loose Power Stone is in your inventory (any slot) it hurts you (3 hearts every 2 s, and it can kill you) and sends out a **pulsing purple shockwave** every 2 seconds that expands 9 blocks and damages (2.5 hearts) and knocks back every creature it passes through. It stays safe when **socketed in a holder (worn or not) or kept in the Orb**; creative and spectator players are immune. The numbers are constants at the top of `PowerStonePulse.java`.
+
+### The rule: loose stones are cursed
+A stone loose in your inventory is a drawback (safe once socketed in a holder or kept in its container; creative/spectator are immune):
+
+| Loose stone | What it does to you |
+|---|---|
+| Power | 3 hearts every 2 s plus purple damaging shockwaves. **It can kill you.** |
+| Space | Tears you 5-10 blocks sideways to a safe spot every 10 s |
+| Mind | Nausea and blindness, and monsters within 16 blocks turn on you (every 15 s) |
+| Reality | A random bad effect (blindness, hunger, mining fatigue, slowness, weakness, glowing, nausea) every 20 s |
+| Time | Slowness, mining fatigue and weakness every 25 s |
+| Soul | 1 heart and hunger every 3 s |
+
+Only the Power Stone can kill you; the others stop hurting you before your last 3.5 hearts. The timings are in `LooseStones.java` and `PowerStonePulse.java`.

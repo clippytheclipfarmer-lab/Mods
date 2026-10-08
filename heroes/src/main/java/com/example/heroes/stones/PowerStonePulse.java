@@ -31,7 +31,7 @@ import java.util.UUID;
 public final class PowerStonePulse {
     /** Ticks between pulses. */
     private static final int INTERVAL = 40;
-    /** Damage to the carrier per pulse: three hearts. It never kills: it only hits when more than SELF_DAMAGE + 1 health is left. */
+    /** Damage to the carrier per pulse: three hearts. Unlike the other loose stones, the Power Stone can kill you. */
     private static final float SELF_DAMAGE = 6.0F;
     /** Damage to each other creature the shockwave passes through. */
     private static final float WAVE_DAMAGE = 5.0F;
@@ -95,10 +95,8 @@ public final class PowerStonePulse {
         WAVES.add(new Wave(level.dimension(), player.position().add(0, 0.2, 0), player.getUUID()));
         level.playSound(null, player.blockPosition(), SoundEvents.BEACON_POWER_SELECT, SoundSource.PLAYERS, 1.6F, 0.5F);
         level.playSound(null, player.blockPosition(), SoundEvents.WARDEN_SONIC_CHARGE, SoundSource.PLAYERS, 0.6F, 1.6F);
-        // It burns the one carrying it, but never to death.
-        if (player.getHealth() > SELF_DAMAGE + 1.0F) {
-            player.hurt(level.damageSources().magic(), SELF_DAMAGE);
-        }
+        // It burns the one carrying it, and it can kill.
+        player.hurt(level.damageSources().magic(), SELF_DAMAGE);
         player.displayClientMessage(Component.literal("The Power Stone pulses..."), true);
     }
 

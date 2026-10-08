@@ -24,6 +24,7 @@ public final class StoneItems {
     public static Item GAUNTLET;
     public static Item NECKLACE;
     public static Item BRACERS;
+    public static Item RING;
 
     private StoneItems() {
     }
@@ -42,11 +43,13 @@ public final class StoneItems {
         GAUNTLET = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(HeroesMod.MOD_ID, "infinity_gauntlet"), new HolderItem(new Item.Properties()));
         NECKLACE = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(HeroesMod.MOD_ID, "infinity_necklace"), new HolderItem(new Item.Properties()));
         BRACERS = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(HeroesMod.MOD_ID, "infinity_bracers"), new HolderItem(new Item.Properties()));
+        RING = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(HeroesMod.MOD_ID, "stone_ring"), new HolderItem(new Item.Properties(), 1));
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.INGREDIENTS).register(entries -> {
             ITEMS.values().forEach(entries::accept);
             entries.accept(GAUNTLET);
             entries.accept(NECKLACE);
             entries.accept(BRACERS);
+            entries.accept(RING);
             for (InfinityStone stone : InfinityStone.values()) {
                 entries.accept(StoneContainers.stack(stone, true));
                 entries.accept(StoneContainers.stack(stone, false));
@@ -71,10 +74,16 @@ public final class StoneItems {
         public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
             tooltip.add(Component.literal("One of the six Infinity Stones.").withStyle(net.minecraft.ChatFormatting.GRAY));
             tooltip.add(Component.literal("Cannot be worn on its own: socket it into the Gauntlet, Necklace or Bracers.").withStyle(net.minecraft.ChatFormatting.DARK_GRAY));
-            if (stone == InfinityStone.POWER) {
-                tooltip.add(Component.literal("Dangerous to carry: it hurts you and pulses shockwaves.").withStyle(net.minecraft.ChatFormatting.DARK_PURPLE));
-                tooltip.add(Component.literal("Socket it in a holder or keep it in the Orb to tame it.").withStyle(net.minecraft.ChatFormatting.DARK_GRAY));
-            }
+            String curse = switch (stone) {
+                case POWER -> "Loose, it burns you for 3 hearts every 2 s and pulses shockwaves. It can kill you.";
+                case SPACE -> "Loose, it tears you sideways through space every few seconds.";
+                case MIND -> "Loose, it clouds your mind and turns nearby monsters on you.";
+                case REALITY -> "Loose, it makes reality warp around you with random bad effects.";
+                case TIME -> "Loose, time drags: you are slowed and weakened now and then.";
+                case SOUL -> "Loose, it drains your health and hunger.";
+            };
+            tooltip.add(Component.literal(curse).withStyle(net.minecraft.ChatFormatting.DARK_PURPLE));
+            tooltip.add(Component.literal("Socket it in a holder, or keep it in its container, to be safe.").withStyle(net.minecraft.ChatFormatting.DARK_GRAY));
         }
     }
 }

@@ -29,8 +29,16 @@ import java.util.Set;
 public class HolderItem extends Item {
     private static final String KEY = "Stones";
 
+    private final int capacity;
+
     public HolderItem(Properties properties) {
+        this(properties, 6);
+    }
+
+    /** A holder with the given number of sockets (the Stone Ring has one). */
+    public HolderItem(Properties properties, int capacity) {
         super(properties.stacksTo(1).rarity(Rarity.EPIC).fireResistant());
+        this.capacity = capacity;
     }
 
     /** The stones socketed in a holder stack. */
@@ -68,11 +76,13 @@ public class HolderItem extends Item {
         if (other.getItem() instanceof StoneItems.StoneItem stoneItem) {
             if (stones.contains(stoneItem.stone)) {
                 player.displayClientMessage(Component.literal("That stone is already socketed."), true);
+            } else if (stones.size() >= capacity) {
+                player.displayClientMessage(Component.literal("All sockets are full."), true);
             } else {
                 stones.add(stoneItem.stone);
                 write(holder, stones);
                 other.shrink(1);
-                player.displayClientMessage(Component.literal(stoneItem.stone.displayName() + " socketed (" + stones.size() + "/6)."), true);
+                player.displayClientMessage(Component.literal(stoneItem.stone.displayName() + " socketed (" + stones.size() + "/" + capacity + ")."), true);
             }
         } else if (other.isEmpty() && !stones.isEmpty()) {
             List<InfinityStone> list = new ArrayList<>(stones);
@@ -80,7 +90,7 @@ public class HolderItem extends Item {
             stones.remove(last);
             write(holder, stones);
             player.getInventory().placeItemBackInInventory(new ItemStack(StoneItems.get(last)));
-            player.displayClientMessage(Component.literal(last.displayName() + " removed (" + stones.size() + "/6)."), true);
+            player.displayClientMessage(Component.literal(last.displayName() + " removed (" + stones.size() + "/" + capacity + ")."), true);
         }
         return InteractionResultHolder.consume(holder);
     }
@@ -93,8 +103,11 @@ public class HolderItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
         Set<InfinityStone> stones = stones(stack);
-        tooltip.add(Component.literal("Stones: " + stones.size() + "/6").withStyle(ChatFormatting.GOLD));
+        tooltip.add(Component.literal("Stones: " + stones.size() + "/" + capacity).withStyle(ChatFormatting.GOLD));
         for (InfinityStone stone : InfinityStone.values()) {
+            if (capacity < InfinityStone.values().length && !stones.contains(stone)) {
+                continue; // small holders only list what they hold
+            }
             boolean has = stones.contains(stone);
             tooltip.add(Component.literal((has ? "  ◆ " : "  ◇ ") + stone.displayName())
                     .withStyle(has ? ChatFormatting.WHITE : ChatFormatting.DARK_GRAY));
