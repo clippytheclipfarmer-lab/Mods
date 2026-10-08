@@ -36,7 +36,13 @@ public class RageScalingAbility extends Ability {
             return;
         }
         float rage = HulkRage.fraction(entity);
-        HulkScale.set(entity, 1.3F + 0.7F * rage);
+        // 1.3x calm -> ~2x at 80% rage -> Titan (kaiju) size near max rage.
+        float scale = rage < 0.8F ? 1.3F + 0.875F * rage : 2.0F + (rage - 0.8F) * 5F;
+        HulkScale.set(entity, scale);
+        // Immortal-style regeneration: heals faster the angrier he is.
+        if (entity.tickCount % 20 == 0 && entity.getHealth() < entity.getMaxHealth()) {
+            entity.heal(0.5F + 3F * rage);
+        }
         apply(entity, Attributes.MAX_HEALTH, HEALTH, 10 + 30 * rage, AttributeModifier.Operation.ADDITION);
         apply(entity, Attributes.ATTACK_DAMAGE, DAMAGE, 3 + 9 * rage, AttributeModifier.Operation.ADDITION);
         apply(entity, Attributes.MOVEMENT_SPEED, SPEED, 0.1 + 0.3 * rage, AttributeModifier.Operation.MULTIPLY_TOTAL);

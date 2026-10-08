@@ -23,9 +23,10 @@ public class GroundSmashAbility extends Ability {
             return;
         }
         float rage = HulkRage.fraction(entity);
-        double radius = 4 + 4 * rage;
+        float tier = HulkRage.tier(rage).multiplier;
+        double radius = (4 + 4 * rage) * tier;
         Vec3 origin = entity.position();
-        HulkEffects.blast(level, entity, origin, radius, 6 + 10 * rage, 1.0 + 1.0 * rage, 0.5 + 0.4 * rage);
+        HulkEffects.blast(level, entity, origin, radius, (6 + 10 * rage) * tier, 1.0 + 1.0 * rage, 0.5 + 0.4 * rage);
         HulkEffects.breakWeakBlocks(level, entity, entity.blockPosition().below(), (int) radius, 1.0F + 2.0F * rage);
         HulkEffects.ring(level, origin, radius);
         HulkEffects.boom(level, origin, 0.8F);

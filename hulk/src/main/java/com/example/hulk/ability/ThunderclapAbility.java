@@ -31,13 +31,19 @@ public class ThunderclapAbility extends Ability {
             return;
         }
         float rage = HulkRage.fraction(entity);
-        double radius = 6 + 6 * rage;
+        float tier = HulkRage.tier(rage).multiplier;
+        double radius = (6 + 6 * rage) * tier;
         Vec3 origin = entity.position().add(0, entity.getBbHeight() * 0.6, 0);
 
-        HulkEffects.blast(level, entity, origin, radius, 4 + 6 * rage, 1.6 + 1.2 * rage, 0.3);
+        HulkEffects.blast(level, entity, origin, radius, (4 + 6 * rage) * tier, 1.6 + 1.2 * rage, 0.3);
         for (LivingEntity target : level.getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(radius), e -> e != entity)) {
             if (target.position().distanceTo(origin) <= radius) {
-                target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 40 + (int) (40 * rage), 3));
+                int ticks = 40 + (int) (60 * rage * tier);
+                target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, ticks, 3));
+                // Concussion: dizzy and half-blind from the deafening clap.
+                target.addEffect(new MobEffectInstance(MobEffects.CONFUSION, ticks + 40, 0));
+                target.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, ticks / 2, 0));
+                target.clearFire();
             }
         }
 
@@ -45,8 +51,15 @@ public class ThunderclapAbility extends Ability {
             int r = (int) radius;
             BlockPos center = BlockPos.containing(origin);
             for (BlockPos pos : BlockPos.betweenClosed(center.offset(-r, -r, -r), center.offset(r, r, r))) {
-                if (pos.distSqr(center) <= r * r && level.getBlockState(pos).is(BlockTags.IMPERMEABLE)) {
+                if (pos.distSqr(center) > r * r) {
+                    continue;
+                }
+                var state = level.getBlockState(pos);
+                if (state.is(BlockTags.IMPERMEABLE)) {
                     level.destroyBlock(pos.immutable(), false, entity);
+                } else if (state.is(BlockTags.FIRE)) {
+                    // The clap's pressure wave snuffs out fires.
+                    level.removeBlock(pos.immutable(), false);
                 }
             }
         }

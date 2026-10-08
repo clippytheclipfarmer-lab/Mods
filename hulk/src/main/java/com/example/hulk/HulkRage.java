@@ -39,4 +39,27 @@ public final class HulkRage {
         EnergyBar bar = bar(entity);
         return bar == null || bar.getMax() <= 0 ? 0F : bar.get() / (float) bar.getMax();
     }
+
+    /** Comic-inspired power tiers, driven by rage. */
+    public enum Tier {
+        SAVAGE(1.0F), WORLDBREAKER(1.6F), TITAN(2.2F);
+
+        /** Multiplier applied to the radius/damage of Hulk's powers. */
+        public final float multiplier;
+
+        Tier(float multiplier) {
+            this.multiplier = multiplier;
+        }
+    }
+
+    public static Tier tier(LivingEntity entity) {
+        return tier(fraction(entity));
+    }
+
+    public static Tier tier(float rage) {
+        if (rage >= 0.95F) {
+            return Tier.TITAN;
+        }
+        return rage >= 0.6F ? Tier.WORLDBREAKER : Tier.SAVAGE;
+    }
 }

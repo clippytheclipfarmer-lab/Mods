@@ -1,6 +1,8 @@
 package com.example.hulk;
 
 import com.example.hulk.ability.GroundSmashAbility;
+import com.example.hulk.ability.ImmortalityAbility;
+import com.example.hulk.ability.StompQuakeAbility;
 import com.example.hulk.ability.RageScalingAbility;
 import com.example.hulk.ability.SuperJumpAbility;
 import com.example.hulk.ability.ThunderclapAbility;
@@ -13,17 +15,23 @@ import net.threetag.palladium.power.ability.Ability;
 import net.threetag.palladiumcore.event.EventResult;
 import net.threetag.palladiumcore.event.LivingEntityEvents;
 import net.threetag.palladiumcore.registry.DeferredRegister;
+import net.threetag.palladiumcore.registry.RegistrySupplier;
+import net.threetag.palladium.power.ability.AbilityUtil;
 
 public class HulkMod implements ModInitializer {
     public static final String MOD_ID = "hulk";
 
     public static final DeferredRegister<Ability> ABILITIES = DeferredRegister.create(MOD_ID, Ability.REGISTRY);
 
+    public static final RegistrySupplier<Ability> IMMORTALITY;
+
     static {
         ABILITIES.register("rage_scaling", RageScalingAbility::new);
         ABILITIES.register("ground_smash", GroundSmashAbility::new);
         ABILITIES.register("super_jump", SuperJumpAbility::new);
         ABILITIES.register("thunderclap", ThunderclapAbility::new);
+        ABILITIES.register("stomp_quake", StompQuakeAbility::new);
+        IMMORTALITY = ABILITIES.register("immortality", ImmortalityAbility::new);
     }
 
     public static ResourceLocation id(String path) {
@@ -38,6 +46,18 @@ public class HulkMod implements ModInitializer {
         ServerLivingEntityEvents.ALLOW_DAMAGE.register((entity, source, amount) -> {
             // Hulk shrugs off falls (needed for the super jump).
             return !(entity instanceof ServerPlayer player && source.is(DamageTypeTags.IS_FALL) && HulkRage.isHulk(player));
+        });
+
+        ServerLivingEntityEvents.ALLOW_DEATH.register((entity, source, amount) -> {
+            if (!(entity instanceof ServerPlayer player)) {
+                return true;
+            }
+            for (var entry : AbilityUtil.getEnabledEntries(player, IMMORTALITY.get())) {
+                if (ImmortalityAbility.tryRevive(player, entry)) {
+                    return false;
+                }
+            }
+            return true;
         });
 
         LivingEntityEvents.HURT.register((entity, source, amount) -> {
