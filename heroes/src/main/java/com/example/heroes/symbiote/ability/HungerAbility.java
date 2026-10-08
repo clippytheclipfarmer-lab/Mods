@@ -47,6 +47,7 @@ public class HungerAbility extends Ability {
                 TAKEOVER.put(id, TAKEOVER_TICKS);
                 FED_DURING.put(id, false);
                 entity.addEffect(new MobEffectInstance(MobEffects.DARKNESS, TAKEOVER_TICKS, 0, false, false));
+                SymbioteHost.requestSuit(entity);
                 if (entity instanceof ServerPlayer player) {
                     player.sendSystemMessage(Component.literal("The symbiote is starving - it takes control!"));
                 }

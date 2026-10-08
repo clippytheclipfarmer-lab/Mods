@@ -9,7 +9,13 @@ import net.threetag.palladium.power.IPowerHolder;
 import net.threetag.palladium.power.PowerManager;
 import net.threetag.palladium.power.PowerUtil;
 import net.threetag.palladium.power.SuperpowerUtil;
+import net.threetag.palladium.power.ability.AbilityInstance;
+import net.threetag.palladium.power.ability.AbilityUtil;
 import net.threetag.palladium.power.energybar.EnergyBar;
+
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 /** Helpers for entities that carry a symbiote (the {@code symbiote:symbiote} or {@code symbiote:apex} power). */
 public final class SymbioteHost {
@@ -17,7 +23,50 @@ public final class SymbioteHost {
     public static final ResourceLocation APEX = HeroesMod.symbiote("apex");
     public static final String HUNGER = "hunger";
 
+    public static final String SUIT = "suit";
+    private static final Map<UUID, Boolean> RELEASE_KEY = new ConcurrentHashMap<>();
+
     private SymbioteHost() {
+    }
+
+    /** Is the black suit currently covering the entity? (Works on both sides: Palladium syncs the ability state.) */
+    public static boolean isSuited(LivingEntity entity) {
+        return AbilityUtil.isEnabled(entity, BASE, SUIT) || AbilityUtil.isEnabled(entity, APEX, SUIT);
+    }
+
+    /** Makes the suit spread by itself, as if the host had pressed the suit key. */
+    public static void requestSuit(LivingEntity entity) {
+        if (entity.level().isClientSide || isSuited(entity)) {
+            return;
+        }
+        for (ResourceLocation id : new ResourceLocation[]{APEX, BASE}) {
+            AbilityInstance suit = AbilityUtil.getInstance(entity, id, SUIT);
+            if (suit != null) {
+                suit.cooldown = 0;
+                suit.keyPressed(entity, true);
+                RELEASE_KEY.put(entity.getUUID(), true);
+                return;
+            }
+        }
+    }
+
+    /** Lets go of the simulated key press one tick after {@link #requestSuit}. */
+    public static void releaseSimulatedKeys(net.minecraft.server.MinecraftServer server) {
+        if (RELEASE_KEY.isEmpty()) {
+            return;
+        }
+        for (UUID id : RELEASE_KEY.keySet()) {
+            ServerPlayer player = server.getPlayerList().getPlayer(id);
+            if (player != null) {
+                for (ResourceLocation power : new ResourceLocation[]{APEX, BASE}) {
+                    AbilityInstance suit = AbilityUtil.getInstance(player, power, SUIT);
+                    if (suit != null) {
+                        suit.keyPressed(player, false);
+                    }
+                }
+            }
+        }
+        RELEASE_KEY.clear();
     }
 
     public static boolean isHost(LivingEntity entity) {

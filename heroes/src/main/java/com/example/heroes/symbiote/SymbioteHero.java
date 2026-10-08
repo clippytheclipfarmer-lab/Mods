@@ -4,6 +4,9 @@ import com.example.heroes.HeroesMod;
 import com.example.heroes.symbiote.klyntar.KlyntarSystem;
 import com.example.heroes.symbiote.ability.ConsumeAbility;
 import com.example.heroes.symbiote.ability.HungerAbility;
+import com.example.heroes.symbiote.ability.RegenAbility;
+import com.example.heroes.symbiote.ability.SenseAbility;
+import com.example.heroes.symbiote.ability.SuitUpkeepAbility;
 import com.example.heroes.symbiote.ability.TendrilAbility;
 import com.example.heroes.symbiote.ability.WallClingAbility;
 import com.mojang.brigadier.CommandDispatcher;
@@ -26,6 +29,9 @@ public final class SymbioteHero {
         ABILITIES.register("consume", ConsumeAbility::new);
         ABILITIES.register("wall_cling", WallClingAbility::new);
         ABILITIES.register("hunger", HungerAbility::new);
+        ABILITIES.register("sense", SenseAbility::new);
+        ABILITIES.register("regen", RegenAbility::new);
+        ABILITIES.register("upkeep", SuitUpkeepAbility::new);
     }
 
     private SymbioteHero() {
@@ -36,6 +42,22 @@ public final class SymbioteHero {
         SymbioteEntities.init();
         MeteorEvents.init();
         KlyntarSystem.init();
+
+        net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents.END_SERVER_TICK.register(SymbioteHost::releaseSimulatedKeys);
+
+        // Hard hits make the suit spread on its own; fire and sonic damage hurt much more while it is on.
+        net.threetag.palladiumcore.event.LivingEntityEvents.HURT.register((entity, source, amount) -> {
+            if (!entity.level().isClientSide && SymbioteHost.isHost(entity)) {
+                if (SymbioteHost.isSuited(entity)) {
+                    if (source.is(net.minecraft.tags.DamageTypeTags.IS_FIRE) || source.is(net.minecraft.world.damagesource.DamageTypes.SONIC_BOOM)) {
+                        amount.set(amount.get() * 2.0F);
+                    }
+                } else if (amount.get() >= 6.0F && entity instanceof ServerPlayer) {
+                    SymbioteHost.requestSuit(entity);
+                }
+            }
+            return net.threetag.palladiumcore.event.EventResult.pass();
+        });
 
         ServerLivingEntityEvents.AFTER_DEATH.register((entity, source) -> {
             // A host's kills feed the symbiote.

@@ -135,7 +135,13 @@
         "translate": "ability.symbiote.strength"
       },
       "icon": "minecraft:netherite_sword",
-      "list_index": 1
+      "list_index": 1,
+      "conditions": {
+        "enabling": {
+          "type": "palladium:ability_enabled",
+          "ability": "suit"
+        }
+      }
     },
     "health": {
       "type": "palladium:attribute_modifier",
@@ -144,7 +150,13 @@
       "operation": 0,
       "uuid": "5b1e0000-0000-4000-8000-a100000002",
       "hidden": true,
-      "hidden_in_bar": true
+      "hidden_in_bar": true,
+      "conditions": {
+        "enabling": {
+          "type": "palladium:ability_enabled",
+          "ability": "suit"
+        }
+      }
     },
     "armor": {
       "type": "palladium:attribute_modifier",
@@ -153,7 +165,13 @@
       "operation": 0,
       "uuid": "5b1e0000-0000-4000-8000-a100000003",
       "hidden": true,
-      "hidden_in_bar": true
+      "hidden_in_bar": true,
+      "conditions": {
+        "enabling": {
+          "type": "palladium:ability_enabled",
+          "ability": "suit"
+        }
+      }
     },
     "speed": {
       "type": "palladium:attribute_modifier",
@@ -162,7 +180,13 @@
       "operation": 2,
       "uuid": "5b1e0000-0000-4000-8000-a100000004",
       "hidden": true,
-      "hidden_in_bar": true
+      "hidden_in_bar": true,
+      "conditions": {
+        "enabling": {
+          "type": "palladium:ability_enabled",
+          "ability": "suit"
+        }
+      }
     },
     "leap": {
       "type": "palladium:attribute_modifier",
@@ -171,7 +195,13 @@
       "operation": 0,
       "uuid": "5b1e0000-0000-4000-8000-a100000005",
       "hidden": true,
-      "hidden_in_bar": true
+      "hidden_in_bar": true,
+      "conditions": {
+        "enabling": {
+          "type": "palladium:ability_enabled",
+          "ability": "suit"
+        }
+      }
     },
     "fall_resist": {
       "type": "palladium:attribute_modifier",
@@ -180,7 +210,13 @@
       "operation": 0,
       "uuid": "5b1e0000-0000-4000-8000-a100000006",
       "hidden": true,
-      "hidden_in_bar": true
+      "hidden_in_bar": true,
+      "conditions": {
+        "enabling": {
+          "type": "palladium:ability_enabled",
+          "ability": "suit"
+        }
+      }
     },
     "tendril": {
       "type": "symbiote:tendril",
@@ -193,6 +229,10 @@
         "enabling": {
           "type": "palladium:action",
           "cooldown": 40
+        },
+        "unlocking": {
+          "type": "palladium:ability_enabled",
+          "ability": "suit"
         }
       }
     },
@@ -207,6 +247,10 @@
         "enabling": {
           "type": "palladium:action",
           "cooldown": 60
+        },
+        "unlocking": {
+          "type": "palladium:ability_enabled",
+          "ability": "suit"
         }
       }
     },
@@ -220,8 +264,45 @@
       "conditions": {
         "enabling": {
           "type": "palladium:held"
+        },
+        "unlocking": {
+          "type": "palladium:ability_enabled",
+          "ability": "suit"
         }
       }
+    },
+    "passive_strength": {
+      "type": "palladium:attribute_modifier",
+      "attribute": "generic.attack_damage",
+      "amount": 2,
+      "operation": 0,
+      "uuid": "5b1e0000-0000-4000-8000-a100000010",
+      "hidden": true,
+      "hidden_in_bar": true
+    },
+    "passive_speed": {
+      "type": "palladium:attribute_modifier",
+      "attribute": "generic.movement_speed",
+      "amount": 0.04,
+      "operation": 2,
+      "uuid": "5b1e0000-0000-4000-8000-a100000011",
+      "hidden": true,
+      "hidden_in_bar": true
+    },
+    "sense": {
+      "type": "symbiote:sense",
+      "hidden": true,
+      "hidden_in_bar": true
+    },
+    "regen": {
+      "type": "symbiote:regen",
+      "hidden": true,
+      "hidden_in_bar": true
+    },
+    "upkeep": {
+      "type": "symbiote:upkeep",
+      "hidden": true,
+      "hidden_in_bar": true
     }
   }
 }
