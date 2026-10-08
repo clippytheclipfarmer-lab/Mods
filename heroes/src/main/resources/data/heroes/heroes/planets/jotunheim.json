@@ -1,0 +1,25 @@
+{
+  "name": "Jotunheim",
+  "dimension": "heroes:jotunheim",
+  "position": [
+    -560,
+    150,
+    -420
+  ],
+  "radius": 48,
+  "blocks": {
+    "surface": "minecraft:snow_block",
+    "subsurface": "minecraft:packed_ice",
+    "core": "minecraft:deepslate",
+    "accent": "minecraft:blue_ice",
+    "accent_scale": 12.0
+  },
+  "gravity": 1.1,
+  "oxygen": true,
+  "hazard": "cold",
+  "landing": [
+    0,
+    0
+  ],
+  "color": "9fd8ff"
+}

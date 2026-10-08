@@ -1,0 +1,25 @@
+{
+  "name": "Hala",
+  "dimension": "heroes:hala",
+  "position": [
+    -520,
+    210,
+    120
+  ],
+  "radius": 44,
+  "blocks": {
+    "surface": "minecraft:light_blue_terracotta",
+    "subsurface": "minecraft:blue_terracotta",
+    "core": "minecraft:calcite",
+    "accent": "minecraft:cyan_concrete",
+    "accent_scale": 16.0
+  },
+  "gravity": 1.0,
+  "oxygen": true,
+  "hazard": "none",
+  "landing": [
+    0,
+    0
+  ],
+  "color": "4a78ff"
+}

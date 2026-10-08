@@ -1,0 +1,25 @@
+{
+  "name": "Skrullos",
+  "dimension": "heroes:skrullos",
+  "position": [
+    480,
+    180,
+    360
+  ],
+  "radius": 40,
+  "blocks": {
+    "surface": "minecraft:green_terracotta",
+    "subsurface": "minecraft:terracotta",
+    "core": "minecraft:stone",
+    "accent": "minecraft:lime_terracotta",
+    "accent_scale": 15.0
+  },
+  "gravity": 0.95,
+  "oxygen": true,
+  "hazard": "none",
+  "landing": [
+    0,
+    0
+  ],
+  "color": "6fcf3a"
+}

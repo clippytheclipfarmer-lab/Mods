@@ -1,0 +1,25 @@
+{
+  "name": "Asgard",
+  "dimension": "heroes:asgard",
+  "position": [
+    620,
+    240,
+    -140
+  ],
+  "radius": 42,
+  "blocks": {
+    "surface": "minecraft:yellow_terracotta",
+    "subsurface": "minecraft:orange_terracotta",
+    "core": "minecraft:stone",
+    "accent": "minecraft:gold_block",
+    "accent_scale": 40.0
+  },
+  "gravity": 1.0,
+  "oxygen": true,
+  "hazard": "none",
+  "landing": [
+    0,
+    0
+  ],
+  "color": "f0c24a"
+}
