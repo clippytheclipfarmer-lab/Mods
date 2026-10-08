@@ -224,7 +224,7 @@ Models are authored in code so they can be looked at and improved without launch
 
 - `tools/modelpreview.py model.geo.json texture.png out.png` renders a front / 3/4 / side / back preview sheet of any GeckoLib cube model (needs `numpy` and `Pillow`). Calibrated against the vanilla Steve skin.
 - `tools/models/mc_model.py` is a small builder: describe cubes and how to paint them and it packs the texture, paints it and writes the `.geo.json` and `.png`.
-- `tools/models/hulk_model.py` generates the Hulk model and texture (re-run it after editing, then re-run the preview). Latest preview: `previews/hulk.png`.
+- `tools/models/hulk_model.py` generates the Hulk model and texture, styled after the 2003 film Hulk (bright glossy green, round head with short dark hair, long torn purple pants, bare feet) (re-run it after editing, then re-run the preview). Latest preview: `previews/hulk.png`.
 
 The generated files are ordinary GeckoLib assets, so you can still open them in Blockbench and edit or replace them; keep the bone names (`armorHead`, `armorBody`, `armorRightArm`, `armorLeftArm`, `armorRightLeg`, `armorLeftLeg`).
 While the Hulk power is active the player's own body is hidden (`palladium:remove_body_part`), so only the Hulk model shows.

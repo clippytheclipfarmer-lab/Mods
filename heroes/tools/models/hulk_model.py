@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Generates the Hulk render layer: assets/hulk/geo/hulk.geo.json and assets/hulk/textures/models/hulk.png.
+Generates the Hulk render layer (modelled on the look of the 2003 film: bright glossy green, round head, long torn purple pants): assets/hulk/geo/hulk.geo.json and assets/hulk/textures/models/hulk.png.
 
 Run from the repository's `heroes` folder:  python3 tools/models/hulk_model.py
 Preview:  python3 tools/modelpreview.py <geo> <png> out.png        (the model alone; the player body is removed in game)
@@ -12,11 +12,11 @@ import sys
 sys.path.insert(0, os.path.dirname(__file__))
 from mc_model import Callback, Flat, ModelBuilder, Skin, Torn  # noqa: E402
 
-GREEN = (78, 164, 58)
-DARK = (52, 122, 44)
-LIGHT = (96, 186, 72)
-PURPLE = (112, 56, 140)
-HAIR = (22, 22, 28)
+GREEN = (96, 192, 64)
+DARK = (60, 136, 48)
+LIGHT = (132, 220, 88)
+PURPLE = (104, 52, 132)
+HAIR = (26, 22, 20)
 WHITE = (240, 244, 240)
 
 
@@ -49,22 +49,24 @@ def build():
             return (24, 50, 24, 255)          # mouth line
         return None
 
-    m.cube("armorHead", [-4.5, 24.2, -4.5], [9, 8, 9], Callback(skin(GREEN, seed=2), face))
-    m.cube("armorHead", [-4.8, 28.2, -5.4], [9.6, 2, 1.6], skin(DARK, seed=3))                    # heavy brow
-    m.cube("armorHead", [-0.9, 25.8, -5.6], [1.8, 2.4, 1.2], skin(DARK, seed=4))                  # nose
+    m.cube("armorHead", [-4.8, 24.0, -4.8], [9.6, 8, 9.6], Callback(skin(GREEN, seed=2, highlight=1.12), face))   # round skull
+    m.cube("armorHead", [-5.0, 25.4, -5.2], [3.0, 2.2, 1.0], skin(LIGHT, seed=30))                              # cheeks
+    m.cube("armorHead", [2.0, 25.4, -5.2], [3.0, 2.2, 1.0], skin(LIGHT, seed=31))
+    m.cube("armorHead", [-4.9, 28.2, -5.5], [9.8, 1.8, 1.6], skin(DARK, seed=3))                                # heavy brow
+    m.cube("armorHead", [-1.0, 25.8, -5.7], [2.0, 2.6, 1.2], skin(GREEN, seed=4))                               # broad flat nose
 
     def teeth(face_name, x, y, w, h, base):
         if face_name == "north" and y == 0 and 1 <= x <= w - 2:
-            return WHITE + (255,) if x % 2 == 0 else (30, 60, 30, 255)
+            return WHITE + (255,) if x % 2 == 0 else (34, 70, 34, 255)
         return None
 
-    m.cube("armorHead", [-4.4, 23.4, -5.4], [8.8, 2.4, 1.8], Callback(skin(GREEN, seed=5), teeth))  # jutting jaw
-    m.cube("armorHead", [-4.8, 31.8, -4.8], [9.6, 1.6, 9.6], Flat(HAIR, seed=6))                  # hair
-    m.cube("armorHead", [-4.8, 27.2, 3.4], [9.6, 4.8, 1.6], Flat(HAIR, seed=7))
-    m.cube("armorHead", [-5.4, 28.0, -4.2], [1.0, 3.6, 7.0], Flat(HAIR, seed=8))                  # temples
-    m.cube("armorHead", [4.4, 28.0, -4.2], [1.0, 3.6, 7.0], Flat(HAIR, seed=9))
-    m.cube("armorHead", [-5.2, 26.0, -0.8], [0.8, 2.2, 1.6], skin(GREEN, seed=10))                # ears
-    m.cube("armorHead", [4.4, 26.0, -0.8], [0.8, 2.2, 1.6], skin(GREEN, seed=11))
+    m.cube("armorHead", [-4.6, 23.0, -5.6], [9.2, 2.6, 1.8], Callback(skin(GREEN, seed=5), teeth))             # wide jutting jaw
+    m.cube("armorHead", [-4.9, 31.7, -4.9], [9.8, 1.3, 9.8], Flat(HAIR, seed=6))                               # short hair
+    m.cube("armorHead", [-4.9, 27.6, 4.0], [9.8, 4.2, 1.0], Flat(HAIR, seed=7))
+    for i, (hx, hz, hh) in enumerate([(-3.6, -2.0, 1.4), (0.2, 1.0, 1.8), (2.6, -1.5, 1.2), (-1.0, -4.2, 1.0), (-3.2, 2.2, 1.0)]):
+        m.cube("armorHead", [hx, 33.0, hz], [1.8, hh, 1.8], Flat(HAIR, seed=40 + i))                           # spiky tufts
+    m.cube("armorHead", [-5.5, 26.0, -0.8], [0.8, 2.4, 1.6], skin(GREEN, seed=10))                              # ears
+    m.cube("armorHead", [4.7, 26.0, -0.8], [0.8, 2.4, 1.6], skin(GREEN, seed=11))
 
     # ------------------------------------------------------------------ body
     m.cube("armorBody", [-3.8, 23.6, -2.8], [7.6, 3.2, 5.6], skin(GREEN, seed=12))                # neck and traps
@@ -76,8 +78,8 @@ def build():
     m.cube("armorBody", [-7.2, 14.2, -2.2], [2.0, 6.8, 4.4], skin(DARK, seed=17))                 # lats
     m.cube("armorBody", [5.2, 14.2, -2.2], [2.0, 6.8, 4.4], skin(DARK, seed=18))
     m.cube("armorBody", [-6.0, 16.6, 2.8], [12.0, 7.6, 1.6], skin(DARK, seed=19, lines=(("v", "south", 0.5),)))  # back
-    m.cube("armorBody", [-5.4, 7.0, -3.3], [10.8, 5.0, 6.6], Flat(PURPLE, seed=20))      # shorts
-    m.cube("armorBody", [-5.5, 11.2, -3.4], [11.0, 1.2, 6.8], Flat((84, 40, 108), seed=21))       # waistband
+    m.cube("armorBody", [-5.4, 7.0, -3.3], [10.8, 5.0, 6.6], Flat(PURPLE, seed=20, noise=7))      # shorts
+    m.cube("armorBody", [-5.5, 11.0, -3.4], [11.0, 1.4, 6.8], Torn((80, 38, 104), depth=1, seed=21))       # ragged waistband
 
     # ------------------------------------------------------------------ arms (right arm is at -x; the left is mirrored)
     arm = [
@@ -92,10 +94,10 @@ def build():
 
     # ------------------------------------------------------------------ legs
     legs = [
-        ([-5.9, 5.6, -3.4], [5.8, 7.0, 6.8], skin(GREEN, seed=26, veins=1, lines=(("v", "north", 0.5),))),                        # thigh
-        ([-5.6, 0.8, -3.1], [5.2, 5.0, 6.2], skin(DARK, seed=27, veins=1, lines=(("h", "north", 0.1),))),                         # calf
+        ([-5.9, 5.6, -3.4], [5.8, 7.0, 6.8], skin(GREEN, seed=26)),                        # thigh (under the pants)
+        ([-5.6, 0.4, -3.1], [5.2, 5.4, 6.2], skin(DARK, seed=27, veins=1)),                # calf and shin
         ([-5.8, 0.0, -4.6], [5.6, 1.8, 8.0], skin(DARK, seed=28, edge=0.7)),               # bare foot
-        ([-6.2, 6.0, -3.7], [6.4, 6.4, 7.4], Torn(PURPLE, depth=3, seed=29)),               # shorts leg
+        ([-6.3, 3.2, -3.8], [6.6, 9.4, 7.6], Torn(PURPLE, depth=4, seed=29, noise=7)),      # long tattered pants
     ]
     for origin, size, painter in legs:
         c = m.cube("armorRightLeg", origin, size, painter)
