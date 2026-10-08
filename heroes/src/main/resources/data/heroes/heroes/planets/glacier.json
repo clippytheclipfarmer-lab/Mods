@@ -1,0 +1,24 @@
+{
+  "name": "Glacier",
+  "dimension": "heroes:glacier",
+  "position": [
+    -260,
+    140,
+    -260
+  ],
+  "radius": 38,
+  "blocks": {
+    "surface": "minecraft:snow_block",
+    "subsurface": "minecraft:packed_ice",
+    "core": "minecraft:blue_ice",
+    "accent": "minecraft:ice",
+    "accent_scale": 14.0
+  },
+  "gravity": 0.8,
+  "oxygen": true,
+  "hazard": "cold",
+  "landing": [
+    0,
+    0
+  ]
+}

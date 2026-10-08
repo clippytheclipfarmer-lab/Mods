@@ -1,0 +1,20 @@
+{
+  "name": "Orbit Station",
+  "shape": "station",
+  "dimension": "heroes:space",
+  "position": [
+    120,
+    200,
+    0
+  ],
+  "radius": 16,
+  "blocks": {
+    "surface": "minecraft:iron_block",
+    "subsurface": "minecraft:glass",
+    "core": "minecraft:smooth_stone"
+  },
+  "gravity": 0.0,
+  "oxygen": true,
+  "hazard": "none",
+  "can_launch": false
+}

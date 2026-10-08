@@ -9,6 +9,9 @@
   "entrypoints": {
     "main": [
       "com.example.heroes.HeroesMod"
+    ],
+    "client": [
+      "com.example.heroes.client.HeroesClient"
     ]
   },
   "depends": {

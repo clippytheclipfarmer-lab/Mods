@@ -1,0 +1,21 @@
+{
+  "name": "Earth",
+  "dimension": "minecraft:overworld",
+  "position": [
+    0,
+    170,
+    0
+  ],
+  "radius": 70,
+  "blocks": {
+    "surface": "minecraft:grass_block",
+    "subsurface": "minecraft:dirt",
+    "core": "minecraft:stone",
+    "accent": "minecraft:light_blue_concrete",
+    "accent_scale": 45.0
+  },
+  "gravity": 1.0,
+  "oxygen": true,
+  "hazard": "none",
+  "can_launch": true
+}

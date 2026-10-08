@@ -2,6 +2,7 @@ package com.example.heroes;
 
 import com.example.heroes.city.CityManager;
 import com.example.heroes.hulk.HulkHero;
+import com.example.heroes.space.SpaceSystem;
 import com.example.heroes.viltrumite.ViltrumiteHero;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.resources.ResourceLocation;
@@ -11,6 +12,8 @@ import net.minecraft.resources.ResourceLocation;
  * (so data/assets are under {@code data/<hero>/...}); add a hero by writing a class like {@link HulkHero}.
  */
 public class HeroesMod implements ModInitializer {
+    public static final org.slf4j.Logger LOGGER = org.slf4j.LoggerFactory.getLogger("heroes");
+
     public static final String MOD_ID = "heroes";
     public static final String HULK = "hulk";
     public static final String VILTRUMITE = "viltrumite";
@@ -28,5 +31,6 @@ public class HeroesMod implements ModInitializer {
         HulkHero.init();
         ViltrumiteHero.init();
         CityManager.init();
+        SpaceSystem.init();
     }
 }

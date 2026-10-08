@@ -75,3 +75,38 @@ After `idle_seconds` without new damage, blocks come back in order from the lowe
 Rebuilding pauses while a player in the region is fighting, skips spots blocked by entities, and waits for unloaded chunks.
 Builder villagers (invulnerable, no AI, a mason profession) appear near the rebuild front with hammering and construction sounds while a player is within 96 blocks, and disappear when finished.
 Damage records are saved with the world (capped at 6 million blocks per region); the nuke can destroy millions of blocks, so saves after a big blast can be large and slow.
+
+## Space
+Fly straight up past the build limit and you leave the planet (normal dimension-change loading screen) and arrive in the **space dimension**, above the planet you left.
+There the planets are real block spheres you can see and fly around, plus an orbit station. Fly into a planet and you land on its surface (another loading screen);
+flying back into the planet you launched from returns you to the spot you left. In space survival players get free flight and no gravity.
+
+Built-in destinations: Earth (the overworld), the Moon, Verdant (alien jungle), Dune (hot desert), Glacier (cold ice), and the Orbit Station.
+
+**Per-planet rules:** gravity (client-side, so low-gravity worlds make you jump higher and fall softer), oxygen, and a heat or cold hazard.
+Protection: creative/spectator, the Viltrumite Space Survival ability, and any helmet in the item tag `heroes:oxygen_helmets` (turtle helmet by default; extend it with a datapack) for oxygen.
+Vanilla fire resistance and leather armor still protect against heat and cold.
+
+**Commands (op):** `/space list`, `/space land <planet> [players]`, `/space orbit <planet> [players]`.
+
+### Adding or changing planets
+A planet is one JSON file: `data/<namespace>/heroes/planets/<name>.json`.
+
+    {
+      "name": "My Planet",
+      "dimension": "heroes:moon",          // the world you land on (needs its own dimension, see data/heroes/dimension/)
+      "position": [330, 200, 110],         // center of its sphere in the space dimension
+      "radius": 24,
+      "blocks": { "surface": "minecraft:light_gray_concrete_powder", "subsurface": "minecraft:andesite",
+                  "core": "minecraft:stone", "accent": "minecraft:gray_concrete", "accent_scale": 10.0 },
+      "gravity": 0.16,                     // 1.0 = normal
+      "oxygen": false,
+      "hazard": "none",                    // none | heat | cold
+      "landing": [0, 0],                   // x, z where you touch down (unless returning to where you launched)
+      "can_launch": true,                  // whether flying up from this world leads to space
+      "launch_altitude": -1                // -1 = just under the build limit
+    }
+
+Set `"shape": "station"` for a hollow glass-and-iron station instead of a sphere.
+The sphere is generated into space chunks when they first generate, so changing a planet after chunks exist needs a fresh space dimension (delete `dimensions/heroes/space` from the world).
+Each landing dimension is ordinary datapack worldgen: see `dimension`, `worldgen/noise_settings` and `worldgen/biome` under `data/heroes`.

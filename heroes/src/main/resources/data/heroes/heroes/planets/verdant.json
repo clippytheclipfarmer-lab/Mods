@@ -1,0 +1,24 @@
+{
+  "name": "Verdant",
+  "dimension": "heroes:verdant",
+  "position": [
+    -300,
+    170,
+    260
+  ],
+  "radius": 42,
+  "blocks": {
+    "surface": "minecraft:moss_block",
+    "subsurface": "minecraft:dirt",
+    "core": "minecraft:stone",
+    "accent": "minecraft:lime_concrete",
+    "accent_scale": 18.0
+  },
+  "gravity": 0.9,
+  "oxygen": true,
+  "hazard": "none",
+  "landing": [
+    0,
+    0
+  ]
+}

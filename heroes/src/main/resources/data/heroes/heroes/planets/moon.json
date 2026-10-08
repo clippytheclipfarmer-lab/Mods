@@ -1,0 +1,24 @@
+{
+  "name": "The Moon",
+  "dimension": "heroes:moon",
+  "position": [
+    330,
+    200,
+    110
+  ],
+  "radius": 24,
+  "blocks": {
+    "surface": "minecraft:light_gray_concrete_powder",
+    "subsurface": "minecraft:andesite",
+    "core": "minecraft:stone",
+    "accent": "minecraft:gray_concrete",
+    "accent_scale": 10.0
+  },
+  "gravity": 0.16,
+  "oxygen": false,
+  "hazard": "none",
+  "landing": [
+    0,
+    0
+  ]
+}

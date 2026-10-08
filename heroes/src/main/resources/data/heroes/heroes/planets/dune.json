@@ -1,0 +1,24 @@
+{
+  "name": "Dune",
+  "dimension": "heroes:dune",
+  "position": [
+    270,
+    230,
+    -310
+  ],
+  "radius": 46,
+  "blocks": {
+    "surface": "minecraft:sand",
+    "subsurface": "minecraft:sandstone",
+    "core": "minecraft:stone",
+    "accent": "minecraft:red_sand",
+    "accent_scale": 22.0
+  },
+  "gravity": 1.1,
+  "oxygen": true,
+  "hazard": "heat",
+  "landing": [
+    0,
+    0
+  ]
+}
