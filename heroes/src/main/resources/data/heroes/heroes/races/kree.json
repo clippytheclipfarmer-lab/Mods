@@ -1,0 +1,47 @@
+{
+  "name": "Kree",
+  "description": "Blue-skinned soldiers and scientists of an empire of warriors. Disciplined, strong and sharp-minded, in a green Starforce-style uniform.",
+  "weight": 5,
+  "ability_bonuses": {
+    "str": 1,
+    "int": 1
+  },
+  "attributes": [
+    {
+      "attribute": "minecraft:generic.max_health",
+      "amount": 2.0,
+      "operation": "addition"
+    }
+  ],
+  "traits": {},
+  "models": {
+    "male": "races:kree_male",
+    "female": "races:kree_female"
+  },
+  "subtypes": [
+    {
+      "id": "soldier",
+      "name": "Kree Soldier",
+      "weight": 70,
+      "ability_bonuses": {
+        "str": 1,
+        "con": 1
+      },
+      "flags": [
+        "soldier"
+      ]
+    },
+    {
+      "id": "scientist",
+      "name": "Kree Scientist",
+      "weight": 30,
+      "ability_bonuses": {
+        "int": 2,
+        "wis": 1
+      },
+      "flags": [
+        "scientist"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "name": "Jotun",
+  "description": "Frost giants: huge, ice-blue and ridged with raised markings, with red eyes. Brutally strong and tough, untouched by cold and weak to fire.",
+  "weight": 5,
+  "height_blocks": {
+    "min": 2.8,
+    "max": 3.3
+  },
+  "ability_bonuses": {
+    "str": 2,
+    "con": 2,
+    "dex": -1
+  },
+  "attributes": [
+    {
+      "attribute": "minecraft:generic.max_health",
+      "amount": 6.0,
+      "operation": "addition"
+    },
+    {
+      "attribute": "minecraft:generic.knockback_resistance",
+      "amount": 0.2,
+      "operation": "addition"
+    }
+  ],
+  "traits": {
+    "fire_damage_multiplier": 1.5
+  },
+  "flags": [
+    "cold_immune"
+  ],
+  "models": {
+    "male": "races:jotun_male",
+    "female": "races:jotun_female"
+  },
+  "subtypes": [
+    {
+      "id": "common",
+      "name": "Jotun",
+      "weight": 80,
+      "ability_bonuses": {},
+      "flags": []
+    },
+    {
+      "id": "warrior",
+      "name": "Jotun Warrior",
+      "weight": 15,
+      "ability_bonuses": {
+        "str": 1
+      },
+      "flags": [
+        "warrior"
+      ]
+    },
+    {
+      "id": "royal",
+      "name": "Jotun Royal",
+      "weight": 5,
+      "ability_bonuses": {
+        "int": 1,
+        "cha": 1
+      },
+      "flags": [
+        "royal"
+      ]
+    }
+  ]
+}

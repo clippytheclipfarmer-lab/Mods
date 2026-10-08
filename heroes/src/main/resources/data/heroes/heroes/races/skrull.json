@@ -1,0 +1,42 @@
+{
+  "name": "Skrull",
+  "description": "Green-skinned, ridge-chinned and pointy-eared: quick, clever and good with people. Born shapeshifters in the stories, for now just the look and the wits.",
+  "weight": 5,
+  "ability_bonuses": {
+    "dex": 1,
+    "int": 1,
+    "cha": 1
+  },
+  "attributes": [],
+  "traits": {},
+  "models": {
+    "male": "races:skrull_male",
+    "female": "races:skrull_female"
+  },
+  "subtypes": [
+    {
+      "id": "infiltrator",
+      "name": "Skrull Infiltrator",
+      "weight": 55,
+      "ability_bonuses": {
+        "cha": 1,
+        "wis": 1
+      },
+      "flags": [
+        "infiltrator"
+      ]
+    },
+    {
+      "id": "warrior",
+      "name": "Skrull Warrior",
+      "weight": 45,
+      "ability_bonuses": {
+        "str": 1,
+        "con": 1
+      },
+      "flags": [
+        "warrior"
+      ]
+    }
+  ]
+}

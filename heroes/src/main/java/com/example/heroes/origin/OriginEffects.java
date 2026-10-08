@@ -5,12 +5,15 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Enemy;
+import net.threetag.palladium.power.PowerUtil;
+import net.threetag.palladium.power.SuperpowerUtil;
 import net.threetag.palladium.power.ability.AbilityInstance;
 import net.threetag.palladium.power.ability.AbilityUtil;
 
@@ -52,6 +55,7 @@ public final class OriginEffects {
             OriginData.get(player.server).setDirty();
         }
         OriginScale.setHeight(player, sheet.height);
+        syncModel(player, sheet.raceDef() == null ? null : sheet.raceDef().models.get(sheet.gender));
         int str = sheet.mod(Ability5e.STR), dex = sheet.mod(Ability5e.DEX), con = sheet.mod(Ability5e.CON);
         add(player, Attributes.MAX_HEALTH, "con", con * 2.0 + (sheet.level() - 1), AttributeModifier.Operation.ADDITION);
         add(player, Attributes.ATTACK_DAMAGE, "str", str * 0.5, AttributeModifier.Operation.ADDITION);
@@ -84,6 +88,20 @@ public final class OriginEffects {
             for (AttributeModifier modifier : new ArrayList<>(instance.getModifiers())) {
                 if (modifier.getName().startsWith(PREFIX)) {
                     instance.removeModifier(modifier.getId());
+                }
+            }
+        }
+    }
+
+    /** Wears the model power for this race and gender, and takes off every other race model. null = the normal player model. */
+    public static void syncModel(ServerPlayer player, ResourceLocation wanted) {
+        for (Race race : Races.all()) {
+            for (ResourceLocation id : race.models.values()) {
+                boolean has = PowerUtil.hasPower(player, id);
+                if (id.equals(wanted) && !has) {
+                    SuperpowerUtil.addSuperpower(player, id);
+                } else if (!id.equals(wanted) && has) {
+                    SuperpowerUtil.removeSuperpower(player, id);
                 }
             }
         }

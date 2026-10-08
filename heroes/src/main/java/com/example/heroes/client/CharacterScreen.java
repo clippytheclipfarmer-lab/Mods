@@ -39,7 +39,8 @@ public class CharacterScreen extends Screen {
         g.drawString(font, sheet.getString("Subtype"), x + 10, y + 10, ink, false);
         g.drawString(font, "Level " + level, x + w - 10 - font.width("Level " + level), y + 10, ink, false);
         String heightText = sheet.getFloat("Height") > 0 ? String.format("  -  %.2f blocks tall", sheet.getFloat("Height")) : "";
-        g.drawString(font, sheet.getString("Race") + heightText, x + 10, y + 22, faint, false);
+        String gender = sheet.getString("Gender").isEmpty() ? "" : (sheet.getString("Gender").equals("female") ? "Female " : "Male ");
+        g.drawString(font, gender + sheet.getString("Race") + heightText, x + 10, y + 22, faint, false);
 
         // XP bar
         int next = sheet.getInt("XpNext"), xp = sheet.getInt("Xp"), this_ = sheet.getInt("XpThis");

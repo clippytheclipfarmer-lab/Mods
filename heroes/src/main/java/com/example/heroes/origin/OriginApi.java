@@ -25,8 +25,14 @@ public final class OriginApi {
 
     /** Gives the player this race, a subtype rolled by weight, and freshly rolled ability scores (level 1, no XP). */
     public static Sheet assign(ServerPlayer player, Race race) {
+        return assign(player, race, player.getRandom().nextBoolean() ? "male" : "female");
+    }
+
+    /** As above, with the character's gender chosen by the caller ("male" or "female"). */
+    public static Sheet assign(ServerPlayer player, Race race, String gender) {
         Sheet sheet = new Sheet();
         sheet.race = race.id;
+        sheet.gender = "female".equals(gender) ? "female" : "male";
         sheet.subtype = Races.randomSubtype(race, player.getRandom()).id;
         sheet.rollScores(player.getRandom());
         sheet.rollHeight(player.getRandom());
@@ -56,6 +62,7 @@ public final class OriginApi {
     public static void clear(ServerPlayer player) {
         OriginData.get(player.server).remove(player.getUUID());
         OriginEffects.clear(player);
+        OriginEffects.syncModel(player, null);
         OriginNet.sync(player);
     }
 

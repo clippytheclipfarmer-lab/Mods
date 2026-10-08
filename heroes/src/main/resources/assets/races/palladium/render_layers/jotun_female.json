@@ -1,0 +1,14 @@
+{
+  "type": "geckolib:default",
+  "model": "races:geo/jotun_female.geo.json",
+  "texture": "races:textures/models/jotun_female.png",
+  "bones": {
+    "head": "armorHead",
+    "body": "armorBody",
+    "right_arm": "armorRightArm",
+    "left_arm": "armorLeftArm",
+    "right_leg": "armorRightLeg",
+    "left_leg": "armorLeftLeg"
+  },
+  "render_full_model_in_first_person": false
+}

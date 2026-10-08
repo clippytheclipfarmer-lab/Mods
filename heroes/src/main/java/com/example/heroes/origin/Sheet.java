@@ -14,6 +14,8 @@ import java.util.Set;
 public final class Sheet {
     public ResourceLocation race;
     public String subtype = "common";
+    /** "male" or "female": picks which model the race wears. */
+    public String gender = "male";
     /** The rolled scores (4d6, drop the lowest), before race bonuses. */
     public final int[] rolled = new int[6];
     public int xp;
@@ -50,8 +52,9 @@ public final class Sheet {
     }
 
     public boolean hasFlag(String flag) {
+        Race r = raceDef();
         Race.Subtype s = subtypeDef();
-        return s != null && s.flags.contains(flag);
+        return (r != null && r.flags.contains(flag)) || (s != null && s.flags.contains(flag));
     }
 
     /** A trait value summed over the race and the subtype (0 when absent). */
@@ -84,6 +87,7 @@ public final class Sheet {
         CompoundTag tag = new CompoundTag();
         tag.putString("Race", race.toString());
         tag.putString("Subtype", subtype);
+        tag.putString("Gender", gender);
         tag.putIntArray("Rolled", rolled);
         tag.putInt("Xp", xp);
         tag.putFloat("Height", height);
@@ -100,6 +104,7 @@ public final class Sheet {
         Sheet s = new Sheet();
         s.race = new ResourceLocation(tag.getString("Race"));
         s.subtype = tag.getString("Subtype");
+        s.gender = tag.contains("Gender") ? tag.getString("Gender") : "male";
         int[] r = tag.getIntArray("Rolled");
         System.arraycopy(r, 0, s.rolled, 0, Math.min(6, r.length));
         s.xp = tag.getInt("Xp");

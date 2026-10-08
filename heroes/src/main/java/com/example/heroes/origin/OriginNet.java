@@ -33,6 +33,7 @@ public final class OriginNet {
         Race.Subtype subtype = sheet.subtypeDef();
         tag.putString("Race", race.name);
         tag.putString("Subtype", subtype.name);
+        tag.putString("Gender", sheet.gender);
         tag.putString("Description", race.description);
         int level = sheet.level();
         tag.putFloat("Height", sheet.height);
@@ -53,6 +54,9 @@ public final class OriginNet {
         }
         if (sheet.trait("regen_hp_per_10s") > 0) {
             notes.add(StringTag.valueOf("Quick healing: +" + sheet.trait("regen_hp_per_10s") + " HP every 10 s"));
+        }
+        if (sheet.hasFlag("cold_immune")) {
+            notes.add(StringTag.valueOf("Frost-born: immune to cold, but burns easily"));
         }
         if (sheet.hasFlag("magical_potential")) {
             notes.add(StringTag.valueOf("Born with magical potential"));

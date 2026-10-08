@@ -52,6 +52,10 @@ public final class Race {
     public final List<AttributeBonus> attributes = new ArrayList<>();
     public final Map<String, Double> traits = new HashMap<>();
     public final List<Subtype> subtypes = new ArrayList<>();
+    /** Flags every member of the race has (for example cold_immune). */
+    public final Set<String> flags = new HashSet<>();
+    /** gender (male/female) -> Palladium power that wears this race's model; empty = the normal player model. */
+    public final Map<String, ResourceLocation> models = new HashMap<>();
 
     Race(ResourceLocation id, JsonObject json) {
         this.id = id;
@@ -73,6 +77,16 @@ public final class Race {
                 JsonObject a = e.getAsJsonObject();
                 attributes.add(new AttributeBonus(new ResourceLocation(a.get("attribute").getAsString()), a.get("amount").getAsDouble(),
                         a.has("operation") ? a.get("operation").getAsString() : "addition"));
+            }
+        }
+        if (json.has("flags")) {
+            for (JsonElement e : json.getAsJsonArray("flags")) {
+                flags.add(e.getAsString());
+            }
+        }
+        if (json.has("models")) {
+            for (var entry : json.getAsJsonObject("models").entrySet()) {
+                models.put(entry.getKey(), new ResourceLocation(entry.getValue().getAsString()));
             }
         }
         JsonArray subs = json.has("subtypes") ? json.getAsJsonArray("subtypes") : new JsonArray();

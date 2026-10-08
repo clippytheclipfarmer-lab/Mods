@@ -22,7 +22,11 @@ public final class OriginCommands {
                 .then(Commands.literal("assign").then(raceArg
                         .executes(ctx -> assign(ctx.getSource(), ctx.getSource().getPlayerOrException(), StringArgumentType.getString(ctx, "race")))
                         .then(Commands.argument("player", EntityArgument.player())
-                                .executes(ctx -> assign(ctx.getSource(), EntityArgument.getPlayer(ctx, "player"), StringArgumentType.getString(ctx, "race"))))))
+                                .executes(ctx -> assign(ctx.getSource(), EntityArgument.getPlayer(ctx, "player"), StringArgumentType.getString(ctx, "race")))
+                                .then(Commands.argument("gender", StringArgumentType.word())
+                                        .suggests((ctx, builder) -> SharedSuggestionProvider.suggest(java.util.List.of("male", "female"), builder))
+                                        .executes(ctx -> assign(ctx.getSource(), EntityArgument.getPlayer(ctx, "player"), StringArgumentType.getString(ctx, "race"),
+                                                StringArgumentType.getString(ctx, "gender")))))))
                 .then(Commands.literal("random")
                         .executes(ctx -> random(ctx.getSource(), ctx.getSource().getPlayerOrException()))
                         .then(Commands.argument("player", EntityArgument.player())
@@ -44,13 +48,17 @@ public final class OriginCommands {
     }
 
     private static int assign(CommandSourceStack src, ServerPlayer player, String name) {
+        return assign(src, player, name, player.getRandom().nextBoolean() ? "male" : "female");
+    }
+
+    private static int assign(CommandSourceStack src, ServerPlayer player, String name, String gender) {
         Race race = Races.find(name);
         if (race == null) {
             src.sendFailure(Component.literal("Unknown race '" + name + "'."));
             return 0;
         }
-        Sheet sheet = OriginApi.assign(player, race);
-        src.sendSuccess(() -> Component.literal(player.getName().getString() + " is now " + sheet.subtypeDef().name + "."), true);
+        Sheet sheet = OriginApi.assign(player, race, gender);
+        src.sendSuccess(() -> Component.literal(player.getName().getString() + " is now a " + sheet.gender + " " + sheet.subtypeDef().name + "."), true);
         return 1;
     }
 

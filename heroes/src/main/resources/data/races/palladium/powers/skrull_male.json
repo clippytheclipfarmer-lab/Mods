@@ -1,0 +1,44 @@
+{
+  "name": {
+    "translate": "power.races.skrull_male"
+  },
+  "icon": "minecraft:player_head",
+  "primary_color": [
+    118,
+    164,
+    62
+  ],
+  "secondary_color": [
+    58,
+    52,
+    66
+  ],
+  "abilities": {
+    "hide_body": {
+      "type": "palladium:remove_body_part",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "affects_first_person": false,
+      "body_parts": [
+        "head",
+        "head_overlay",
+        "chest",
+        "chest_overlay",
+        "right_arm",
+        "right_arm_overlay",
+        "left_arm",
+        "left_arm_overlay",
+        "right_leg",
+        "right_leg_overlay",
+        "left_leg",
+        "left_leg_overlay"
+      ]
+    },
+    "render_layer": {
+      "type": "palladium:render_layer",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "render_layer": "races:skrull_male"
+    }
+  }
+}

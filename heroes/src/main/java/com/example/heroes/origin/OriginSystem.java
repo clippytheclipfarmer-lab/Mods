@@ -41,6 +41,20 @@ public final class OriginSystem {
         ServerLivingEntityEvents.ALLOW_DAMAGE.register((entity, source, amount) ->
                 !(entity instanceof ServerPlayer player && source.getEntity() != null && OriginEffects.dodges(player)));
 
+        // Frost-born races (the Jotun) feel no cold, and burn harder than everyone else.
+        ServerLivingEntityEvents.ALLOW_DAMAGE.register((entity, source, amount) ->
+                !(entity instanceof ServerPlayer player && source.is(net.minecraft.world.damagesource.DamageTypes.FREEZE) && OriginApi.hasFlag(player, "cold_immune")));
+        net.threetag.palladiumcore.event.LivingEntityEvents.HURT.register((entity, source, amount) -> {
+            if (entity instanceof ServerPlayer player && source.is(net.minecraft.tags.DamageTypeTags.IS_FIRE)) {
+                Sheet sheet = OriginApi.get(player);
+                double multiplier = sheet == null ? 0 : sheet.trait("fire_damage_multiplier");
+                if (multiplier > 0) {
+                    amount.set((float) (amount.get() * multiplier));
+                }
+            }
+            return net.threetag.palladiumcore.event.EventResult.pass();
+        });
+
         // XP for kills; bosses are worth a lot.
         ServerLivingEntityEvents.AFTER_DEATH.register((entity, source) -> {
             if (source.getEntity() instanceof ServerPlayer killer && killer != entity && OriginApi.get(killer) != null) {
