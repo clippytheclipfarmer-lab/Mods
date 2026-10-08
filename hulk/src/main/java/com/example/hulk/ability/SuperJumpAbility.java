@@ -5,6 +5,7 @@ import com.example.hulk.HulkRage;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.phys.Vec3;
 import net.threetag.palladium.power.IPowerHolder;
@@ -16,9 +17,9 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-/** Hold to charge, release to leap; lands with a small shockwave. Use with a 'held' condition. */
+/** Hold Space to charge (up to 3 s), release to take off; lands with a small shockwave. Use with a 'held' condition. */
 public class SuperJumpAbility extends Ability {
-    private static final int MAX_CHARGE = 30;
+    private static final int MAX_CHARGE = 60;
     private static final int MIN_CHARGE = 5;
     /** Entities currently airborne from a super jump -> ticks since launch. */
     private static final Map<UUID, Integer> AIRBORNE = new ConcurrentHashMap<>();
@@ -29,6 +30,14 @@ public class SuperJumpAbility extends Ability {
 
     @Override
     public void tick(LivingEntity entity, AbilityInstance entry, IPowerHolder holder, boolean enabled) {
+        if (entity.level().isClientSide) {
+            // While Space is held he crouches and gathers power instead of doing the vanilla hop.
+            if (enabled && entity instanceof Player player && player.isLocalPlayer() && entity.onGround()) {
+                Vec3 motion = entity.getDeltaMovement();
+                entity.setDeltaMovement(motion.x, Math.min(motion.y, 0), motion.z);
+            }
+            return;
+        }
         if (!(entity.level() instanceof ServerLevel level)) {
             return;
         }

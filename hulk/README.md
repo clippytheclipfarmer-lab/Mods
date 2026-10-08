@@ -15,11 +15,11 @@ Use Palladium's own tools (or your power-assigning system):
 - **Rage** (energy bar, 0-100): rises when Hulk takes or deals damage, slowly drains when calm.
 - **Rage scaling** (`hulk:rage_scaling`): size 1.3x -> 2.0x (Pehkui), plus health, damage, speed and knockback resistance, all scaling with rage.
 - **Ground Smash** (`hulk:ground_smash`, action key, 3s cooldown): shockwave, damage, knockback, breaks weak blocks.
-- **Super Jump** (`hulk:super_jump`, hold key to charge, release to leap): lands with a small shockwave; Hulk takes no fall damage.
+- **Super Jump** (`hulk:super_jump`, hold **Space** to charge for up to 3 s, release to take off; the longer you hold, the higher): lands with a small shockwave; Hulk takes no fall damage.
 - **Thunderclap** (`hulk:thunderclap`, action key, 5s cooldown): wide blast; slows, concusses (nausea + brief blindness) and knocks back enemies, shatters glass and snuffs out fires.
 - **Stomp Quake** (`hulk:stomp_quake`, action key, 6s cooldown): seismic stomp that launches enemies and flings ground blocks.
 - **Grab & Throw** (`hulk:grab_throw`, action key): press to grab the mob, player or block in front of you, press again to throw it. Thrown things explode on impact (damage scales with rage and tier). Held for at most 10 s.
-- **Shoulder Charge** (`hulk:charge`, hold key, up to 5 s): super sprint that bowls over mobs and smashes weak blocks.
+- **Shoulder Charge** (`hulk:charge`, hold key, up to 8 s): super sprint that keeps accelerating the longer you run (full speed after 4 s), that bowls over mobs and smashes weak blocks.
 - **Wall Climb** (`hulk:wall_climb`, hold key): climb the wall you are pushing against.
 - **Immortality** (`hulk:immortality`, passive): instead of dying, Hulk revives at 40% health at full rage (5 min cooldown).
 - **Regeneration**: heals faster the higher his rage.

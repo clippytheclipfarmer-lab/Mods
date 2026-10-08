@@ -61,6 +61,7 @@
       "conditions": {
         "enabling": {
           "type": "palladium:held",
+          "key_type": "space_bar",
           "cooldown": 0
         }
       }
@@ -165,7 +166,7 @@
       "conditions": {
         "enabling": {
           "type": "palladium:held",
-          "cooldown": 100
+          "cooldown": 160
         }
       }
     },
