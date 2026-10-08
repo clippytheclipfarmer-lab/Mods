@@ -2,7 +2,9 @@ package com.example.heroes;
 
 import com.example.heroes.city.CityManager;
 import com.example.heroes.hulk.HulkHero;
+import com.example.heroes.pod.PodRegistry;
 import com.example.heroes.space.SpaceSystem;
+import com.example.heroes.stones.StoneHunt;
 import com.example.heroes.viltrumite.ViltrumiteHero;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.resources.ResourceLocation;
@@ -32,5 +34,7 @@ public class HeroesMod implements ModInitializer {
         ViltrumiteHero.init();
         CityManager.init();
         SpaceSystem.init();
+        PodRegistry.init();
+        StoneHunt.init();
     }
 }

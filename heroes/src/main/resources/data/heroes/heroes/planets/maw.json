@@ -1,0 +1,22 @@
+{
+  "name": "The Maw",
+  "kind": "black_hole",
+  "position": [
+    -1500,
+    300,
+    -1200
+  ],
+  "radius": 14,
+  "color": "#8a3dff",
+  "blocks": {
+    "surface": "minecraft:black_concrete",
+    "subsurface": "minecraft:black_concrete",
+    "core": "minecraft:obsidian"
+  },
+  "ring": {
+    "inner_radius": 26,
+    "outer_radius": 55,
+    "thickness": 2,
+    "block": "minecraft:purple_stained_glass"
+  }
+}

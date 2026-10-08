@@ -110,17 +110,17 @@ public final class SpaceSystem {
         SpaceData.get(server).setOrigin(player.getUUID(), level.dimension().location(), player.blockPosition());
         Vec3 arrive = here.position.add(0, here.radius + 22, 0);
         player.displayClientMessage(Component.literal("Leaving " + here.name + "..."), true);
-        player.teleportTo(space, arrive.x, arrive.y, arrive.z, player.getYRot(), -10F);
+        travel(player, space, arrive.x, arrive.y, arrive.z, player.getYRot(), -10F, true);
         COOLDOWN.put(player.getUUID(), 100);
     }
 
     private static void checkLanding(MinecraftServer server, ServerPlayer player, ServerLevel space) {
         Vec3 p = player.position();
         for (PlanetDef def : Planets.inSpace()) {
-            if (def.station || def.dimension.equals(Planets.SPACE)) {
+            if (!def.landable()) {
                 continue;
             }
-            if (p.distanceTo(def.position) <= def.radius + 3.5) {
+            if (p.distanceTo(def.position) <= def.radius + 5.5) {
                 land(server, player, def);
                 return;
             }
@@ -147,7 +147,7 @@ public final class SpaceSystem {
             y = dest.getSeaLevel() + 40;
         }
         player.displayClientMessage(Component.literal("Entering the atmosphere of " + def.name + "..."), true);
-        player.teleportTo(dest, x + 0.5, y + 0.2, z + 0.5, player.getYRot(), 0F);
+        travel(player, dest, x + 0.5, y + 0.2, z + 0.5, player.getYRot(), 0F, false);
         player.fallDistance = 0;
         COOLDOWN.put(player.getUUID(), 100);
         return true;
@@ -160,9 +160,27 @@ public final class SpaceSystem {
             return false;
         }
         Vec3 at = def.station ? def.position.add(0, -def.radius / 2 + 2, 0) : def.position.add(0, def.radius + 22, 0);
-        player.teleportTo(space, at.x, at.y, at.z, player.getYRot(), 0F);
+        travel(player, space, at.x, at.y, at.z, player.getYRot(), 0F, false);
         COOLDOWN.put(player.getUUID(), 100);
         return true;
+    }
+
+    /** Teleports the player, taking their space pod along (and its autopilot target, if asked). */
+    private static void travel(ServerPlayer player, ServerLevel dest, double x, double y, double z, float yaw, float pitch, boolean keepTarget) {
+        com.example.heroes.pod.SpacePodEntity oldPod = player.getVehicle() instanceof com.example.heroes.pod.SpacePodEntity p ? p : null;
+        ResourceLocation target = oldPod != null && keepTarget ? oldPod.getTarget() : null;
+        if (oldPod != null) {
+            player.stopRiding();
+        }
+        player.teleportTo(dest, x, y, z, yaw, pitch);
+        if (oldPod != null) {
+            oldPod.discard();
+            com.example.heroes.pod.SpacePodEntity pod = new com.example.heroes.pod.SpacePodEntity(com.example.heroes.pod.PodRegistry.SPACE_POD, dest);
+            pod.moveTo(x, y, z, yaw, pitch);
+            pod.setTarget(target);
+            dest.addFreshEntity(pod);
+            player.startRiding(pod, true);
+        }
     }
 
     // ------------------------------------------------------------------ environment
@@ -198,6 +216,28 @@ public final class SpaceSystem {
 
     private static void spaceEnvironment(ServerPlayer player) {
         drainOxygen(player);
+        if (player.isCreative() || player.isSpectator()) {
+            return;
+        }
+        Vec3 p = player.position();
+        for (PlanetDef def : Planets.inSpace()) {
+            double d = p.distanceTo(def.position);
+            if (def.kind == PlanetDef.Kind.STAR && d < def.radius + 14) {
+                // Too close to a star: burning, fast.
+                player.setSecondsOnFire(4);
+                if (player.tickCount % 10 == 0) {
+                    player.hurt(player.damageSources().inFire(), 3.0F);
+                }
+            } else if (def.kind == PlanetDef.Kind.BLACK_HOLE && d < def.radius * 4 + 30) {
+                // Gravity well: pulled in, and crushed at the event horizon.
+                Vec3 pull = def.position.subtract(p).normalize().scale(0.05 + (1.0 - d / (def.radius * 4 + 30)) * 0.5);
+                player.setDeltaMovement(player.getDeltaMovement().add(pull));
+                player.hurtMarked = true;
+                if (d < def.radius + 3 && player.tickCount % 5 == 0) {
+                    player.hurt(player.damageSources().wither(), 6.0F);
+                }
+            }
+        }
     }
 
     private static void planetEnvironment(ServerPlayer player, ServerLevel level) {

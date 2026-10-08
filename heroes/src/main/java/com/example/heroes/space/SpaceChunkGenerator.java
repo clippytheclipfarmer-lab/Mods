@@ -83,7 +83,7 @@ public class SpaceChunkGenerator extends ChunkGenerator {
         double dx = x + 0.5 - p.position.x, dy = y + 0.5 - p.position.y, dz = z + 0.5 - p.position.z;
         double d = Math.sqrt(dx * dx + dy * dy + dz * dz);
         if (d > p.radius) {
-            return null;
+            return ringBlock(p, dx, dy, dz);
         }
         double depth = p.radius - d;
         if (depth < 1.5) {
@@ -93,6 +93,14 @@ public class SpaceChunkGenerator extends ChunkGenerator {
             return p.surface;
         }
         return depth < 5 ? p.subsurface : p.core;
+    }
+
+    private static BlockState ringBlock(PlanetDef p, double dx, double dy, double dz) {
+        if (p.ring == null || Math.abs(dy) > p.ring.thickness() / 2.0) {
+            return null;
+        }
+        double flat = Math.sqrt(dx * dx + dz * dz);
+        return flat >= p.ring.inner() && flat <= p.ring.outer() ? p.ring.block() : null;
     }
 
     /** A hollow walled box: iron frame, glass walls, stone floor, lamps in the ceiling. Coordinates are relative to the center. */

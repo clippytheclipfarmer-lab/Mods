@@ -20,9 +20,17 @@ import org.jetbrains.annotations.Nullable;
 public final class PlanetDef {
     public enum Hazard { NONE, HEAT, COLD }
 
+    /** What the star map shows and what you can do there: only planets can be landed on. */
+    public enum Kind { PLANET, STATION, STAR, BLACK_HOLE }
+
     public final ResourceLocation id;
     public final String name;
+    public final Kind kind;
     public final boolean station;
+    public final int color;
+    /** Optional flat ring around the body (accretion disc), or null. */
+    @Nullable
+    public final Ring ring;
     public final ResourceKey<Level> dimension;
     public final Vec3 position;
     public final int radius;
@@ -44,8 +52,29 @@ public final class PlanetDef {
     private PlanetDef(ResourceLocation id, JsonObject json) {
         this.id = id;
         this.name = GsonHelper.getAsString(json, "name", id.getPath());
-        this.station = "station".equals(GsonHelper.getAsString(json, "shape", "sphere"));
-        this.dimension = ResourceKey.create(Registries.DIMENSION, new ResourceLocation(GsonHelper.getAsString(json, "dimension")));
+        String kindName = GsonHelper.getAsString(json, "kind", "station".equals(GsonHelper.getAsString(json, "shape", "")) ? "station" : "planet");
+        try {
+            this.kind = Kind.valueOf(kindName.toUpperCase(java.util.Locale.ROOT));
+        } catch (IllegalArgumentException e) {
+            throw new JsonParseException("Unknown kind '" + kindName + "' (planet, station, star or black_hole)");
+        }
+        this.station = this.kind == Kind.STATION;
+        int defaultColor = switch (this.kind) {
+            case PLANET -> 0x5fa8ff;
+            case STATION -> 0xcccccc;
+            case STAR -> 0xffd84a;
+            case BLACK_HOLE -> 0x8a3dff;
+        };
+        String colorText = GsonHelper.getAsString(json, "color", "");
+        this.color = colorText.isEmpty() ? defaultColor : Integer.parseInt(colorText.replace("#", ""), 16);
+        if (json.has("ring")) {
+            JsonObject r = GsonHelper.getAsJsonObject(json, "ring");
+            this.ring = new Ring(GsonHelper.getAsInt(r, "inner_radius"), GsonHelper.getAsInt(r, "outer_radius"),
+                    GsonHelper.getAsInt(r, "thickness", 2), block(r, "block", "minecraft:orange_concrete"));
+        } else {
+            this.ring = null;
+        }
+        this.dimension = ResourceKey.create(Registries.DIMENSION, new ResourceLocation(GsonHelper.getAsString(json, "dimension", "heroes:space")));
         JsonArray pos = GsonHelper.getAsJsonArray(json, "position");
         this.position = new Vec3(pos.get(0).getAsDouble(), pos.get(1).getAsDouble(), pos.get(2).getAsDouble());
         this.radius = GsonHelper.getAsInt(json, "radius", 30);
@@ -87,8 +116,15 @@ public final class PlanetDef {
         return BuiltInRegistries.BLOCK.get(rl).defaultBlockState();
     }
 
+    public record Ring(int inner, int outer, int thickness, BlockState block) {
+    }
+
+    public boolean landable() {
+        return kind == Kind.PLANET;
+    }
+
     /** Planet radius or half-size of the station: the outermost distance from the center that is part of it. */
     public int extent() {
-        return radius;
+        return ring != null ? Math.max(radius, ring.outer()) : radius;
     }
 }

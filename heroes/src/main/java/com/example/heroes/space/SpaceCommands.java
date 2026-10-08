@@ -60,7 +60,7 @@ final class SpaceCommands {
             src.sendFailure(Component.literal("Unknown planet '" + name + "'. Try /space list."));
             return 0;
         }
-        boolean ok = land && !def.station ? SpaceSystem.land(src.getServer(), player, def) : SpaceSystem.orbit(src.getServer(), player, def);
+        boolean ok = land && def.landable() ? SpaceSystem.land(src.getServer(), player, def) : SpaceSystem.orbit(src.getServer(), player, def);
         return ok ? 1 : 0;
     }
 }

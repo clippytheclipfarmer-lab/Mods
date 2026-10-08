@@ -110,3 +110,21 @@ A planet is one JSON file: `data/<namespace>/heroes/planets/<name>.json`.
 Set `"shape": "station"` for a hollow glass-and-iron station instead of a sphere.
 The sphere is generated into space chunks when they first generate, so changing a planet after chunks exist needs a fresh space dimension (delete `dimensions/heroes/space` from the world).
 Each landing dimension is ordinary datapack worldgen: see `dimension`, `worldgen/noise_settings` and `worldgen/biome` under `data/heroes`.
+
+## Space pod and star map
+- **Space Pod** (craftable: glass, 4 iron blocks, redstone block, firework rocket; also in the creative Tools tab): right-click a block to place it, right-click the pod to sit in it. One seat.
+- **Fly it**: W moves you in the direction you look, sneak to get out. Fly straight up past the build limit and you reach space (the pod comes with you), fly into a planet and you land on it.
+- **Star map (H while in the pod)**: top-down map of every planet, station, star and black hole (distances on a square-root scale). Pick one, press **Launch** and the pod flies there by itself at high speed (it climbs out of the atmosphere first if you are on a planet). **Stop autopilot** cancels.
+- Planets are landed on automatically on arrival. Stations, stars and black holes are not landable: the pod stops at a safe distance. Stars burn you if you get close; a black hole pulls you in and crushes you at the event horizon.
+- More bodies: add a planet JSON with `"kind": "star"` or `"kind": "black_hole"` (and optional `"color"`, `"ring": {"inner_radius", "outer_radius", "thickness", "block"}`).
+
+## Infinity Stone hunt
+Six stones: Space, Mind, Reality, Power, Time, Soul (`heroes:<name>_stone`; powers and boosts are not implemented yet).
+When the first player joins a world, the stones are shuffled: **two** go into secret spots in the map, the other **four** each get a **shrine** on one of the generated planets (built the first time a player is on that planet, 36 blocks from the landing spot).
+Hidden stones are put into an existing chest/barrel at the spot when there is one (so it looks like normal loot), otherwise a chest is placed.
+
+1. Find the secret spots with the scanner: `python3 tools/find_hidden_spots.py <world folder> --count 10` (no extra packages; run it on a copy of the map). It lists deep, isolated containers and unopened loot chests.
+2. Put its output in `config/heroes/stone_hunt_locations.json` (created empty on first run). At least two locations are needed; the rest are spare.
+3. Commands (op): `/stonehunt status` (spoilers!), `/stonehunt reroll`, `/stonehunt place` (do the placement now), `/stonehunt give <stone> [player]`.
+
+Notes: positions are chosen from the world seed, so a fresh world gets a fresh roll. Unplaced stones (not enough locations) stay in `/stonehunt status` as `unplaced`.

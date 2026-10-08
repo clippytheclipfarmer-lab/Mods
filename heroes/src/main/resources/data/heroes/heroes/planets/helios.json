@@ -1,0 +1,18 @@
+{
+  "name": "Helios",
+  "kind": "star",
+  "position": [
+    1400,
+    260,
+    900
+  ],
+  "radius": 80,
+  "color": "#ffd84a",
+  "blocks": {
+    "surface": "minecraft:shroomlight",
+    "subsurface": "minecraft:orange_concrete",
+    "core": "minecraft:magma_block",
+    "accent": "minecraft:glowstone",
+    "accent_scale": 10.0
+  }
+}

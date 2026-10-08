@@ -58,7 +58,7 @@ public final class Planets {
     @Nullable
     public static PlanetDef forDimension(ResourceKey<Level> dimension) {
         for (PlanetDef def : planets.values()) {
-            if (!def.station && def.dimension.equals(dimension)) {
+            if (def.landable() && def.dimension.equals(dimension)) {
                 return def;
             }
         }

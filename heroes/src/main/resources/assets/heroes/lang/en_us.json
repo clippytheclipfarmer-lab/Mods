@@ -1,3 +1,13 @@
 {
-  "item.heroes.city_wand": "City Wand"
+  "item.heroes.city_wand": "City Wand",
+  "item.heroes.space_pod": "Space Pod",
+  "entity.heroes.space_pod": "Space Pod",
+  "key.heroes.star_map": "Open Star Map",
+  "key.categories.heroes": "Heroes",
+  "item.heroes.space_stone": "Space Stone",
+  "item.heroes.mind_stone": "Mind Stone",
+  "item.heroes.reality_stone": "Reality Stone",
+  "item.heroes.power_stone": "Power Stone",
+  "item.heroes.time_stone": "Time Stone",
+  "item.heroes.soul_stone": "Soul Stone"
 }

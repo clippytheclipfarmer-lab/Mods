@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " G ",
+    "IRI",
+    "IFI"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "I": {
+      "item": "minecraft:iron_block"
+    },
+    "R": {
+      "item": "minecraft:redstone_block"
+    },
+    "F": {
+      "item": "minecraft:firework_rocket"
+    }
+  },
+  "result": {
+    "item": "heroes:space_pod"
+  }
+}
