@@ -66,6 +66,11 @@ public final class StoneWear {
                 set.add(held);
             }
         }
+        // The Cosmi-Rod (and any other held-only holder) channels its stone while it is in the main hand.
+        ItemStack mainHand = entity.getMainHandItem();
+        if (mainHand.getItem() instanceof HolderItem rod && rod.isHeldOnly()) {
+            set.addAll(HolderItem.stones(mainHand));
+        }
         for (ItemStack stack : wornStacks(entity)) {
             if (stack.getItem() instanceof HolderItem) {
                 set.addAll(HolderItem.stones(stack));

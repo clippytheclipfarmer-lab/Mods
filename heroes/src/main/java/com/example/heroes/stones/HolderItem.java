@@ -22,14 +22,16 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * A worn item with six sockets (Infinity Gauntlet, Necklace or Bracers). Sneak + right-click with a stone in the
- * other hand sockets it; sneak + right-click with an empty off hand takes the last stone out.
- * While worn it gives the powers of every stone socketed in it.
+ * A worn item with six sockets (Infinity Gauntlet, Necklace or Bracers). Right-click with a stone in the off hand
+ * sockets it; sneak + right-click with an empty off hand takes the last stone out.
+ * While worn it gives the powers of every stone socketed in it. A {@code heldOnly} holder (the Cosmi-Rod) works while
+ * it is in the main hand instead.
  */
 public class HolderItem extends Item {
     private static final String KEY = "Stones";
 
     private final int capacity;
+    private final boolean heldOnly;
 
     public HolderItem(Properties properties) {
         this(properties, 6);
@@ -37,8 +39,18 @@ public class HolderItem extends Item {
 
     /** A holder with the given number of sockets (the Stone Ring has one). */
     public HolderItem(Properties properties, int capacity) {
+        this(properties, capacity, false);
+    }
+
+    /** {@code heldOnly}: the stones count only while this is held in the main hand (wands and rods). */
+    public HolderItem(Properties properties, int capacity, boolean heldOnly) {
         super(properties.stacksTo(1).rarity(Rarity.EPIC).fireResistant());
         this.capacity = capacity;
+        this.heldOnly = heldOnly;
+    }
+
+    public boolean isHeldOnly() {
+        return heldOnly;
     }
 
     /** The stones socketed in a holder stack. */
@@ -65,13 +77,15 @@ public class HolderItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack holder = player.getItemInHand(hand);
-        if (!player.isSecondaryUseActive() || hand != InteractionHand.MAIN_HAND) {
+        ItemStack other = player.getOffhandItem();
+        boolean inserting = other.getItem() instanceof StoneItems.StoneItem;
+        boolean removing = player.isSecondaryUseActive() && other.isEmpty();
+        if (hand != InteractionHand.MAIN_HAND || !(inserting || removing)) {
             return InteractionResultHolder.pass(holder);
         }
         if (level.isClientSide) {
             return InteractionResultHolder.success(holder);
         }
-        ItemStack other = player.getOffhandItem();
         Set<InfinityStone> stones = stones(holder);
         if (other.getItem() instanceof StoneItems.StoneItem stoneItem) {
             if (stones.contains(stoneItem.stone)) {
@@ -112,7 +126,8 @@ public class HolderItem extends Item {
             tooltip.add(Component.literal((has ? "  ◆ " : "  ◇ ") + stone.displayName())
                     .withStyle(has ? ChatFormatting.WHITE : ChatFormatting.DARK_GRAY));
         }
-        tooltip.add(Component.literal("Sneak + right-click with a stone in your off hand to socket it.").withStyle(ChatFormatting.GRAY));
-        tooltip.add(Component.literal("Wear it in an accessory slot.").withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.literal("Right-click with a stone in your off hand to socket it.").withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.literal("Sneak + right-click with an empty off hand to take one out.").withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.literal(heldOnly ? "Hold it in your main hand to channel the stone." : "Wear it in an accessory slot.").withStyle(ChatFormatting.GRAY));
     }
 }

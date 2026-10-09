@@ -187,19 +187,26 @@ The **Stone Ring** (cheap: 4 gold ingots + an amethyst shard) holds **one** ston
 
 **Containers in hand:** a filled stone container (Orb, Tesseract, Scepter, Aether, Eye, Soul Urn) gives its stone's powers while you hold it in either hand, and keeps the stone safe.
 
-| Stone | Power (action key) | Boosts other heroes |
-|---|---|---|
-| Space | Blink (teleport to where you look), heroic flight, higher jump | Hulk super jump +30%, space pod +50% speed |
-| Mind | Telekinesis (grab and throw, same system as the Hulk's) | Grab reach x2 and can lift bigger things |
-| Reality | Reality Shift (turn the mob you look at into another mob) | Smashes/charges break harder blocks, wider radius |
-| Power | Power Blast (energy beam and explosion), more damage and armor | All shockwaves/blasts +50% damage |
-| Time | Rewind (back 5 seconds with that health), faster movement | Every ability cooldown ticks down twice as fast |
-| Soul | Soul Drain (steal life from a creature in front of you), slow regeneration | Hulk regeneration x2, revive cooldown halved, symbiote Consume heals x2 |
+Each stone has the kit of [Pugmeowla's Infinity Stone Core](https://www.curseforge.com/minecraft/mc-mods/pugmeowlas-infinity-stone-core), rebuilt from scratch for Fabric (that mod is a Forge/Palladium addon pack; nothing was copied). Keys are Palladium's ability keys; "toggle" abilities stay on until pressed again, "hold" abilities work while the key is down, "scroll" means the mouse wheel while the parent ability is on.
+
+| Stone | Abilities |
+|---|---|
+| Space | **Teleport** (to where you look), **Telekinesis** (grab and throw), **Force Field** (toggle: invulnerable but rooted), **Black Hole** (toggle, needs the Power Stone too: drags in and crushes everything, erodes blocks); passive speed, step assist, no fall damage, water breathing; `/space_tp x y z` |
+| Mind | **Flight** (toggle off to use another form of flight), **Intangibility** (toggle: phase through blocks and entities), **Mind Beam** (hold), **Pacify** (hostile mobs around you stop attacking players; sneak to undo); passive night vision and Hero of the Village; unlocks every recipe |
+| Power | **Power Beam** (hold; scroll to pick the damage step 1 to 2048; 100 blocks, smelts what it hits and sets fires), **Controlled Explosion** (hold to charge, release), **Empower** (health boost and resistance, 2 min cooldown), **Meteor Storm** (needs the Space Stone too); **punch strength** by stones worn: 30, 70, 100, 300, 3000, near infinite (vanilla caps attack damage at 2048); immune to explosions and knockback. With all six stones the beam turns **rainbow**, explodes where it lands and does 1,000,000 damage |
+| Reality | **Resize** (toggle, scroll: one tenth to ten times your size), **Invisibility** (toggle), **Block Duplication** (toggle: every block you look at is copied into your inventory), **Warp Reality** (blindness, nausea, darkness and slowness on everything near you), **Bubble** (turns the blocks you look at into bubbles), **Clear Skies / Summon Rain / Summon Storm** |
+| Time | **Time Freeze** (toggle: mobs, items and projectiles within 40 blocks stop, players are not affected), **Stop Projectiles** (toggle), **Time Rate** (toggle, scroll from -5, everything near you crawls, to +5, you and your cooldowns speed up; an approximation, the game clock itself is not slowed), **Fast Forward** (hold: the day races), **Stop / Start Daylight**; walk on water; every cooldown ticks down twice as fast; `/time_set` |
+| Soul | **Soul Sight** (hold: everything glows within 100 blocks), **Soul Army** (seven zombies fight whatever you fight, five minutes), **Immortality** (all six stones only); passive saturation, regeneration, +380 max health, removes harmful effects, and nothing but the void and `/kill` can hurt you; `/locateplayer <name>` |
+
+The **Soul Urn** wants a **soul for a soul**: right-click it with a tamed pet of yours or a villager within 6 blocks and it takes them, then gives up the Soul Stone (creative players skip the price).
+The abilities the stones had before (Rewind, Reality Shift, Soul Drain, the old Power Blast) are still registered, so old saves and other addons keep working, but the stone powers no longer use them.
+Not done compared with the original: the Soul World dimension, the Time Stone's global tick-rate and screen overlay, gauntlet skins, and the Morag/Vormir/Svartalfheim structures (the hunt shrines and the Soul Urn stand in for them).
 
 Every stone you wear also adds a general +10% to blasts (and doubles at all six).
 
 **Holders** (Stone Ring with one socket; Infinity Gauntlet, Necklace and Bracers with six, craftable with gold blocks, netherite and diamond blocks): worn, they give the powers of every stone socketed in them.
-Sneak + right-click with the holder in your main hand and a stone in your off hand to socket it; sneak + right-click with an empty off hand takes the last one out.
+Right-click with the holder in your main hand and a stone in your off hand to socket it; sneak + right-click with an empty off hand takes the last one out.
+**Cosmi-Rod** (gold, amethyst, blaze rods): a one-socket holder that works while you **hold it in your main hand**, a channeling tool for any stone. **Double-Edged Sword** (netherite ingots + blaze rod): hits harder than netherite and withers the target, but every strike costs the wielder 1.5 hearts.
 With **all six** socketed in a worn holder you also get **The Snap**: half of all creatures (not players or bosses) within 128 blocks turn to ash, with a 20 minute cooldown.
 
 ## Stone containers
