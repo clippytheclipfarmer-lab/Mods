@@ -13,6 +13,9 @@
     ],
     "client": [
       "com.fiskheroes.client.FiskHeroesClient"
+    ],
+    "server": [
+      "com.fiskheroes.dev.SelfTest"
     ]
   },
   "depends": {

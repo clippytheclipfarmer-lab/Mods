@@ -1,0 +1,8 @@
+{
+  "pack": {
+    "id": "fiskheroes",
+    "description": "Fisk's Superheroes for Palladium: Iron Man, Captain America, Thor, Spider-Man, Black Panther, Superman, Batman and the Flash.",
+    "pack_format": 15,
+    "version": "${version}"
+  }
+}

@@ -55,7 +55,8 @@ bone names (`armorHead`, `armorBody`, `armorRightArm`, `armorLeftArm`, `armorRig
     gradle build        # jar in build/libs
 
 For `gradle runClient/runServer`, drop the Palladium jar and the jars bundled inside it (META-INF/jars) into `dev-libs/`
-(see `build.gradle`); that folder is git-ignored.
+(see `build.gradle`; that folder is git-ignored), or run `bash ../tools/prepare-dev-libs.sh .` after a build to do it for you.
+`./gradlew runSelftest` parses every power in the mod with Palladium's own parser (no world, no EULA prompt) and exits.
 
 ## License
 GPL-3.0 (Palladium is GPL-3.0).

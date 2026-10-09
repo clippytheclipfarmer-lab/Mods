@@ -65,7 +65,9 @@ To add a hero: add a `build_<hero>()` painter in `tools/suits.py`, a hero entry 
 
 ## Building
     ./gradlew build        # jar in build/libs
-`./gradlew runClient` / `runServer` need Palladium and the jars bundled inside it in `dev-libs/` (see `build.gradle`; the folder is git-ignored).
+`./gradlew runClient` / `runServer` need Palladium and the jars bundled inside it in `dev-libs/` (git-ignored): after one build run `bash ../tools/prepare-dev-libs.sh .`.
+`./gradlew runSelftest` then parses all eight powers with Palladium's own parser (no world, no EULA prompt) and exits; Palladium also logs how many items, suit sets, armor materials and tabs it registered from `addon/`.
+Palladium reads this mod as an addon pack because of the `addon/` folder, so the root `pack.mcmeta` (with `pack_format`) is required.
 
 ## Not done compared with the original
 The original's Suit Fabricator and customisable suits, per-hero animations (the suits are static models; capes do not sway), many more heroes (Hawkeye, Black Widow, Ant-Man, Deadpool, ...), and hero-specific sounds. Powers use Palladium's flight, beams and key system instead of the original's own.

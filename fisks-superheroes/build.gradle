@@ -39,7 +39,8 @@ dependencies {
 
 processResources {
     inputs.property 'version', project.version
-    filesMatching('fabric.mod.json') {
+    // Palladium reads addon packs (the addon/ folder) through pack.mcmeta, which must carry the vanilla pack_format too.
+    filesMatching(['fabric.mod.json', 'pack.mcmeta']) {
         expand 'version': project.version
     }
 }
@@ -56,3 +57,15 @@ java {
 
 // Lets us script console commands into the dev server (e.g. `printf '...' | gradle runServer`).
 tasks.matching { it.name == 'runServer' }.configureEach { standardInput = System.in }
+
+// `./gradlew runSelftest` parses every power JSON with Palladium's own parser (needs dev-libs, see above) and exits.
+loom {
+    runs {
+        selftest {
+            server()
+            ideConfigGenerated false
+            vmArg '-Dfiskheroes.selftest=true'
+            runDir 'run'
+        }
+    }
+}
