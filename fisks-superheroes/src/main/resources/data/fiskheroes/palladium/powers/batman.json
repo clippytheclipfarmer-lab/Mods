@@ -1,0 +1,180 @@
+{
+  "name": {
+    "translate": "power.fiskheroes.batman"
+  },
+  "icon": "minecraft:black_wool",
+  "primary_color": [
+    76,
+    81,
+    94
+  ],
+  "secondary_color": [
+    242,
+    197,
+    0
+  ],
+  "abilities": {
+    "strength": {
+      "type": "palladium:attribute_modifier",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "attribute": "generic.attack_damage",
+      "amount": 5,
+      "operation": 0,
+      "uuid": "f15c0001-0000-4000-8000-000000000001"
+    },
+    "speed": {
+      "type": "palladium:attribute_modifier",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "attribute": "generic.movement_speed",
+      "amount": 0.01,
+      "operation": 0,
+      "uuid": "f15c0001-0000-4000-8000-000000000002"
+    },
+    "armor": {
+      "type": "palladium:attribute_modifier",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "attribute": "generic.armor",
+      "amount": 6,
+      "operation": 0,
+      "uuid": "f15c0001-0000-4000-8000-000000000003"
+    },
+    "toughness": {
+      "type": "palladium:attribute_modifier",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "attribute": "generic.armor_toughness",
+      "amount": 2,
+      "operation": 0,
+      "uuid": "f15c0001-0000-4000-8000-000000000004"
+    },
+    "knockback_resistance": {
+      "type": "palladium:attribute_modifier",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "attribute": "generic.knockback_resistance",
+      "amount": 0.2,
+      "operation": 0,
+      "uuid": "f15c0001-0000-4000-8000-000000000005"
+    },
+    "health": {
+      "type": "palladium:attribute_modifier",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "attribute": "generic.max_health",
+      "amount": 6,
+      "operation": 0,
+      "uuid": "f15c0001-0000-4000-8000-000000000006"
+    },
+    "grapple": {
+      "type": "fiskheroes:zip_line",
+      "title": {
+        "translate": "ability.fiskheroes.batman.grapple"
+      },
+      "icon": "minecraft:fishing_rod",
+      "list_index": 0,
+      "range": 55.0,
+      "speed": 1.5,
+      "color": "#c9ccd4",
+      "conditions": {
+        "enabling": {
+          "type": "palladium:held",
+          "cooldown": 0
+        }
+      }
+    },
+    "batarang": {
+      "type": "fiskheroes:throw_gadget",
+      "title": {
+        "translate": "ability.fiskheroes.batman.batarang"
+      },
+      "icon": "fiskheroes:batarang",
+      "list_index": 1,
+      "gadget": "batarang",
+      "item": "fiskheroes:batarang",
+      "consume": false,
+      "damage": 7.0,
+      "speed": 2.0,
+      "conditions": {
+        "enabling": {
+          "type": "palladium:action",
+          "cooldown": 12
+        }
+      }
+    },
+    "smoke_bomb": {
+      "type": "fiskheroes:smoke_bomb",
+      "title": {
+        "translate": "ability.fiskheroes.batman.smoke_bomb"
+      },
+      "icon": "minecraft:gunpowder",
+      "list_index": 2,
+      "radius": 6.0,
+      "conditions": {
+        "enabling": {
+          "type": "palladium:action",
+          "cooldown": 400
+        }
+      }
+    },
+    "vision": {
+      "type": "palladium:dummy",
+      "title": {
+        "translate": "ability.fiskheroes.batman.vision"
+      },
+      "icon": "minecraft:spyglass",
+      "list_index": 3,
+      "conditions": {
+        "enabling": {
+          "type": "palladium:toggle",
+          "cooldown": 0
+        }
+      }
+    },
+    "vision_night": {
+      "type": "fiskheroes:effect",
+      "icon": "minecraft:potion",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "effect": "minecraft:night_vision",
+      "amplifier": 0,
+      "conditions": {
+        "enabling": {
+          "type": "palladium:ability_enabled",
+          "ability": "vision"
+        }
+      }
+    },
+    "vision_glow": {
+      "type": "palladium:entity_glow",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "mode": "others",
+      "distance": 40.0,
+      "color": "#ffffff",
+      "conditions": {
+        "enabling": {
+          "type": "palladium:ability_enabled",
+          "ability": "vision"
+        }
+      }
+    },
+    "glide": {
+      "type": "fiskheroes:glide",
+      "title": {
+        "translate": "ability.fiskheroes.batman.glide"
+      },
+      "icon": "minecraft:phantom_membrane",
+      "list_index": 4,
+      "conditions": {
+        "enabling": {
+          "type": "palladium:held",
+          "cooldown": 0,
+          "key_type": "space_bar"
+        }
+      }
+    }
+  }
+}

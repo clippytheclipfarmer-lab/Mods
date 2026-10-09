@@ -1,0 +1,46 @@
+{
+  "armor_material": "fiskheroes:spider_man",
+  "should_render_model": false,
+  "rarity": "epic",
+  "creative_mode_tab": "fiskheroes:heroes",
+  "tooltip": [
+    "Spider-Man - Classic Suit",
+    "Wall crawling, web zipping, web shots and spider sense."
+  ],
+  "head": {
+    "item_name": "spider_man_helmet",
+    "render_layers": {
+      "head": [
+        "fiskheroes:spider_man_head",
+        "fiskheroes:spider_man_head_glow"
+      ]
+    }
+  },
+  "chest": {
+    "item_name": "spider_man_chestplate",
+    "render_layers": {
+      "chest": [
+        "fiskheroes:spider_man_chest",
+        "fiskheroes:spider_man_chest_glow"
+      ]
+    }
+  },
+  "legs": {
+    "item_name": "spider_man_leggings",
+    "render_layers": {
+      "legs": [
+        "fiskheroes:spider_man_legs",
+        "fiskheroes:spider_man_legs_glow"
+      ]
+    }
+  },
+  "feet": {
+    "item_name": "spider_man_boots",
+    "render_layers": {
+      "feet": [
+        "fiskheroes:spider_man_feet",
+        "fiskheroes:spider_man_feet_glow"
+      ]
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "durability_multiplier": 36,
+  "slot_protections": [
+    2,
+    6,
+    7,
+    3
+  ],
+  "enchantment_value": 15,
+  "equip_sound": "minecraft:item.armor.equip_netherite",
+  "toughness": 2.0,
+  "knockback_resistance": 0.2,
+  "repair_ingredient": {
+    "item": "minecraft:leather"
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "name": {
+    "translate": "power.fiskheroes.spider_man"
+  },
+  "icon": "minecraft:cobweb",
+  "primary_color": [
+    184,
+    28,
+    36
+  ],
+  "secondary_color": [
+    32,
+    63,
+    148
+  ],
+  "abilities": {
+    "strength": {
+      "type": "palladium:attribute_modifier",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "attribute": "generic.attack_damage",
+      "amount": 3,
+      "operation": 0,
+      "uuid": "f15c0006-0000-4000-8000-000000000001"
+    },
+    "speed": {
+      "type": "palladium:attribute_modifier",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "attribute": "generic.movement_speed",
+      "amount": 0.02,
+      "operation": 0,
+      "uuid": "f15c0006-0000-4000-8000-000000000002"
+    },
+    "jump": {
+      "type": "palladium:attribute_modifier",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "attribute": "palladium:jump_power",
+      "amount": 0.5,
+      "operation": 0,
+      "uuid": "f15c0006-0000-4000-8000-000000000003"
+    },
+    "health": {
+      "type": "palladium:attribute_modifier",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "attribute": "generic.max_health",
+      "amount": 6,
+      "operation": 0,
+      "uuid": "f15c0006-0000-4000-8000-000000000004"
+    },
+    "armor": {
+      "type": "palladium:attribute_modifier",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "attribute": "generic.armor",
+      "amount": 2,
+      "operation": 0,
+      "uuid": "f15c0006-0000-4000-8000-000000000005"
+    },
+    "agility": {
+      "type": "palladium:damage_immunity",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "damage_sources": [
+        "minecraft:is_fall"
+      ]
+    },
+    "wall_climb": {
+      "type": "fiskheroes:wall_climb",
+      "title": {
+        "translate": "ability.fiskheroes.spider_man.wall_climb"
+      },
+      "icon": "minecraft:ladder",
+      "list_index": 0,
+      "speed": 0.28,
+      "needs_sprint": false,
+      "conditions": {
+        "enabling": {
+          "type": "palladium:held",
+          "cooldown": 0,
+          "key_type": "space_bar"
+        }
+      }
+    },
+    "web_zip": {
+      "type": "fiskheroes:zip_line",
+      "title": {
+        "translate": "ability.fiskheroes.spider_man.web_zip"
+      },
+      "icon": "minecraft:string",
+      "list_index": 1,
+      "range": 42.0,
+      "speed": 1.1,
+      "color": "#f2f2f2",
+      "conditions": {
+        "enabling": {
+          "type": "palladium:held",
+          "cooldown": 0
+        }
+      }
+    },
+    "web_shot": {
+      "type": "fiskheroes:web_shot",
+      "title": {
+        "translate": "ability.fiskheroes.spider_man.web_shot"
+      },
+      "icon": "minecraft:cobweb",
+      "list_index": 2,
+      "range": 28.0,
+      "web_ticks": 160,
+      "conditions": {
+        "enabling": {
+          "type": "palladium:action",
+          "cooldown": 20
+        }
+      }
+    },
+    "spider_sense": {
+      "type": "fiskheroes:spider_sense",
+      "title": {
+        "translate": "ability.fiskheroes.spider_man.spider_sense"
+      },
+      "icon": "minecraft:spider_eye",
+      "list_index": 3,
+      "radius": 16.0
+    }
+  }
+}

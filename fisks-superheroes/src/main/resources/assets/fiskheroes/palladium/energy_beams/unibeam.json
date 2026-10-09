@@ -1,0 +1,15 @@
+[
+  {
+    "type": "palladium:laser",
+    "body_part": "chest",
+    "offset": [
+      0,
+      -3,
+      -3
+    ],
+    "glow_color": "#7fe9ff",
+    "core_color": "#ffffff",
+    "size": 4.0,
+    "bloom": 5
+  }
+]

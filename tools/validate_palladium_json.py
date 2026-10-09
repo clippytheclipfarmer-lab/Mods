@@ -11,6 +11,7 @@ It reads Palladium's sources jar (downloaded once into a cache directory) and is
 """
 import io
 import json
+import math
 import os
 import re
 import sys
@@ -187,6 +188,187 @@ def check_power(idx, path, project, ability_names_by_power):
     ability_names_by_power[power_id] = set(abilities)
 
 
+
+
+# ---------------------------------------------------------------------------------------------- addon content
+ITEM_BASE_KEYS = {"type", "max_stack_size", "max_damage", "rarity", "is_fire_resistant", "tooltip", "should_render_model",
+                  "creative_mode_tab", "attribute_modifiers", "render_layers", "food", "item_name"}
+ITEM_TYPE_KEYS = {
+    None: set(), "palladium:default": set(), "palladium:armor": {"slot", "armor_material", "armor_renderer", "openable", "opening_time", "opened_sound", "closed_sound", "opening_toggle_sound"},
+    "palladium:sword": {"tier", "base_damage", "attack_speed"}, "palladium:shield": {"use_duration", "repair_ingredient"},
+    "palladium:pickaxe": {"tier", "base_damage", "attack_speed"}, "palladium:axe": {"tier", "base_damage", "attack_speed"},
+    "palladium:shovel": {"tier", "base_damage", "attack_speed"}, "palladium:hoe": {"tier", "base_damage", "attack_speed"},
+}
+ARMOR_MATERIAL_KEYS = {"durability_multiplier", "slot_protections", "enchantment_value", "equip_sound", "toughness", "knockback_resistance", "repair_ingredient"}
+SLOTS = {"head", "chest", "legs", "feet", "mainhand", "offhand"}
+
+
+def load(path):
+    with open(path) as f:
+        return json.load(f)
+
+
+def files(directory, suffix=".json"):
+    if not os.path.isdir(directory):
+        return []
+    return sorted(f for f in os.listdir(directory) if f.endswith(suffix))
+
+
+def check_geo(path, texture_path, where):
+    geo = load(path)["minecraft:geometry"][0]
+    tw, th = geo["description"]["texture_width"], geo["description"]["texture_height"]
+    try:
+        from PIL import Image
+        with Image.open(texture_path) as im:
+            if im.size != (tw, th):
+                errors.append(f"{where}: texture is {im.size} but the geo says {tw}x{th}")
+    except ImportError:
+        pass
+    names = {b["name"] for b in geo["bones"]}
+    for bone in geo["bones"]:
+        if bone.get("parent") and bone["parent"] not in names:
+            errors.append(f"{where}: bone {bone['name']} has unknown parent {bone['parent']}")
+        for cube in bone.get("cubes", []):
+            u, v = cube["uv"]
+            w, h, d = (math.ceil(x) for x in cube["size"])
+            if u + 2 * (d + w) > tw or v + d + h > th:
+                errors.append(f"{where}: cube in {bone['name']} at uv {cube['uv']} size {cube['size']} leaves the {tw}x{th} texture")
+
+
+def check_addon(project, ns):
+    res = os.path.join(project, "src", "main", "resources")
+    addon, data, assets = (os.path.join(res, k, ns) for k in ("addon", "data", "assets"))
+    lang = load(os.path.join(assets, "lang", "en_us.json")) if os.path.exists(os.path.join(assets, "lang", "en_us.json")) else {}
+    materials = {f[:-5] for f in files(os.path.join(addon, "armor_materials"))}
+    item_names = set()
+
+    for f in files(os.path.join(addon, "armor_materials")):
+        m = load(os.path.join(addon, "armor_materials", f))
+        for k in m:
+            if k not in ARMOR_MATERIAL_KEYS:
+                errors.append(f"armor_materials/{f}: unknown key {k}")
+        for need in ("durability_multiplier", "slot_protections", "enchantment_value", "equip_sound"):
+            if need not in m:
+                errors.append(f"armor_materials/{f}: missing {need}")
+
+    def check_item(name, item, where):
+        if name in item_names:
+            errors.append(f"{where}: duplicate item {name}")
+        item_names.add(name)
+        itype = item.get("type")
+        allowed = ITEM_BASE_KEYS | ITEM_TYPE_KEYS.get(itype, set())
+        if itype not in ITEM_TYPE_KEYS:
+            errors.append(f"{where}: unknown item type {itype}")
+        for k in item:
+            if k not in allowed and k not in ("head", "chest", "legs", "feet", "armor_material", "slot"):
+                errors.append(f"{where}: unknown item key '{k}' for type {itype}")
+        if not os.path.exists(os.path.join(assets, "models", "item", name + ".json")):
+            errors.append(f"{where}: missing models/item/{name}.json")
+        if not os.path.exists(os.path.join(assets, "textures", "item", name + ".png")):
+            errors.append(f"{where}: missing textures/item/{name}.png")
+        if f"item.{ns}.{name}" not in lang:
+            errors.append(f"{where}: no lang entry item.{ns}.{name}")
+        for slot, layers in (item.get("render_layers") or {}).items():
+            for lid in layers:
+                check_layer(lid, f"{where} layer")
+
+    layer_cache = set()
+
+    def check_layer(lid, where):
+        if lid in layer_cache:
+            return
+        layer_cache.add(lid)
+        lns, _, lname = lid.partition(":")
+        path = os.path.join(res, "assets", lns, "palladium", "render_layers", lname + ".json")
+        if not os.path.exists(path):
+            errors.append(f"{where}: render layer {lid} does not exist")
+            return
+        layer = load(path)
+        models = layer.get("model")
+        for model in (models.values() if isinstance(models, dict) else [models]):
+            mns, _, mpath = model.partition(":")
+            geo_path = os.path.join(res, "assets", mns, mpath)
+            tex = layer.get("texture")
+            tex = tex if isinstance(tex, str) else tex.get("normal")
+            tns, _, tpath = tex.partition(":")
+            tex_path = os.path.join(res, "assets", tns, tpath)
+            if not os.path.exists(geo_path):
+                errors.append(f"{where}: layer {lid} model {model} is missing")
+            elif not os.path.exists(tex_path):
+                errors.append(f"{where}: layer {lid} texture {tex} is missing")
+            else:
+                check_geo(geo_path, tex_path, f"{where}: {lid} ({mpath})")
+
+    for f in files(os.path.join(addon, "items")):
+        check_item(f[:-5], load(os.path.join(addon, "items", f)), f"items/{f}")
+
+    for f in files(os.path.join(addon, "suit_sets")):
+        suit = load(os.path.join(addon, "suit_sets", f))
+        where = f"suit_sets/{f}"
+        mat = suit.get("armor_material", "")
+        if mat.partition(":")[2] not in materials and mat.partition(":")[0] == ns:
+            errors.append(f"{where}: armor material {mat} not found")
+        slots = [k for k in suit if k in SLOTS]
+        if not slots:
+            errors.append(f"{where}: no slots")
+        for slot in slots:
+            merged = {**{k: v for k, v in suit.items() if k not in SLOTS}, **suit[slot]}
+            name = merged.get("item_name", f[:-5] + "_" + slot)
+            check_item(name, merged, f"{where}:{slot}")
+        if not os.path.exists(os.path.join(data, "palladium", "suit_set_powers", f)):
+            warnings.append(f"{where}: no suit_set_powers link, the suit gives no power")
+
+    for f in files(os.path.join(data, "palladium", "suit_set_powers")):
+        link = load(os.path.join(data, "palladium", "suit_set_powers", f))
+        for sid in ([link["suit_set"]] if isinstance(link["suit_set"], str) else link["suit_set"]):
+            if sid.partition(":")[0] == ns and not os.path.exists(os.path.join(addon, "suit_sets", sid.partition(":")[2] + ".json")):
+                errors.append(f"suit_set_powers/{f}: suit set {sid} does not exist")
+        for pid in ([link["power"]] if isinstance(link["power"], str) else link["power"]):
+            if pid.partition(":")[0] == ns and not os.path.exists(os.path.join(data, "palladium", "powers", pid.partition(":")[2] + ".json")):
+                errors.append(f"suit_set_powers/{f}: power {pid} does not exist")
+
+    # references from powers to beams, trails and render layers
+    for f in files(os.path.join(data, "palladium", "powers")):
+        power = load(os.path.join(data, "palladium", "powers", f))
+        for key, ab in power["abilities"].items():
+            for prop, folder in (("energy_beam", "energy_beams"), ("trail", "trails")):
+                ref = ab.get(prop)
+                if ref and ref.partition(":")[0] == ns and not os.path.exists(os.path.join(assets, "palladium", folder, ref.partition(":")[2] + ".json")):
+                    errors.append(f"powers/{f}:{key}: {prop} {ref} does not exist")
+            if ab.get("render_layer"):
+                check_layer(ab["render_layer"], f"powers/{f}:{key}")
+            if ab.get("icon", "").startswith(ns + ":") and ab["icon"].partition(":")[2] not in item_names:
+                errors.append(f"powers/{f}:{key}: icon {ab['icon']} is not one of this addon's items")
+            for cond_slot in (ab.get("conditions") or {}).values():
+                for c in (cond_slot if isinstance(cond_slot, list) else [cond_slot]):
+                    if isinstance(c, dict) and c.get("type") == "palladium:item_in_slot":
+                        ing = c.get("item", {}).get("item", "")
+                        if ing.startswith(ns + ":") and ing.partition(":")[2] not in item_names:
+                            errors.append(f"powers/{f}:{key}: item_in_slot refers to unknown item {ing}")
+
+    for f in files(os.path.join(data, "recipes")):
+        recipe = load(os.path.join(data, "recipes", f))
+        result = recipe.get("result", {}).get("item", "")
+        if result.startswith(ns + ":") and result.partition(":")[2] not in item_names:
+            errors.append(f"recipes/{f}: result {result} is not one of this addon's items")
+        for ing in list((recipe.get("key") or {}).values()) + list(recipe.get("ingredients") or []):
+            ref = ing.get("item", "") if isinstance(ing, dict) else ""
+            if ref.startswith(ns + ":") and ref.partition(":")[2] not in item_names:
+                errors.append(f"recipes/{f}: ingredient {ref} is not one of this addon's items")
+        if recipe.get("type") == "minecraft:crafting_shaped":
+            pattern = "".join(recipe["pattern"])
+            for ch in set(pattern) - {" "}:
+                if ch not in recipe["key"]:
+                    errors.append(f"recipes/{f}: pattern uses {ch} with no key")
+
+    for f in files(os.path.join(addon, "creative_mode_tabs")):
+        tab = load(os.path.join(addon, "creative_mode_tabs", f))
+        icon = tab.get("icon", "")
+        if icon.startswith(ns + ":") and icon.partition(":")[2] not in item_names:
+            errors.append(f"creative_mode_tabs/{f}: icon {icon} is not one of this addon's items")
+    print(f"checked addon {ns}: {len(item_names)} items, {len(layer_cache)} render layers")
+
+
 def main():
     if len(sys.argv) < 2:
         print(__doc__)
@@ -213,6 +395,8 @@ def main():
                     check_power(idx, os.path.join(dirpath, f), project, names)
                     count += 1
     print(f"checked {count} powers, {len(idx.mod_abilities)} mod ability types registered")
+    for ns in sorted(os.listdir(os.path.join(res, "addon"))) if os.path.isdir(os.path.join(res, "addon")) else []:
+        check_addon(project, ns)
     for w in warnings:
         print("warning:", w)
     for e in errors:

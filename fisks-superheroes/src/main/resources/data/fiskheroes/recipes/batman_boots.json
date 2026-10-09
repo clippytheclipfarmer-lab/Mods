@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "M M",
+    "A A"
+  ],
+  "key": {
+    "M": {
+      "item": "minecraft:gray_wool"
+    },
+    "A": {
+      "item": "minecraft:black_wool"
+    }
+  },
+  "result": {
+    "item": "fiskheroes:batman_boots"
+  }
+}

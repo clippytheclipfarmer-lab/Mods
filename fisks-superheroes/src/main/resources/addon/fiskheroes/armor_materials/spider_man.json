@@ -1,0 +1,16 @@
+{
+  "durability_multiplier": 22,
+  "slot_protections": [
+    1,
+    3,
+    4,
+    1
+  ],
+  "enchantment_value": 15,
+  "equip_sound": "minecraft:item.armor.equip_leather",
+  "toughness": 0.0,
+  "knockback_resistance": 0.0,
+  "repair_ingredient": {
+    "item": "minecraft:string"
+  }
+}

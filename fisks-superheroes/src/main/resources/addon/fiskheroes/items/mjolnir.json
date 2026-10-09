@@ -1,0 +1,13 @@
+{
+  "type": "palladium:sword",
+  "tier": "minecraft:netherite",
+  "base_damage": 9,
+  "attack_speed": -2.9,
+  "rarity": "epic",
+  "is_fire_resistant": true,
+  "tooltip": [
+    "Whosoever holds this hammer, if they be worthy, shall possess the power of Thor.",
+    "Throw it, call lightning, fly."
+  ],
+  "creative_mode_tab": "fiskheroes:heroes"
+}

@@ -1,0 +1,23 @@
+{
+  "type": "palladium:compound",
+  "trails": [
+    {
+      "type": "palladium:lightning",
+      "color": "#ffe14d",
+      "spacing": 0.35,
+      "lifetime": 8,
+      "requires_movement": true,
+      "amount": 3,
+      "spread_x": 0.5,
+      "spread_y": 0.9
+    },
+    {
+      "type": "palladium:gradient",
+      "color": "#ff3b30",
+      "spacing": 0.3,
+      "lifetime": 12,
+      "requires_movement": true,
+      "opacity": 0.45
+    }
+  ]
+}

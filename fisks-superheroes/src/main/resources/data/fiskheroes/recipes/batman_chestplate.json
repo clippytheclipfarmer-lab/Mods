@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "M M",
+    "MCM",
+    "MAM"
+  ],
+  "key": {
+    "M": {
+      "item": "minecraft:gray_wool"
+    },
+    "C": {
+      "item": "minecraft:yellow_dye"
+    },
+    "A": {
+      "item": "minecraft:black_wool"
+    }
+  },
+  "result": {
+    "item": "fiskheroes:batman_chestplate"
+  }
+}

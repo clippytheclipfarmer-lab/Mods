@@ -1,0 +1,46 @@
+{
+  "armor_material": "fiskheroes:captain_america",
+  "should_render_model": false,
+  "rarity": "epic",
+  "creative_mode_tab": "fiskheroes:heroes",
+  "tooltip": [
+    "Captain America - Stealth Suit",
+    "Super soldier strength and speed, and the vibranium shield."
+  ],
+  "head": {
+    "item_name": "captain_america_helmet",
+    "render_layers": {
+      "head": [
+        "fiskheroes:captain_america_head",
+        "fiskheroes:captain_america_head_glow"
+      ]
+    }
+  },
+  "chest": {
+    "item_name": "captain_america_chestplate",
+    "render_layers": {
+      "chest": [
+        "fiskheroes:captain_america_chest",
+        "fiskheroes:captain_america_chest_glow"
+      ]
+    }
+  },
+  "legs": {
+    "item_name": "captain_america_leggings",
+    "render_layers": {
+      "legs": [
+        "fiskheroes:captain_america_legs",
+        "fiskheroes:captain_america_legs_glow"
+      ]
+    }
+  },
+  "feet": {
+    "item_name": "captain_america_boots",
+    "render_layers": {
+      "feet": [
+        "fiskheroes:captain_america_feet",
+        "fiskheroes:captain_america_feet_glow"
+      ]
+    }
+  }
+}

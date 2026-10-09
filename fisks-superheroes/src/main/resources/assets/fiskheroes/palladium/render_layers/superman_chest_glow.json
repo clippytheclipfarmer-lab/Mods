@@ -1,0 +1,18 @@
+{
+  "type": "geckolib:default",
+  "model": {
+    "normal": "fiskheroes:geo/superman/chest.geo.json",
+    "slim": "fiskheroes:geo/superman/chest_slim.geo.json"
+  },
+  "texture": "fiskheroes:textures/models/superman_glow.png",
+  "bones": {
+    "head": "armorHead",
+    "body": "armorBody",
+    "right_arm": "armorRightArm",
+    "left_arm": "armorLeftArm",
+    "right_leg": "armorRightLeg",
+    "left_leg": "armorLeftLeg"
+  },
+  "render_full_model_in_first_person": false,
+  "render_type": "glow"
+}

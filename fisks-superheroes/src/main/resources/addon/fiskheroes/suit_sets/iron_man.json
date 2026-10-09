@@ -1,0 +1,46 @@
+{
+  "armor_material": "fiskheroes:iron_man",
+  "should_render_model": false,
+  "rarity": "epic",
+  "creative_mode_tab": "fiskheroes:heroes",
+  "tooltip": [
+    "Iron Man - Mark VII",
+    "Powered flight, repulsors, a unibeam and missiles. Runs on the arc reactor."
+  ],
+  "head": {
+    "item_name": "iron_man_helmet",
+    "render_layers": {
+      "head": [
+        "fiskheroes:iron_man_head",
+        "fiskheroes:iron_man_head_glow"
+      ]
+    }
+  },
+  "chest": {
+    "item_name": "iron_man_chestplate",
+    "render_layers": {
+      "chest": [
+        "fiskheroes:iron_man_chest",
+        "fiskheroes:iron_man_chest_glow"
+      ]
+    }
+  },
+  "legs": {
+    "item_name": "iron_man_leggings",
+    "render_layers": {
+      "legs": [
+        "fiskheroes:iron_man_legs",
+        "fiskheroes:iron_man_legs_glow"
+      ]
+    }
+  },
+  "feet": {
+    "item_name": "iron_man_boots",
+    "render_layers": {
+      "feet": [
+        "fiskheroes:iron_man_feet",
+        "fiskheroes:iron_man_feet_glow"
+      ]
+    }
+  }
+}

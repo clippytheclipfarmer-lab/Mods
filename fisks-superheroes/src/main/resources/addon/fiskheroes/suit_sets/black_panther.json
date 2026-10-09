@@ -1,0 +1,46 @@
+{
+  "armor_material": "fiskheroes:black_panther",
+  "should_render_model": false,
+  "rarity": "epic",
+  "creative_mode_tab": "fiskheroes:heroes",
+  "tooltip": [
+    "Black Panther - Vibranium Suit",
+    "Kinetic energy absorption, vibranium claws, heightened senses."
+  ],
+  "head": {
+    "item_name": "black_panther_helmet",
+    "render_layers": {
+      "head": [
+        "fiskheroes:black_panther_head",
+        "fiskheroes:black_panther_head_glow"
+      ]
+    }
+  },
+  "chest": {
+    "item_name": "black_panther_chestplate",
+    "render_layers": {
+      "chest": [
+        "fiskheroes:black_panther_chest",
+        "fiskheroes:black_panther_chest_glow"
+      ]
+    }
+  },
+  "legs": {
+    "item_name": "black_panther_leggings",
+    "render_layers": {
+      "legs": [
+        "fiskheroes:black_panther_legs",
+        "fiskheroes:black_panther_legs_glow"
+      ]
+    }
+  },
+  "feet": {
+    "item_name": "black_panther_boots",
+    "render_layers": {
+      "feet": [
+        "fiskheroes:black_panther_feet",
+        "fiskheroes:black_panther_feet_glow"
+      ]
+    }
+  }
+}
