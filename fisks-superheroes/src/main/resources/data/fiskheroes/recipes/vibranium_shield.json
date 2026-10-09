@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "IVI",
+    "VSV",
+    "IVI"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "V": {
+      "tag": "c:vibranium_ingots"
+    },
+    "S": {
+      "item": "minecraft:shield"
+    }
+  },
+  "result": {
+    "item": "fiskheroes:vibranium_shield"
+  }
+}

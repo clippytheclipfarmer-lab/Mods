@@ -1,0 +1,28 @@
+[
+  {
+    "type": "palladium:laser",
+    "body_part": "head",
+    "offset": [
+      -2,
+      4,
+      -4
+    ],
+    "glow_color": "#ff2a1a",
+    "core_color": "#ffd8c8",
+    "size": 0.7,
+    "bloom": 3
+  },
+  {
+    "type": "palladium:laser",
+    "body_part": "head",
+    "offset": [
+      2,
+      4,
+      -4
+    ],
+    "glow_color": "#ff2a1a",
+    "core_color": "#ffd8c8",
+    "size": 0.7,
+    "bloom": 3
+  }
+]

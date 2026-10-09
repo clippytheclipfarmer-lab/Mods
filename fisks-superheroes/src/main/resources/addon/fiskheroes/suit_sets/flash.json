@@ -1,0 +1,46 @@
+{
+  "armor_material": "fiskheroes:flash",
+  "should_render_model": false,
+  "rarity": "epic",
+  "creative_mode_tab": "fiskheroes:heroes",
+  "tooltip": [
+    "The Flash - Speedster Suit",
+    "Five levels of super speed, wall and water running, phasing and a lightning trail."
+  ],
+  "head": {
+    "item_name": "flash_helmet",
+    "render_layers": {
+      "head": [
+        "fiskheroes:flash_head",
+        "fiskheroes:flash_head_glow"
+      ]
+    }
+  },
+  "chest": {
+    "item_name": "flash_chestplate",
+    "render_layers": {
+      "chest": [
+        "fiskheroes:flash_chest",
+        "fiskheroes:flash_chest_glow"
+      ]
+    }
+  },
+  "legs": {
+    "item_name": "flash_leggings",
+    "render_layers": {
+      "legs": [
+        "fiskheroes:flash_legs",
+        "fiskheroes:flash_legs_glow"
+      ]
+    }
+  },
+  "feet": {
+    "item_name": "flash_boots",
+    "render_layers": {
+      "feet": [
+        "fiskheroes:flash_feet",
+        "fiskheroes:flash_feet_glow"
+      ]
+    }
+  }
+}

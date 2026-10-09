@@ -28,5 +28,7 @@
   "entity.heroes.symbiote_crawler": "Symbiote Crawler",
   "entity.heroes.symbiote_brute": "Symbiote Brute",
   "entity.heroes.knull": "Knull",
-  "key.heroes.character_sheet": "Open Character Sheet"
+  "key.heroes.character_sheet": "Open Character Sheet",
+  "item.heroes.cosmi_rod": "Cosmi-Rod",
+  "item.heroes.double_edged_sword": "Double-Edged Sword"
 }

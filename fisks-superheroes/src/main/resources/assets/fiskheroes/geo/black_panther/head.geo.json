@@ -1,0 +1,140 @@
+{
+  "format_version": "1.12.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.fiskheroes.black_panther_head",
+        "texture_width": 128,
+        "texture_height": 128,
+        "visible_bounds_width": 4,
+        "visible_bounds_height": 5,
+        "visible_bounds_offset": [
+          0,
+          1.75,
+          0
+        ]
+      },
+      "bones": [
+        {
+          "name": "armorHead",
+          "pivot": [
+            0,
+            24,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -4,
+                24,
+                -4
+              ],
+              "size": [
+                8,
+                8,
+                8
+              ],
+              "uv": [
+                0,
+                0
+              ],
+              "inflate": 0.45
+            },
+            {
+              "origin": [
+                -3.9,
+                32.0,
+                -1.0
+              ],
+              "size": [
+                1.7,
+                2.6,
+                1.3
+              ],
+              "uv": [
+                88,
+                16
+              ],
+              "rotation": [
+                0,
+                0,
+                8
+              ],
+              "pivot": [
+                -3.05,
+                32.0,
+                0
+              ]
+            },
+            {
+              "origin": [
+                2.2,
+                32.0,
+                -1.0
+              ],
+              "size": [
+                1.7,
+                2.6,
+                1.3
+              ],
+              "uv": [
+                96,
+                16
+              ],
+              "rotation": [
+                0,
+                0,
+                -8
+              ],
+              "pivot": [
+                3.0500000000000003,
+                32.0,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "name": "armorBody",
+          "pivot": [
+            0,
+            24,
+            0
+          ]
+        },
+        {
+          "name": "armorRightArm",
+          "pivot": [
+            -5,
+            22,
+            0
+          ]
+        },
+        {
+          "name": "armorLeftArm",
+          "pivot": [
+            5,
+            22,
+            0
+          ]
+        },
+        {
+          "name": "armorRightLeg",
+          "pivot": [
+            -1.9,
+            12,
+            0
+          ]
+        },
+        {
+          "name": "armorLeftLeg",
+          "pivot": [
+            1.9,
+            12,
+            0
+          ]
+        }
+      ]
+    }
+  ]
+}

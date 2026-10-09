@@ -1,0 +1,79 @@
+plugins {
+    id 'fabric-loom' version '1.9-SNAPSHOT'
+}
+
+version = project.mod_version
+group = project.maven_group
+base.archivesName = project.archives_base_name
+
+repositories {
+    maven { url = 'https://maven-central.storage-download.googleapis.com/maven2/' }
+    maven { url = 'https://maven.threetag.net/' }
+    maven { url = 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
+    maven { url = 'https://jitpack.io' }
+    maven { url = 'https://maven.terraformersmc.com/' }
+    maven { url = 'https://maven.shedaniel.me/' }
+    maven { url = 'https://maven.architectury.dev/' }
+    maven { url = 'https://maven.blamejared.com/' }
+    mavenCentral()
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings loom.officialMojangMappings()
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+
+    if (file('dev-libs/palladium.jar').exists()) {
+        // Full Palladium jar (with its bundled libraries) for running in the dev environment.
+        modImplementation files('dev-libs/palladium.jar')
+        fileTree(dir: 'dev-libs', include: '*.jar', exclude: 'palladium.jar').each { modLocalRuntime files(it) }
+        modCompileOnly("net.threetag:palladiumcore-fabric:${project.palladiumcore_version}") { transitive = false }
+    } else {
+        modImplementation("net.threetag:palladium-fabric:${project.palladium_version}") { transitive = false }
+        modImplementation("net.threetag:palladiumcore-fabric:${project.palladiumcore_version}") { transitive = false }
+    }
+    modImplementation "software.bernie.geckolib:geckolib-fabric-1.20.1:${project.geckolib_version}"
+    compileOnly 'dev.architectury:architectury-injectables:1.0.10'
+}
+
+processResources {
+    inputs.property 'version', project.version
+    // Palladium reads addon packs (the addon/ folder) through pack.mcmeta, which must carry the vanilla pack_format too.
+    filesMatching(['fabric.mod.json', 'pack.mcmeta']) {
+        expand 'version': project.version
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 17
+}
+
+java {
+    withSourcesJar()
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+// Lets us script console commands into the dev server (e.g. `printf '...' | gradle runServer`).
+tasks.matching { it.name == 'runServer' }.configureEach { standardInput = System.in }
+
+// `./gradlew runSelftest` parses every power JSON with Palladium's own parser (needs dev-libs, see above) and exits.
+loom {
+    runs {
+        // `./gradlew runShots` (under Xvfb with software GL, see README) saves screenshots of every suit to build/shots.
+        shots {
+            client()
+            ideConfigGenerated false
+            vmArg "-Dfiskheroes.shots=${layout.buildDirectory.get().asFile.absolutePath}/shots"
+            programArgs '--width', '960', '--height', '720'
+            runDir 'run'
+        }
+        selftest {
+            server()
+            ideConfigGenerated false
+            vmArg '-Dfiskheroes.selftest=true'
+            runDir 'run'
+        }
+    }
+}

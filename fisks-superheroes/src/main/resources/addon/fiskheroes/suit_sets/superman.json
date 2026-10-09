@@ -1,0 +1,46 @@
+{
+  "armor_material": "fiskheroes:superman",
+  "should_render_model": false,
+  "rarity": "epic",
+  "creative_mode_tab": "fiskheroes:heroes",
+  "tooltip": [
+    "Superman - Kryptonian Suit",
+    "Flight, heat vision, freeze breath, near invulnerability. Kryptonite makes him sick."
+  ],
+  "head": {
+    "item_name": "superman_helmet",
+    "render_layers": {
+      "head": [
+        "fiskheroes:superman_head",
+        "fiskheroes:superman_head_glow"
+      ]
+    }
+  },
+  "chest": {
+    "item_name": "superman_chestplate",
+    "render_layers": {
+      "chest": [
+        "fiskheroes:superman_chest",
+        "fiskheroes:superman_chest_glow"
+      ]
+    }
+  },
+  "legs": {
+    "item_name": "superman_leggings",
+    "render_layers": {
+      "legs": [
+        "fiskheroes:superman_legs",
+        "fiskheroes:superman_legs_glow"
+      ]
+    }
+  },
+  "feet": {
+    "item_name": "superman_boots",
+    "render_layers": {
+      "feet": [
+        "fiskheroes:superman_feet",
+        "fiskheroes:superman_feet_glow"
+      ]
+    }
+  }
+}

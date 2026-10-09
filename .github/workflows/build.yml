@@ -1,22 +1,33 @@
-name: Build mod
+name: Build mods
 on:
   push:
-    paths: ['heroes/**', '.github/workflows/build.yml']
+    paths: ['heroes/**', 'fisks-superheroes/**', 'tools/**', '.github/workflows/build.yml']
   workflow_dispatch:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        project: [heroes, fisks-superheroes]
     defaults:
       run:
-        working-directory: heroes
+        working-directory: ${{ matrix.project }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 21
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate Palladium JSON
+        run: python3 ../tools/validate_palladium_json.py .
       - run: chmod +x gradlew && ./gradlew build --no-daemon
+      - name: Self-test (parse every power with Palladium's own parser)
+        run: bash ../tools/prepare-dev-libs.sh . && ./gradlew runSelftest --no-daemon
       - uses: actions/upload-artifact@v4
         with:
-          name: heroes-mod
-          path: heroes/build/libs/heroes-*.jar
+          name: ${{ matrix.project }}-mod
+          path: ${{ matrix.project }}/build/libs/${{ matrix.project == 'heroes' && 'heroes' || 'fisks-superheroes' }}-*.jar

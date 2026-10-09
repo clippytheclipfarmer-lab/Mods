@@ -1,0 +1,168 @@
+{
+  "name": {
+    "translate": "power.fiskheroes.flash"
+  },
+  "icon": "minecraft:sugar",
+  "primary_color": [
+    193,
+    18,
+    31
+  ],
+  "secondary_color": [
+    255,
+    210,
+    63
+  ],
+  "abilities": {
+    "speed_force": {
+      "type": "fiskheroes:speed_force",
+      "title": {
+        "translate": "ability.fiskheroes.flash.speed_force"
+      },
+      "icon": "minecraft:sugar",
+      "list_index": 0,
+      "conditions": {
+        "enabling": {
+          "type": "palladium:toggle",
+          "cooldown": 0
+        }
+      }
+    },
+    "speed_up": {
+      "type": "fiskheroes:speed_step",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "delta": 1,
+      "conditions": {
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "speed_force"
+          },
+          {
+            "type": "palladium:action",
+            "cooldown": 0,
+            "key_type": "scroll_up"
+          }
+        ]
+      }
+    },
+    "speed_down": {
+      "type": "fiskheroes:speed_step",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "delta": -1,
+      "conditions": {
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "speed_force"
+          },
+          {
+            "type": "palladium:action",
+            "cooldown": 0,
+            "key_type": "scroll_down"
+          }
+        ]
+      }
+    },
+    "phase": {
+      "type": "palladium:intangibility",
+      "title": {
+        "translate": "ability.fiskheroes.flash.phase"
+      },
+      "icon": "minecraft:glass",
+      "list_index": 1,
+      "vertical": false,
+      "conditions": {
+        "enabling": {
+          "type": "palladium:toggle",
+          "cooldown": 0
+        }
+      }
+    },
+    "phase_vibrate": {
+      "type": "palladium:vibrate",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "intensity": 14,
+      "conditions": {
+        "enabling": {
+          "type": "palladium:ability_enabled",
+          "ability": "phase"
+        }
+      }
+    },
+    "water_run": {
+      "type": "palladium:fluid_walking",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "conditions": {
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "speed_force"
+          },
+          {
+            "type": "palladium:sprinting"
+          }
+        ]
+      }
+    },
+    "wall_run": {
+      "type": "fiskheroes:wall_climb",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "speed": 0.34,
+      "needs_sprint": true,
+      "conditions": {
+        "enabling": {
+          "type": "palladium:ability_enabled",
+          "ability": "speed_force"
+        }
+      }
+    },
+    "trail": {
+      "type": "palladium:trail",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "trail": "fiskheroes:flash",
+      "conditions": {
+        "enabling": {
+          "type": "palladium:ability_enabled",
+          "ability": "speed_force"
+        }
+      }
+    },
+    "speed_punch": {
+      "type": "palladium:attribute_modifier",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "attribute": "generic.attack_damage",
+      "amount": 5,
+      "operation": 0,
+      "uuid": "f15c0004-0000-4000-8000-000000000001",
+      "conditions": {
+        "enabling": {
+          "type": "palladium:ability_enabled",
+          "ability": "speed_force"
+        }
+      }
+    },
+    "regeneration": {
+      "type": "palladium:healing",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "frequency": 30,
+      "amount": 1.0
+    },
+    "agility": {
+      "type": "palladium:damage_immunity",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "damage_sources": [
+        "minecraft:is_fall"
+      ]
+    }
+  }
+}

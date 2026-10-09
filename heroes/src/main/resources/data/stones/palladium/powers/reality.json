@@ -2,7 +2,7 @@
   "name": {
     "translate": "power.stones.reality"
   },
-  "icon": "minecraft:amethyst_shard",
+  "icon": "minecraft:redstone",
   "primary_color": [
     224,
     48,
@@ -14,13 +14,152 @@
     255
   ],
   "abilities": {
-    "reality_shift": {
-      "type": "stones:reality_shift",
-      "list_index": 0,
+    "resize": {
+      "type": "stones:resize",
       "title": {
-        "translate": "ability.stones.reality_shift"
+        "translate": "ability.stones.resize"
       },
-      "icon": "minecraft:amethyst_shard",
+      "icon": "minecraft:brown_mushroom",
+      "list_index": 0,
+      "conditions": {
+        "enabling": {
+          "type": "palladium:toggle",
+          "cooldown": 0
+        }
+      }
+    },
+    "resize_up": {
+      "type": "stones:resize_step",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "delta": 1,
+      "conditions": {
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "resize"
+          },
+          {
+            "type": "palladium:action",
+            "cooldown": 0,
+            "key_type": "scroll_up"
+          }
+        ]
+      }
+    },
+    "resize_down": {
+      "type": "stones:resize_step",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "delta": -1,
+      "conditions": {
+        "enabling": [
+          {
+            "type": "palladium:ability_enabled",
+            "ability": "resize"
+          },
+          {
+            "type": "palladium:action",
+            "cooldown": 0,
+            "key_type": "scroll_down"
+          }
+        ]
+      }
+    },
+    "invisibility": {
+      "type": "palladium:invisibility",
+      "title": {
+        "translate": "ability.stones.invisibility"
+      },
+      "icon": "minecraft:glass_bottle",
+      "list_index": 1,
+      "conditions": {
+        "enabling": {
+          "type": "palladium:toggle",
+          "cooldown": 0
+        }
+      }
+    },
+    "block_copy": {
+      "type": "stones:block_copy",
+      "title": {
+        "translate": "ability.stones.block_copy"
+      },
+      "icon": "minecraft:grass_block",
+      "list_index": 2,
+      "conditions": {
+        "enabling": {
+          "type": "palladium:toggle",
+          "cooldown": 0
+        }
+      }
+    },
+    "effects": {
+      "type": "stones:reality_effects",
+      "title": {
+        "translate": "ability.stones.effects"
+      },
+      "icon": "minecraft:fermented_spider_eye",
+      "list_index": 3,
+      "conditions": {
+        "enabling": {
+          "type": "palladium:action",
+          "cooldown": 200
+        }
+      }
+    },
+    "bubble": {
+      "type": "stones:bubble",
+      "title": {
+        "translate": "ability.stones.bubble"
+      },
+      "icon": "minecraft:prismarine_crystals",
+      "list_index": 4,
+      "conditions": {
+        "enabling": {
+          "type": "palladium:action",
+          "cooldown": 20
+        }
+      }
+    },
+    "weather_clear": {
+      "type": "stones:weather",
+      "title": {
+        "translate": "ability.stones.weather_clear"
+      },
+      "icon": "minecraft:sunflower",
+      "list_index": 5,
+      "weather": "clear",
+      "conditions": {
+        "enabling": {
+          "type": "palladium:action",
+          "cooldown": 100
+        }
+      }
+    },
+    "weather_rain": {
+      "type": "stones:weather",
+      "title": {
+        "translate": "ability.stones.weather_rain"
+      },
+      "icon": "minecraft:water_bucket",
+      "list_index": 6,
+      "weather": "rain",
+      "conditions": {
+        "enabling": {
+          "type": "palladium:action",
+          "cooldown": 100
+        }
+      }
+    },
+    "weather_thunder": {
+      "type": "stones:weather",
+      "title": {
+        "translate": "ability.stones.weather_thunder"
+      },
+      "icon": "minecraft:lightning_rod",
+      "list_index": 7,
+      "weather": "thunder",
       "conditions": {
         "enabling": {
           "type": "palladium:action",

@@ -1,0 +1,16 @@
+{
+  "durability_multiplier": 40,
+  "slot_protections": [
+    3,
+    6,
+    8,
+    3
+  ],
+  "enchantment_value": 15,
+  "equip_sound": "minecraft:item.armor.equip_iron",
+  "toughness": 2.0,
+  "knockback_resistance": 0.1,
+  "repair_ingredient": {
+    "item": "minecraft:iron_ingot"
+  }
+}

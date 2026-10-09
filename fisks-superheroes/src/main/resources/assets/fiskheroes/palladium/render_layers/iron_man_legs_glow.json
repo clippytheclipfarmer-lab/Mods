@@ -1,0 +1,15 @@
+{
+  "type": "geckolib:default",
+  "model": "fiskheroes:geo/iron_man/legs.geo.json",
+  "texture": "fiskheroes:textures/models/iron_man_glow.png",
+  "bones": {
+    "head": "armorHead",
+    "body": "armorBody",
+    "right_arm": "armorRightArm",
+    "left_arm": "armorLeftArm",
+    "right_leg": "armorRightLeg",
+    "left_leg": "armorLeftLeg"
+  },
+  "render_full_model_in_first_person": false,
+  "render_type": "glow"
+}

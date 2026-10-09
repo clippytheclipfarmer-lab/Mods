@@ -1,0 +1,207 @@
+{
+  "name": {
+    "translate": "power.fiskheroes.black_panther"
+  },
+  "icon": "minecraft:amethyst_shard",
+  "primary_color": [
+    27,
+    27,
+    35
+  ],
+  "secondary_color": [
+    181,
+    123,
+    255
+  ],
+  "energy_bars": {
+    "kinetic": {
+      "max": 100,
+      "color": [
+        181,
+        123,
+        255
+      ],
+      "auto_increase_per_tick": 0,
+      "auto_increase_interval": 1
+    }
+  },
+  "abilities": {
+    "speed": {
+      "type": "palladium:attribute_modifier",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "attribute": "generic.movement_speed",
+      "amount": 0.03,
+      "operation": 0,
+      "uuid": "f15c0002-0000-4000-8000-000000000001"
+    },
+    "jump": {
+      "type": "palladium:attribute_modifier",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "attribute": "palladium:jump_power",
+      "amount": 0.35,
+      "operation": 0,
+      "uuid": "f15c0002-0000-4000-8000-000000000002"
+    },
+    "health": {
+      "type": "palladium:attribute_modifier",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "attribute": "generic.max_health",
+      "amount": 10,
+      "operation": 0,
+      "uuid": "f15c0002-0000-4000-8000-000000000003"
+    },
+    "armor": {
+      "type": "palladium:attribute_modifier",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "attribute": "generic.armor",
+      "amount": 6,
+      "operation": 0,
+      "uuid": "f15c0002-0000-4000-8000-000000000004"
+    },
+    "toughness": {
+      "type": "palladium:attribute_modifier",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "attribute": "generic.armor_toughness",
+      "amount": 3,
+      "operation": 0,
+      "uuid": "f15c0002-0000-4000-8000-000000000005"
+    },
+    "knockback_resistance": {
+      "type": "palladium:attribute_modifier",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "attribute": "generic.knockback_resistance",
+      "amount": 0.3,
+      "operation": 0,
+      "uuid": "f15c0002-0000-4000-8000-000000000006"
+    },
+    "agility": {
+      "type": "palladium:damage_immunity",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "damage_sources": [
+        "minecraft:is_fall"
+      ]
+    },
+    "silent_steps": {
+      "type": "palladium:sculk_immunity",
+      "hidden": true,
+      "hidden_in_bar": true
+    },
+    "kinetic_absorb": {
+      "type": "fiskheroes:kinetic_absorb",
+      "title": {
+        "translate": "ability.fiskheroes.black_panther.kinetic_absorb"
+      },
+      "icon": "minecraft:amethyst_shard",
+      "hidden_in_bar": true,
+      "energy_bar": "kinetic",
+      "efficiency": 2.5
+    },
+    "kinetic_release": {
+      "type": "fiskheroes:kinetic_release",
+      "title": {
+        "translate": "ability.fiskheroes.black_panther.kinetic_release"
+      },
+      "icon": "minecraft:firework_star",
+      "list_index": 0,
+      "energy_bar": "kinetic",
+      "damage_per_energy": 0.35,
+      "conditions": {
+        "enabling": {
+          "type": "palladium:action",
+          "cooldown": 40
+        }
+      }
+    },
+    "claws": {
+      "type": "palladium:dummy",
+      "title": {
+        "translate": "ability.fiskheroes.black_panther.claws"
+      },
+      "icon": "minecraft:iron_sword",
+      "list_index": 1,
+      "conditions": {
+        "enabling": {
+          "type": "palladium:toggle",
+          "cooldown": 0
+        }
+      }
+    },
+    "claws_render": {
+      "type": "palladium:render_layer",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "render_layer": "fiskheroes:panther_claws",
+      "conditions": {
+        "enabling": {
+          "type": "palladium:ability_enabled",
+          "ability": "claws"
+        }
+      }
+    },
+    "claws_damage": {
+      "type": "palladium:attribute_modifier",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "attribute": "generic.attack_damage",
+      "amount": 6,
+      "operation": 0,
+      "uuid": "f15c0002-0000-4000-8000-000000000007",
+      "conditions": {
+        "enabling": {
+          "type": "palladium:ability_enabled",
+          "ability": "claws"
+        }
+      }
+    },
+    "claws_speed": {
+      "type": "palladium:attribute_modifier",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "attribute": "generic.attack_speed",
+      "amount": 0.8,
+      "operation": 0,
+      "uuid": "f15c0002-0000-4000-8000-000000000008",
+      "conditions": {
+        "enabling": {
+          "type": "palladium:ability_enabled",
+          "ability": "claws"
+        }
+      }
+    },
+    "senses_toggle": {
+      "type": "palladium:dummy",
+      "title": {
+        "translate": "ability.fiskheroes.black_panther.senses_toggle"
+      },
+      "icon": "minecraft:ender_eye",
+      "list_index": 2,
+      "conditions": {
+        "enabling": {
+          "type": "palladium:toggle",
+          "cooldown": 0
+        }
+      }
+    },
+    "senses": {
+      "type": "fiskheroes:effect",
+      "icon": "minecraft:potion",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "effect": "minecraft:night_vision",
+      "amplifier": 0,
+      "conditions": {
+        "enabling": {
+          "type": "palladium:ability_enabled",
+          "ability": "senses_toggle"
+        }
+      }
+    }
+  }
+}

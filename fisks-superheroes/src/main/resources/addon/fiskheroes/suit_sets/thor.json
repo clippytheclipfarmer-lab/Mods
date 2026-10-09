@@ -1,0 +1,46 @@
+{
+  "armor_material": "fiskheroes:thor",
+  "should_render_model": false,
+  "rarity": "epic",
+  "creative_mode_tab": "fiskheroes:heroes",
+  "tooltip": [
+    "Thor - Asgardian Armor",
+    "Mjolnir, lightning, storms and flight with the hammer in hand."
+  ],
+  "head": {
+    "item_name": "thor_helmet",
+    "render_layers": {
+      "head": [
+        "fiskheroes:thor_head",
+        "fiskheroes:thor_head_glow"
+      ]
+    }
+  },
+  "chest": {
+    "item_name": "thor_chestplate",
+    "render_layers": {
+      "chest": [
+        "fiskheroes:thor_chest",
+        "fiskheroes:thor_chest_glow"
+      ]
+    }
+  },
+  "legs": {
+    "item_name": "thor_leggings",
+    "render_layers": {
+      "legs": [
+        "fiskheroes:thor_legs",
+        "fiskheroes:thor_legs_glow"
+      ]
+    }
+  },
+  "feet": {
+    "item_name": "thor_boots",
+    "render_layers": {
+      "feet": [
+        "fiskheroes:thor_feet",
+        "fiskheroes:thor_feet_glow"
+      ]
+    }
+  }
+}

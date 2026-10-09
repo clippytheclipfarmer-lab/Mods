@@ -1,0 +1,13 @@
+{
+  "type": "palladium:shield",
+  "max_damage": 2400,
+  "use_duration": 72000,
+  "repair_ingredient": {
+    "tag": "c:vibranium_ingots"
+  },
+  "rarity": "epic",
+  "tooltip": [
+    "Captain America's shield. Block with it, or throw it: it ricochets between enemies and comes back."
+  ],
+  "creative_mode_tab": "fiskheroes:heroes"
+}

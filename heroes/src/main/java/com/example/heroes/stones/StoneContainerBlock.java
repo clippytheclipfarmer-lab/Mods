@@ -70,6 +70,9 @@ public class StoneContainerBlock extends Block {
         ItemStack held = player.getItemInHand(hand);
         if (state.getValue(FILLED)) {
             if (!level.isClientSide) {
+                if (stone == InfinityStone.SOUL && level instanceof net.minecraft.server.level.ServerLevel serverLevel && !SoulSacrifice.pay(serverLevel, pos, player)) {
+                    return InteractionResult.CONSUME;
+                }
                 level.setBlock(pos, state.setValue(FILLED, false), 3);
                 player.getInventory().placeItemBackInInventory(new ItemStack(StoneItems.get(stone)));
                 level.playSound(null, pos, SoundEvents.AMETHYST_BLOCK_BREAK, SoundSource.BLOCKS, 1.0F, 0.7F);

@@ -61,3 +61,15 @@ java {
 
 // Lets us script console commands into the dev server (e.g. `printf '...' | gradle runServer`).
 tasks.matching { it.name == 'runServer' }.configureEach { standardInput = System.in }
+
+// `./gradlew runSelftest` parses every power JSON with Palladium's own parser (needs dev-libs, see above) and exits.
+loom {
+    runs {
+        selftest {
+            server()
+            ideConfigGenerated false
+            vmArg '-Dheroes.selftest=true'
+            runDir 'run'
+        }
+    }
+}

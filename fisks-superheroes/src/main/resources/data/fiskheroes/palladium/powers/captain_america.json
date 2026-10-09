@@ -1,0 +1,98 @@
+{
+  "name": {
+    "translate": "power.fiskheroes.captain_america"
+  },
+  "icon": "minecraft:shield",
+  "primary_color": [
+    42,
+    74,
+    140
+  ],
+  "secondary_color": [
+    179,
+    32,
+    43
+  ],
+  "abilities": {
+    "strength": {
+      "type": "palladium:attribute_modifier",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "attribute": "generic.attack_damage",
+      "amount": 4,
+      "operation": 0,
+      "uuid": "f15c0003-0000-4000-8000-000000000001"
+    },
+    "speed": {
+      "type": "palladium:attribute_modifier",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "attribute": "generic.movement_speed",
+      "amount": 0.025,
+      "operation": 0,
+      "uuid": "f15c0003-0000-4000-8000-000000000002"
+    },
+    "jump": {
+      "type": "palladium:attribute_modifier",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "attribute": "palladium:jump_power",
+      "amount": 0.3,
+      "operation": 0,
+      "uuid": "f15c0003-0000-4000-8000-000000000003"
+    },
+    "health": {
+      "type": "palladium:attribute_modifier",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "attribute": "generic.max_health",
+      "amount": 10,
+      "operation": 0,
+      "uuid": "f15c0003-0000-4000-8000-000000000004"
+    },
+    "armor": {
+      "type": "palladium:attribute_modifier",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "attribute": "generic.armor",
+      "amount": 4,
+      "operation": 0,
+      "uuid": "f15c0003-0000-4000-8000-000000000005"
+    },
+    "knockback_resistance": {
+      "type": "palladium:attribute_modifier",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "attribute": "generic.knockback_resistance",
+      "amount": 0.3,
+      "operation": 0,
+      "uuid": "f15c0003-0000-4000-8000-000000000006"
+    },
+    "regeneration": {
+      "type": "palladium:healing",
+      "hidden": true,
+      "hidden_in_bar": true,
+      "frequency": 90,
+      "amount": 1.0
+    },
+    "shield_throw": {
+      "type": "fiskheroes:throw_gadget",
+      "title": {
+        "translate": "ability.fiskheroes.captain_america.shield_throw"
+      },
+      "icon": "fiskheroes:vibranium_shield",
+      "list_index": 0,
+      "gadget": "shield",
+      "item": "fiskheroes:vibranium_shield",
+      "consume": true,
+      "damage": 14.0,
+      "speed": 1.8,
+      "conditions": {
+        "enabling": {
+          "type": "palladium:action",
+          "cooldown": 30
+        }
+      }
+    }
+  }
+}

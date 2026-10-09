@@ -1,0 +1,25 @@
+{
+  "type": "palladium:compound",
+  "trails": [
+    {
+      "type": "palladium:lightning",
+      "color": "#ffe14d",
+      "spacing": 0.3,
+      "lifetime": 8,
+      "requires_movement": true,
+      "amount": 4,
+      "spread_x": 0.5,
+      "spread_y": 0.9
+    },
+    {
+      "type": "palladium:lightning",
+      "color": "#ffffff",
+      "spacing": 0.5,
+      "lifetime": 5,
+      "requires_movement": true,
+      "amount": 2,
+      "spread_x": 0.3,
+      "spread_y": 0.7
+    }
+  ]
+}

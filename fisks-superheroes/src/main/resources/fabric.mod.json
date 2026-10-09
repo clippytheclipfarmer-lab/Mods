@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "fiskheroes",
+  "version": "${version}",
+  "name": "Fisk's Superheroes (Palladium addon)",
+  "description": "A recreation of Fisk's Superheroes for Fabric 1.20.1, built as a Palladium addon: Iron Man, Captain America, Thor, Spider-Man, Black Panther, Superman, Batman and the Flash, each with a full suit, gadgets and powers.",
+  "authors": ["Fisk's Superheroes fans"],
+  "license": "GPL-3.0-only",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.fiskheroes.FiskHeroes"
+    ],
+    "client": [
+      "com.fiskheroes.client.FiskHeroesClient",
+      "com.fiskheroes.dev.ClientShots"
+    ],
+    "server": [
+      "com.fiskheroes.dev.SelfTest"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.14.0",
+    "minecraft": "~1.20.1",
+    "fabric-api": "*",
+    "palladium": ">=4.5.0",
+    "geckolib": "*"
+  }
+}

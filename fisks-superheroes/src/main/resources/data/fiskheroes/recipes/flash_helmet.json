@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "MMM",
+    "MAM"
+  ],
+  "key": {
+    "M": {
+      "item": "minecraft:red_wool"
+    },
+    "A": {
+      "item": "minecraft:gold_ingot"
+    }
+  },
+  "result": {
+    "item": "fiskheroes:flash_helmet"
+  }
+}

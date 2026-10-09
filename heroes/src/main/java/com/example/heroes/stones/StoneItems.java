@@ -25,6 +25,8 @@ public final class StoneItems {
     public static Item NECKLACE;
     public static Item BRACERS;
     public static Item RING;
+    public static Item COSMI_ROD;
+    public static Item DOUBLE_EDGED_SWORD;
 
     private StoneItems() {
     }
@@ -44,12 +46,16 @@ public final class StoneItems {
         NECKLACE = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(HeroesMod.MOD_ID, "infinity_necklace"), new HolderItem(new Item.Properties()));
         BRACERS = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(HeroesMod.MOD_ID, "infinity_bracers"), new HolderItem(new Item.Properties()));
         RING = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(HeroesMod.MOD_ID, "stone_ring"), new HolderItem(new Item.Properties(), 1));
+        COSMI_ROD = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(HeroesMod.MOD_ID, "cosmi_rod"), new HolderItem(new Item.Properties(), 1, true));
+        DOUBLE_EDGED_SWORD = Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(HeroesMod.MOD_ID, "double_edged_sword"), new DoubleEdgedSword(new Item.Properties()));
+        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.COMBAT).register(entries -> entries.accept(DOUBLE_EDGED_SWORD));
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.INGREDIENTS).register(entries -> {
             ITEMS.values().forEach(entries::accept);
             entries.accept(GAUNTLET);
             entries.accept(NECKLACE);
             entries.accept(BRACERS);
             entries.accept(RING);
+            entries.accept(COSMI_ROD);
             for (InfinityStone stone : InfinityStone.values()) {
                 entries.accept(StoneContainers.stack(stone, true));
                 entries.accept(StoneContainers.stack(stone, false));

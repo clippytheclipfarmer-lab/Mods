@@ -1,0 +1,158 @@
+{
+  "format_version": "1.12.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.fiskheroes.superman_chest_slim",
+        "texture_width": 128,
+        "texture_height": 128,
+        "visible_bounds_width": 4,
+        "visible_bounds_height": 5,
+        "visible_bounds_offset": [
+          0,
+          1.75,
+          0
+        ]
+      },
+      "bones": [
+        {
+          "name": "armorHead",
+          "pivot": [
+            0,
+            24,
+            0
+          ]
+        },
+        {
+          "name": "armorBody",
+          "pivot": [
+            0,
+            24,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -4,
+                12,
+                -2
+              ],
+              "size": [
+                8,
+                12,
+                4
+              ],
+              "uv": [
+                54,
+                0
+              ],
+              "inflate": 0.3
+            }
+          ]
+        },
+        {
+          "name": "armorRightArm",
+          "pivot": [
+            -5,
+            22,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -7,
+                12,
+                -2
+              ],
+              "size": [
+                3,
+                12,
+                4
+              ],
+              "uv": [
+                110,
+                0
+              ],
+              "inflate": 0.26
+            }
+          ]
+        },
+        {
+          "name": "armorLeftArm",
+          "pivot": [
+            5,
+            22,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                4,
+                12,
+                -2
+              ],
+              "size": [
+                3,
+                12,
+                4
+              ],
+              "uv": [
+                0,
+                23
+              ],
+              "inflate": 0.26
+            }
+          ]
+        },
+        {
+          "name": "armorRightLeg",
+          "pivot": [
+            -1.9,
+            12,
+            0
+          ]
+        },
+        {
+          "name": "armorLeftLeg",
+          "pivot": [
+            1.9,
+            12,
+            0
+          ]
+        },
+        {
+          "name": "cape",
+          "pivot": [
+            0,
+            23.5,
+            2.4
+          ],
+          "parent": "armorBody",
+          "rotation": [
+            7,
+            0,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -4.6,
+                2,
+                2.35
+              ],
+              "size": [
+                9.2,
+                22,
+                1.0
+              ],
+              "uv": [
+                0,
+                0
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

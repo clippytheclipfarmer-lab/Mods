@@ -1,0 +1,46 @@
+{
+  "armor_material": "fiskheroes:batman",
+  "should_render_model": false,
+  "rarity": "epic",
+  "creative_mode_tab": "fiskheroes:heroes",
+  "tooltip": [
+    "Batman - Batsuit",
+    "Grapple, batarangs, smoke bombs, detective vision and a gliding cape."
+  ],
+  "head": {
+    "item_name": "batman_helmet",
+    "render_layers": {
+      "head": [
+        "fiskheroes:batman_head",
+        "fiskheroes:batman_head_glow"
+      ]
+    }
+  },
+  "chest": {
+    "item_name": "batman_chestplate",
+    "render_layers": {
+      "chest": [
+        "fiskheroes:batman_chest",
+        "fiskheroes:batman_chest_glow"
+      ]
+    }
+  },
+  "legs": {
+    "item_name": "batman_leggings",
+    "render_layers": {
+      "legs": [
+        "fiskheroes:batman_legs",
+        "fiskheroes:batman_legs_glow"
+      ]
+    }
+  },
+  "feet": {
+    "item_name": "batman_boots",
+    "render_layers": {
+      "feet": [
+        "fiskheroes:batman_feet",
+        "fiskheroes:batman_feet_glow"
+      ]
+    }
+  }
+}

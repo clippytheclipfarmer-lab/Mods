@@ -12,6 +12,9 @@
     ],
     "client": [
       "com.example.heroes.client.HeroesClient"
+    ],
+    "server": [
+      "com.example.heroes.dev.SelfTest"
     ]
   },
   "depends": {
