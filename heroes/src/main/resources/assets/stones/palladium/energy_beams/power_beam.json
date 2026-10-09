@@ -2,8 +2,8 @@
   "type": "palladium:laser",
   "body_part": "right_arm",
   "offset": [
-    -1,
-    10,
+    0,
+    -11,
     0
   ],
   "glow_color": "#9b3fe0",

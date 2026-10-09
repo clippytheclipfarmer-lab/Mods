@@ -200,12 +200,13 @@ def soul():
 
 
 # ---------------------------------------------------------------- beams
-def beam(name, glow, core, size=2.0, rainbow=False):
+def beam(name, glow, core, size=2.0, rainbow=False, body_part="right_arm", offset=(0, -11, 0)):
+    """Offsets are in pixels from the body part's pivot; +y is up, so the palm of an arm is at y = -11."""
     os.makedirs(BEAMS, exist_ok=True)
     data = {
         "type": "palladium:laser",
-        "body_part": "right_arm",
-        "offset": [-1, 10, 0],
+        "body_part": body_part,
+        "offset": list(offset),
         "glow_color": glow,
         "core_color": core,
         "size": size,
@@ -221,7 +222,7 @@ def beam(name, glow, core, size=2.0, rainbow=False):
 if __name__ == "__main__":
     for build in (space, mind, power, reality, time, soul):
         build()
-    beam("mind_beam", "#ffd21f", "#fff7c2", 1.6)
+    beam("mind_beam", "#ffd21f", "#fff7c2", 1.6, body_part="head", offset=(0, 5, -5))
     beam("power_beam", "#9b3fe0", "#f1d9ff", 2.2)
     beam("power_beam_rainbow", "#ffffff", "#ffffff", 3.0, rainbow=True)
 

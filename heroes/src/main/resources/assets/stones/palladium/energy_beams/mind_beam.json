@@ -1,10 +1,10 @@
 {
   "type": "palladium:laser",
-  "body_part": "right_arm",
+  "body_part": "head",
   "offset": [
-    -1,
-    10,
-    0
+    0,
+    5,
+    -5
   ],
   "glow_color": "#ffd21f",
   "core_color": "#fff7c2",
