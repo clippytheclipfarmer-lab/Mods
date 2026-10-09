@@ -35,11 +35,11 @@ public class FreezeBreathAbility extends Ability {
         double range = entry.getProperty(RANGE);
         Vec3 origin = entity.getEyePosition().add(entity.getViewVector(1F).scale(0.5)).subtract(0, 0.15, 0);
         Vec3 look = entity.getViewVector(1F);
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 12; i++) {
             double dist = level.random.nextDouble() * range;
             double spread = 0.08 + dist * 0.07;
             Vec3 p = origin.add(look.scale(dist)).add((level.random.nextDouble() - 0.5) * spread * 2, (level.random.nextDouble() - 0.5) * spread * 2, (level.random.nextDouble() - 0.5) * spread * 2);
-            level.sendParticles(i % 3 == 0 ? ParticleTypes.CLOUD : ParticleTypes.SNOWFLAKE, p.x, p.y, p.z, 1, 0.02, 0.02, 0.02, 0.01);
+            level.sendParticles(i % 6 == 0 ? ParticleTypes.CLOUD : ParticleTypes.SNOWFLAKE, p.x, p.y, p.z, 1, 0.02, 0.02, 0.02, 0.01);
         }
         for (LivingEntity target : level.getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(range), e -> e != entity && e.isAlive())) {
             Vec3 to = target.position().add(0, target.getBbHeight() / 2, 0).subtract(origin);

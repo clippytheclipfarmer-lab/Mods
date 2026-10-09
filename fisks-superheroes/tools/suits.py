@@ -279,10 +279,10 @@ def build_superman():
                 edge=0.92, noise=5), NO_GLOW)
     m.cube("head", "armorHead", [0.4, 30.4, -4.8], [1.1, 1.5, 0.9], Suit(HAIR, noise=3), None, 0.0)    # the curl
 
-    shield = ["YYYYYYY", "YRRYYRY", "YRYRRRY", "YRRYYRY", ".YRRRY.", "..YRY.."]
+    shield = ["YYYYYYY", "YRRRRRY", "YRYYYRY", "YRYRRRY", "YRYYYRY", "YRRRYRY", "YRYYYRY", ".YRRRY.", "..YRY.."]
     body(Suit(BLUE, [
-        stamp("north", 0, 1, shield, {"Y": YEL, "R": RED}),
-        stripes_h("north", [BLUE, rgb("#1a45a0")], 8, 11),
+        stamp("north", 0, 0, shield, {"Y": YEL, "R": RED}),
+        stripes_h("north", [BLUE, rgb("#1a45a0")], 9, 11),
         band(11, 11, BLUE, ("north", "south", "east", "west")),
         rect("south", 3, 0, 4, 11, rgb("#1a45a0")),
     ], noise=3, edge=0.9))
@@ -293,8 +293,7 @@ def build_superman():
     boot = lambda: Suit(RED, [band(0, 0, YEL), band(-1, -1, rgb("#7b0d12")), rect("north", 1, 2, 2, 3, rgb("#a8121a"))], noise=3)
     boots(boot(), boot())
     belt(m, YEL, YEL, trim=rgb("#fff0a0"))
-    sback = ["YYYYYYY", "YRRYYRY", "YRYRRRY", "YRRYYRY", ".YRRRY.", "..YRY.."]
-    cape(m, "cape", RED, rgb("#a8121a"), length=22, hem=stamp("south", 1, 3, sback, {"Y": YEL, "R": RED}))
+    cape(m, "cape", RED, rgb("#a8121a"), length=22, hem=stamp("south", 1, 3, shield, {"Y": YEL, "R": RED}))
     return m
 
 

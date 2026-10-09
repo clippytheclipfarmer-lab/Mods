@@ -99,7 +99,7 @@
         "translate": "ability.fiskheroes.black_panther.kinetic_absorb"
       },
       "icon": "minecraft:amethyst_shard",
-      "list_index": 2,
+      "hidden_in_bar": true,
       "energy_bar": "kinetic",
       "efficiency": 2.5
     },
@@ -181,7 +181,7 @@
         "translate": "ability.fiskheroes.black_panther.senses_toggle"
       },
       "icon": "minecraft:ender_eye",
-      "list_index": 3,
+      "list_index": 2,
       "conditions": {
         "enabling": {
           "type": "palladium:toggle",

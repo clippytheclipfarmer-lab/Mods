@@ -87,7 +87,7 @@ class Power:
         self.n += 1
         return f"f15c{self.code:04x}-0000-4000-8000-{self.n:012d}"
 
-    def add(self, key, type_, title=None, icon=None, index=None, hidden=False, cond=None, usage=None, **props):
+    def add(self, key, type_, title=None, icon=None, index=None, hidden=False, cond=None, usage=None, passive=False, **props):
         ab = {"type": type_}
         if title:
             ab["title"] = {"translate": f"ability.{NS}.{self.hero}.{key}"}
@@ -99,6 +99,8 @@ class Power:
         if hidden:
             ab["hidden"] = True
             ab["hidden_in_bar"] = True
+        elif passive:
+            ab["hidden_in_bar"] = True   # listed in the power screen, but not on the key bar
         ab.update(props)
         if cond is not None:
             ab["conditions"] = {"enabling": cond}
@@ -284,7 +286,7 @@ def iron_man():
     p.add("repulsor_aim", "palladium:aim", "Repulsor Blasts", "minecraft:end_rod", 0, cond=held(), time=2, arm="both")
     p.add("repulsor", "palladium:energy_beam", hidden=True, cond=[enabled("repulsor_aim"), energy(bar, 10)], usage=(bar, 2),
           energy_beam=f"{NS}:repulsor", damage=4.0, max_distance=40.0, speed=1.0, set_on_fire_seconds=0)
-    p.add("unibeam", "palladium:dummy", "Unibeam", "minecraft:beacon", 1, cond=held(key="left_click"))
+    p.add("unibeam", "palladium:dummy", "Unibeam", "minecraft:beacon", 1, cond=held())
     p.add("unibeam_beam", "palladium:energy_beam", hidden=True, cond=[enabled("unibeam"), energy(bar, 40)], usage=(bar, 5),
           energy_beam=f"{NS}:unibeam", damage=12.0, max_distance=70.0, speed=0.5, set_on_fire_seconds=3, cause_fire=True)
     p.add("missile", "palladium:projectile", "Missile", "minecraft:firework_rocket", 2, cond=[energy(bar, 30), action(60)], usage=(bar, 30),
@@ -317,7 +319,7 @@ def thor():
     p.attr("armor", "generic.armor", 4)
     p.attr("knockback_resistance", "generic.knockback_resistance", 0.4)
     p.add("regeneration", "palladium:healing", hidden=True, frequency=80, amount=1.0)
-    p.add("thunder_god", "palladium:damage_immunity", hidden=True, damage_sources=["minecraft:is_lightning"])
+    p.add("thunder_god", "palladium:damage_immunity", hidden=True, damage_sources=["minecraft:is_lightning", "minecraft:is_fall"])
     p.add("hammer_throw", f"{NS}:throw_gadget", "Throw Mjolnir", f"{NS}:mjolnir", 0, cond=action(40),
           gadget="hammer", item=f"{NS}:mjolnir", consume=True, damage=16.0, speed=1.9)
     p.add("lightning_strike", f"{NS}:lightning_strike", "Call Lightning", "minecraft:lightning_rod", 1, cond=[hammer, action(60)],
@@ -340,7 +342,7 @@ def spider_man():
     p.add("wall_climb", f"{NS}:wall_climb", "Wall Crawl", "minecraft:ladder", 0, cond=held(key="space_bar"), speed=0.28, needs_sprint=False)
     p.add("web_zip", f"{NS}:zip_line", "Web Zip", "minecraft:string", 1, cond=held(), range=42.0, speed=1.1, color="#f2f2f2")
     p.add("web_shot", f"{NS}:web_shot", "Web Shot", "minecraft:cobweb", 2, cond=action(20), range=28.0, web_ticks=160)
-    p.add("spider_sense", f"{NS}:spider_sense", "Spider Sense", "minecraft:spider_eye", 3, radius=16.0)
+    p.add("spider_sense", f"{NS}:spider_sense", "Spider Sense", "minecraft:spider_eye", passive=True, radius=16.0)
     p.write()
 
 
@@ -355,13 +357,13 @@ def black_panther():
     p.attr("knockback_resistance", "generic.knockback_resistance", 0.3)
     p.add("agility", "palladium:damage_immunity", hidden=True, damage_sources=["minecraft:is_fall"])
     p.add("silent_steps", "palladium:sculk_immunity", hidden=True)
-    p.add("kinetic_absorb", f"{NS}:kinetic_absorb", "Kinetic Absorption", "minecraft:amethyst_shard", 2, energy_bar="kinetic", efficiency=2.5)
+    p.add("kinetic_absorb", f"{NS}:kinetic_absorb", "Kinetic Absorption", "minecraft:amethyst_shard", passive=True, energy_bar="kinetic", efficiency=2.5)
     p.add("kinetic_release", f"{NS}:kinetic_release", "Kinetic Release", "minecraft:firework_star", 0, cond=action(40), energy_bar="kinetic", damage_per_energy=0.35)
     p.add("claws", "palladium:dummy", "Vibranium Claws", "minecraft:iron_sword", 1, cond=toggle())
     p.add("claws_render", "palladium:render_layer", hidden=True, cond=enabled("claws"), render_layer=f"{NS}:panther_claws")
     p.attr("claws_damage", "generic.attack_damage", 6, cond=enabled("claws"))
     p.attr("claws_speed", "generic.attack_speed", 0.8, cond=enabled("claws"))
-    p.add("senses_toggle", "palladium:dummy", "Enhanced Senses", "minecraft:ender_eye", 3, cond=toggle())
+    p.add("senses_toggle", "palladium:dummy", "Enhanced Senses", "minecraft:ender_eye", 2, cond=toggle())
     p.effect("senses", "minecraft:night_vision", cond=enabled("senses_toggle"))
     p.write()
 
@@ -377,12 +379,12 @@ def superman():
     p.attr("armor", "generic.armor", 6, cond=WELL)
     p.attr("knockback_resistance", "generic.knockback_resistance", 0.6, cond=WELL)
     p.add("regeneration", "palladium:healing", hidden=True, cond=WELL, frequency=40, amount=1.0)
-    p.add("invulnerability", "palladium:damage_immunity", "Invulnerability", "minecraft:netherite_chestplate", 3, cond=WELL,
+    p.add("invulnerability", "palladium:damage_immunity", "Invulnerability", "minecraft:netherite_chestplate", passive=True, cond=WELL,
           damage_sources=["minecraft:is_fire", "minecraft:is_projectile", "minecraft:is_explosion", "minecraft:is_fall",
                           "minecraft:is_drowning", "minecraft:is_freezing", "minecraft:is_lightning"])
     p.add("heat_vision", "palladium:energy_beam", "Heat Vision", "minecraft:blaze_powder", 0, cond=[held(), WELL],
           energy_beam=f"{NS}:heat_vision", damage=5.0, max_distance=80.0, speed=1.0, set_on_fire_seconds=4, cause_fire=True, smelt_blocks=True)
-    p.add("freeze_breath", f"{NS}:freeze_breath", "Freeze Breath", "minecraft:snowball", 1, cond=[held(key="right_click"), WELL], range=13.0)
+    p.add("freeze_breath", f"{NS}:freeze_breath", "Freeze Breath", "minecraft:snowball", 1, cond=[held(), WELL], range=13.0)
     p.write()
 
 
@@ -439,8 +441,8 @@ def effects():
     write(os.path.join(ASSETS, "palladium", "trails", "flash.json"), {
         "type": "palladium:compound",
         "trails": [
-            {"type": "palladium:lightning", "color": "#ffe14d", "spacing": 0.35, "lifetime": 8, "requires_movement": True, "amount": 3, "spread_x": 0.5, "spread_y": 0.9},
-            {"type": "palladium:gradient", "color": "#ff3b30", "spacing": 0.3, "lifetime": 12, "requires_movement": True, "opacity": 0.45}]})
+            {"type": "palladium:lightning", "color": "#ffe14d", "spacing": 0.3, "lifetime": 8, "requires_movement": True, "amount": 4, "spread_x": 0.5, "spread_y": 0.9},
+            {"type": "palladium:lightning", "color": "#ffffff", "spacing": 0.5, "lifetime": 5, "requires_movement": True, "amount": 2, "spread_x": 0.3, "spread_y": 0.7}]})
     write(os.path.join(ASSETS, "palladium", "render_layers", "panther_claws.json"), {
         "type": "geckolib:default",
         "model": f"{NS}:geo/claws.geo.json",

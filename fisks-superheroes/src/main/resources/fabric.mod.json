@@ -12,7 +12,8 @@
       "com.fiskheroes.FiskHeroes"
     ],
     "client": [
-      "com.fiskheroes.client.FiskHeroesClient"
+      "com.fiskheroes.client.FiskHeroesClient",
+      "com.fiskheroes.dev.ClientShots"
     ],
     "server": [
       "com.fiskheroes.dev.SelfTest"

@@ -134,7 +134,8 @@
       "hidden": true,
       "hidden_in_bar": true,
       "damage_sources": [
-        "minecraft:is_lightning"
+        "minecraft:is_lightning",
+        "minecraft:is_fall"
       ]
     },
     "hammer_throw": {

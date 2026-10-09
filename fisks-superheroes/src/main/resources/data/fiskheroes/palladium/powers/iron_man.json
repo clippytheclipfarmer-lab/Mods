@@ -177,8 +177,7 @@
       "conditions": {
         "enabling": {
           "type": "palladium:held",
-          "cooldown": 0,
-          "key_type": "left_click"
+          "cooldown": 0
         }
       }
     },

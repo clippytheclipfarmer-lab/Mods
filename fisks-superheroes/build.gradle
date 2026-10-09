@@ -61,6 +61,14 @@ tasks.matching { it.name == 'runServer' }.configureEach { standardInput = System
 // `./gradlew runSelftest` parses every power JSON with Palladium's own parser (needs dev-libs, see above) and exits.
 loom {
     runs {
+        // `./gradlew runShots` (under Xvfb with software GL, see README) saves screenshots of every suit to build/shots.
+        shots {
+            client()
+            ideConfigGenerated false
+            vmArg "-Dfiskheroes.shots=${layout.buildDirectory.get().asFile.absolutePath}/shots"
+            programArgs '--width', '960', '--height', '720'
+            runDir 'run'
+        }
         selftest {
             server()
             ideConfigGenerated false
